@@ -1,0 +1,364 @@
+[
+    {
+        "classes": [
+            {
+                "className": "Backend",
+                "methods": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "index",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "getFastechRear",
+                        "returnType": "int"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "index",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "getFastechFront",
+                        "returnType": "int"
+                    },
+                    {
+                        "access": "public",
+                        "name": "resetError",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "str",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "requestMode",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "str",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "requestControl",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "percent",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "setVolume",
+                        "returnType": "int"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getVolume",
+                        "returnType": "int"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "state",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "shutdown",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "i",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "getVolume_on_off",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "change_to_japan",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "change_to_eng",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getNameAGV",
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getIP",
+                        "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getIPServer",
+                        "returnType": "QString"
+                    }
+                ],
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 0,
+                        "name": "batteryPercentage",
+                        "notify": "batteryPercentageChanged",
+                        "read": "batteryPercentage",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 1,
+                        "name": "batteryVoltage",
+                        "notify": "batteryVoltageChanged",
+                        "read": "batteryVoltage",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 2,
+                        "name": "batteryCurrent",
+                        "notify": "batteryCurrentChanged",
+                        "read": "batteryCurrent",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 3,
+                        "name": "robotStatus",
+                        "notify": "robotStatusChanged",
+                        "read": "robotStatus",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QString",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 4,
+                        "name": "robotDetail",
+                        "notify": "robotDetailChanged",
+                        "read": "robotDetail",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QString",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 5,
+                        "name": "robotError",
+                        "notify": "robotErrorChanged",
+                        "read": "robotError",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QString",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 6,
+                        "name": "getControl",
+                        "notify": "getControlChanged",
+                        "read": "getControl",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QString",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 7,
+                        "name": "robotMode",
+                        "notify": "robotModeChanged",
+                        "read": "robotMode",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QString",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 8,
+                        "name": "getLinear",
+                        "notify": "velChanged",
+                        "read": "getLinear",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 9,
+                        "name": "getAngular",
+                        "notify": "velChanged",
+                        "read": "getAngular",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "double",
+                        "user": false
+                    }
+                ],
+                "qualifiedClassName": "Backend",
+                "signals": [
+                    {
+                        "access": "public",
+                        "name": "batteryPercentageChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "batteryVoltageChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "batteryCurrentChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "robotModeChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "robotStatusChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "robotDetailChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "robotErrorChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getNameChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getIPChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getControlChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getFastechInputChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getFastechOutputChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "velChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "volumePercentageChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "backend.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
+                "className": "hmiApp",
+                "object": true,
+                "qualifiedClassName": "hmiApp",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "main.cpp",
+        "outputRevision": 68
+    }
+]

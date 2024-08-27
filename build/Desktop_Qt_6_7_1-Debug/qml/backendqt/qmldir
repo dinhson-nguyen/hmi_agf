@@ -1,0 +1,4 @@
+module backendqt
+typeinfo hmi_agf.qmltypes
+prefer :/qt/qml/backendqt/
+

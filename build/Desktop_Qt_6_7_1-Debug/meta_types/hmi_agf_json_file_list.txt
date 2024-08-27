@@ -1,0 +1,2 @@
+/home/dinhson/amr_ws/src/hmi_agf/build/Desktop_Qt_6_7_1-Debug/hmi_agf_autogen/include/../7PH6M6IPMC/moc_backend.cpp.json
+/home/dinhson/amr_ws/src/hmi_agf/build/Desktop_Qt_6_7_1-Debug/hmi_agf_autogen/include/main.moc.json

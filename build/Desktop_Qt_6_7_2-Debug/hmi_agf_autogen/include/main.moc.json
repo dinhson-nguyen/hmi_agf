@@ -1,0 +1,17 @@
+{
+    "classes": [
+        {
+            "className": "hmiApp",
+            "object": true,
+            "qualifiedClassName": "hmiApp",
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "main.cpp",
+    "outputRevision": 68
+}

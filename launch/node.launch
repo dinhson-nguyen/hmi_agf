@@ -1,0 +1,7 @@
+<launch>
+
+    <node name="test" pkg="hmi_agf" type="hmi_agf" output="screen">
+        <!-- <param name="/use_sim_time" value="true" /> -->
+
+    </node>
+</launch>

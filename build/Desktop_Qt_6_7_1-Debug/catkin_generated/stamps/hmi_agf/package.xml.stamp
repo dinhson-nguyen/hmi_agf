@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>hmi_agf</name>
+  <version>0.0.0</version>
+  <description>The hmi_agf package</description>
+
+  <maintainer email="your_email@example.com">Your Name</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>roscpp</depend>
+  <depend>std_msgs</depend>
+  <depend>std_stamped_msgs</depend>
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+  <build_depend>rospy</build_depend>
+  <exec_depend>rospy</exec_depend>
+  <depend>std_srvs</depend>
+
+  <export>
+  </export>
+</package>

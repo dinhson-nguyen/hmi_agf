@@ -1,0 +1,8 @@
+--resource
+/home/dinhson/amr_ws/src/hmi_agf/build/Desktop_Qt_6_7_2-Release/content/.qt/rcc/qmake_content.qrc
+--resource
+/home/dinhson/amr_ws/src/hmi_agf/build/Desktop_Qt_6_7_2-Release/content/.qt/rcc/content_raw_qml_0.qrc
+/qt/qml/content/App.qml
+/qt/qml/content/Screen01.ui.qml
+/qt/qml/content/Screen02.ui.qml
+/qt/qml/content/Screen03.ui.qml

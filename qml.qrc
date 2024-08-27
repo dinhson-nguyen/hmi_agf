@@ -1,0 +1,36 @@
+<RCC>
+    <qresource prefix="/">
+        <file>content/Screen01.qml</file>
+        <file>content/Mission.qml</file>
+        <file>content/Screen02.qml</file>
+        <file>content/Screen03.qml</file>
+
+        <file>main.qml</file>
+        <file>content/App.qml</file>
+        <file>content/asset/batt_20.svg</file>
+        <file>content/asset/batt_200.svg</file>
+        <file>content/asset/batt_bolder.svg</file>
+        <file>content/asset/batt_inside.svg</file>
+        <file>content/asset/battery-full (1).svg</file>
+        <file>content/asset/battery-full.png</file>
+        <file>content/asset/battery-full.svg</file>
+        <file>content/asset/battery-svgrepo-com (1).svg</file>
+        <file>content/asset/battery-svgrepo-com.svg</file>
+        <file>content/asset/charge (1).svg</file>
+        <file>content/asset/charge.svg</file>
+        <file>content/asset/circle.svg</file>
+        <file>content/asset/close.svg</file>
+        <file>content/asset/low-battery-svgrepo-com.svg</file>
+        <file>content/asset/minimize.svg</file>
+        <file>content/asset/Setting.svg</file>
+        <file>content/asset/setup.svg</file>
+        <file>content/asset/tv.svg</file>
+        <file>content/asset/Vector 48 (Stroke).svg</file>
+        <file>content/asset/zoom.svg</file>
+        <file>content/asset/mute.svg</file>
+        <file>content/asset/sound.svg</file>
+        <file>content/asset/svg.svg</file>
+        <file>content/asset/svg_2.svg</file>
+        <file>content/asset/dart-mission-goal-success-svgrepo-com.svg</file>
+    </qresource>
+</RCC>

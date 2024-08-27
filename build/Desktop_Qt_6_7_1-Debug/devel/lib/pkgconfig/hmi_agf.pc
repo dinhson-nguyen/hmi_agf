@@ -1,0 +1,8 @@
+prefix=/home/dinhson/amr_ws/src/hmi_agf/build/Desktop_Qt_6_7_1-Debug/devel
+
+Name: hmi_agf
+Description: Description of hmi_agf
+Version: 0.0.0
+Cflags: -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/home/dinhson/amr_ws/devel/include -I/usr/include
+Libs: -L${prefix}/lib -lhmi_agf
+Requires: roscpp std_msgs std_stamped_msgs message_runtime std_srvs

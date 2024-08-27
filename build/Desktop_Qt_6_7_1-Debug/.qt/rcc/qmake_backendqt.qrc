@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/backendqt">
+    <file alias="qmldir">/home/dinhson/amr_ws/src/hmi_agf/build/Desktop_Qt_6_7_1-Debug/qml/backendqt/qmldir</file>
+  </qresource>
+</RCC>
+

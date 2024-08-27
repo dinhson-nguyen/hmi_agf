@@ -1,0 +1,12 @@
+-I
+/home/dinhson/amr_ws/src/hmi_agf/build/qml
+-I
+/home/dinhson/amr_ws/src/hmi_agf/build/qml
+-I
+/home/dinhson/Qt/6.7.2/gcc_64/./qml
+--resource
+/home/dinhson/amr_ws/src/hmi_agf/build/content/.qt/rcc/qmake_content.qrc
+--resource
+/home/dinhson/amr_ws/src/hmi_agf/build/content/.qt/rcc/content_raw_qml_0.qrc
+--module
+content

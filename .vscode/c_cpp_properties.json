@@ -1,0 +1,49 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "${default}",
+                "limitSymbolsToIncludedHeaders": false
+            },
+            "includePath": [
+                "/home/dinhson/amr_ws/devel/include/**",
+                "/opt/ros/noetic/include/**",
+                "/home/dinhson/amr_ws/src/agf_local_planner/include/**",
+                "/home/dinhson/amr_ws/src/agv_arduino/include/**",
+                "/home/dinhson/amr_ws/src/agv_common_library/include/**",
+                "/home/dinhson/amr_ws/src/docking/include/**",
+                "/home/dinhson/amr_ws/src/fiducials/fiducial_slam/include/**",
+                "/home/dinhson/amr_ws/src/mrpt_navigation/mrpt_localization/include/**",
+                "/home/dinhson/amr_ws/src/mrpt_navigation/mrpt_map/include/**",
+                "/home/dinhson/amr_ws/src/mrpt_navigation/mrpt_msgs_bridge/include/**",
+                "/home/dinhson/amr_ws/src/mrpt_navigation/mrpt_rawlog/include/**",
+                "/home/dinhson/amr_ws/src/rviz_navigation_plugin/include/**",
+                "/home/dinhson/amr_ws/src/slam_manager/include/**",
+                "/home/dinhson/amr_ws/src/vl53l5cx/include/**",
+                "/home/dinhson/amr_ws/src/waypoints_global_planner/include/**",
+                "/home/dinhson/amr_ws/src/yujin_ocs/yocs_ar_marker_tracking/include/**",
+                "/home/dinhson/amr_ws/src/yujin_ocs/yocs_ar_pair_tracking/include/**",
+                "/home/dinhson/amr_ws/src/yujin_ocs/yocs_cmd_vel_mux/include/**",
+                "/home/dinhson/amr_ws/src/yujin_ocs/yocs_controllers/include/**",
+                "/home/dinhson/amr_ws/src/yujin_ocs/yocs_diff_drive_pose_controller/include/**",
+                "/home/dinhson/amr_ws/src/yujin_ocs/yocs_keyop/include/**",
+                "/home/dinhson/amr_ws/src/yujin_ocs/yocs_math_toolkit/include/**",
+                "/home/dinhson/amr_ws/src/yujin_ocs/yocs_navi_toolkit/include/**",
+                "/home/dinhson/amr_ws/src/yujin_ocs/yocs_navigator/include/**",
+                "/home/dinhson/amr_ws/src/yujin_ocs/yocs_safety_controller/include/**",
+                "/home/dinhson/amr_ws/src/yocs_velocity_smoother/include/**",
+                "/home/dinhson/amr_ws/src/yujin_ocs/yocs_virtual_sensor/include/**",
+                "/home/dinhson/amr_ws/src/yujin_ocs/yocs_waypoint_provider/include/**",
+                "/home/dinhson/amr_ws/src/yujin_ocs/yocs_waypoints_navi/include/**",
+                "/usr/include/**"
+            ],
+            "name": "ROS",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "c++14",
+            "compileCommands": "${workspaceFolder}/build/Desktop_Qt_6_7_1-Debug/.qtc_clangd/compile_commands.json"
+        }
+    ],
+    "version": 4
+}

@@ -1,0 +1,16 @@
+-rootPath
+/home/dinhson/amr_ws/src/hmi_agf
+-cmake-output
+-output-file
+/home/dinhson/amr_ws/src/hmi_agf/build/Desktop_Qt_6_7_2-Debug/.qt/qml_imports/hmi_agf_conf.cmake
+-importPath
+/home/dinhson/amr_ws/src/hmi_agf/build/Desktop_Qt_6_7_2-Debug/qml/backendqt
+-importPath
+/home/dinhson/amr_ws/src/hmi_agf/build/Desktop_Qt_6_7_2-Debug/qml
+-importPath
+/home/dinhson/Qt/6.7.2/gcc_64/./qml
+-qrcFiles
+/home/dinhson/amr_ws/src/hmi_agf/build/Desktop_Qt_6_7_2-Debug/.qt/rcc/configuration.qrc
+/home/dinhson/amr_ws/src/hmi_agf/build/Desktop_Qt_6_7_2-Debug/.qt/rcc/qmake_backendqt.qrc
+/home/dinhson/amr_ws/src/hmi_agf/build/Desktop_Qt_6_7_2-Debug/.qt/rcc/hmi_agf_raw_qml_0.qrc
+/home/dinhson/amr_ws/src/hmi_agf/build/Desktop_Qt_6_7_2-Debug/.qt/rcc/hmi_agf_translations.qrc

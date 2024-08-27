@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/content">
+    <file alias="qmldir">/home/dinhson/amr_ws/src/hmi_agf/build/qml/content/qmldir</file>
+  </qresource>
+</RCC>
+

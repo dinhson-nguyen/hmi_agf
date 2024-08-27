@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="/qt/qml/backendqt">/home/dinhson/amr_ws/src/hmi_agf/build/qml/backendqt</file>
+
+  </qresource>
+</RCC>

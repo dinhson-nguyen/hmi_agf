@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/i18n">
+    <file alias="hmi_agf_en.qm">/home/dinhson/amr_ws/src/hmi_agf/build/hmi_agf_en.qm</file>
+  </qresource>
+</RCC>
+
