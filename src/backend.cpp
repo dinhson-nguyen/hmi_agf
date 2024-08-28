@@ -729,6 +729,18 @@ void Backend::setDataBuffer(QString id) {
                 }
             }
         }
+    } else {
+        QList<QQuickItem *> allObjects = rootObject->findChildren<QQuickItem *>();
+        // QObject *item = rootObject->findChild<QObject*>(QString::fromStdString(key));
+        for (QQuickItem *item : allObjects) {
+            if (!item->objectName().isEmpty()) {
+                // Ví dụ: nếu đối tượng là Text hoặc TextEdit
+                if (item->inherits("QQuickTextField")) {
+                    item->setProperty("text", QString::fromStdString("Empty"));
+                }
+                // Bạn có thể thêm điều kiện cho các thuộc tính khác mà bạn cần gán giá trị
+            }
+        }
     }
 }
 void Backend::setDataQueue(int id) {
@@ -759,7 +771,7 @@ void Backend::setDataQueue(int id) {
                 } else if (value.is_boolean()) {
                     propertyValue = value.get<bool>() ? "true" : "false";
                 } else {
-                    propertyValue = "[Unknown Type]";
+                    propertyValue = QString::fromStdString("[Unknown Type]");
                 }
                 item->setProperty("text", propertyValue);
             }
@@ -786,11 +798,21 @@ void Backend::setDataQueue(int id) {
                     } else if (value.is_boolean()) {
                         propertyValue = value.get<bool>() ? "true" : "false";
                     } else {
-                        propertyValue = "[Unknown Type]";
+                        propertyValue = QString::fromStdString("[Unknown Type]");
                     }
 
                     // Gán giá trị cho thuộc tính "text"
                     item->setProperty("text", propertyValue);
+                }
+            }
+        }
+    } else {
+        QList<QQuickItem *> allObjects = rootObject->findChildren<QQuickItem *>();
+
+        for (QQuickItem *item : allObjects) {
+            if (!item->objectName().isEmpty()) {
+                if (item->inherits("QQuickTextField")) {
+                    item->setProperty("text", QString::fromStdString("Empty"));
                 }
             }
         }

@@ -190,6 +190,7 @@
  mdp:/home/dinhson/Qt/6.7.2/gcc_64/include/QtNetwork/qtnetworkexports.h
  mdp:/home/dinhson/Qt/6.7.2/gcc_64/include/QtNetwork/qtnetworkglobal.h
  mdp:/home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/QQmlApplicationEngine
+ mdp:/home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/QQmlContext
  mdp:/home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/qjsengine.h
  mdp:/home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/qjsmanagedvalue.h
  mdp:/home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/qjsnumbercoercion.h
@@ -199,6 +200,7 @@
  mdp:/home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/qqmlabstracturlinterceptor.h
  mdp:/home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/qqmlapplicationengine.h
  mdp:/home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/qqmlcomponent.h
+ mdp:/home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/qqmlcontext.h
  mdp:/home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/qqmldebug.h
  mdp:/home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/qqmlengine.h
  mdp:/home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/qqmlerror.h

@@ -186,6 +186,7 @@
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtNetwork/qtnetworkexports.h \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtNetwork/qtnetworkglobal.h \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/QQmlApplicationEngine \
+  /home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/QQmlContext \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/qjsengine.h \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/qjsmanagedvalue.h \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/qjsnumbercoercion.h \
@@ -195,6 +196,7 @@
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/qqmlabstracturlinterceptor.h \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/qqmlapplicationengine.h \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/qqmlcomponent.h \
+  /home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/qqmlcontext.h \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/qqmldebug.h \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/qqmlengine.h \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/qqmlerror.h \

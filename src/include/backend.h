@@ -45,6 +45,8 @@
 #include <QJsonObject>
 #include <QVariant>
 #include <thread>
+#include <QQmlContext>
+
 
 using json = nlohmann::json;
 class Backend : public QObject

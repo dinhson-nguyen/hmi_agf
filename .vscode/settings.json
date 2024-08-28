@@ -85,7 +85,9 @@
         "*.ipp": "cpp",
         "qcolor": "cpp",
         "qqmlcomponent": "cpp",
-        "csignal": "cpp"
+        "csignal": "cpp",
+        "qqmlcontext": "cpp",
+        "qquickitem": "cpp"
     },
     "CodeGPT.apiKey": "CodeGPT Plus Beta"
 }
