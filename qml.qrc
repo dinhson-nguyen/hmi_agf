@@ -4,7 +4,7 @@
         <file>content/Mission.qml</file>
         <file>content/Screen02.qml</file>
         <file>content/Screen03.qml</file>
-
+        <file>content/component_test.ui.qml</file>
         <file>main.qml</file>
         <file>content/App.qml</file>
         <file>content/asset/batt_20.svg</file>

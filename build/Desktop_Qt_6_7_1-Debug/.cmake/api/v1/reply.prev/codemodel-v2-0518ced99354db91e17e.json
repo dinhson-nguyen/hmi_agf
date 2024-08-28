@@ -465,7 +465,7 @@
 				{
 					"directoryIndex" : 4,
 					"id" : "content::@73a38b9e525c9c2ae262",
-					"jsonFile" : "target-content-Release-568362000e5a7c535ae4.json",
+					"jsonFile" : "target-content-Release-05820ce13716bac7b43a.json",
 					"name" : "content",
 					"projectIndex" : 0
 				},
@@ -528,7 +528,7 @@
 				{
 					"directoryIndex" : 4,
 					"id" : "content_tooling::@73a38b9e525c9c2ae262",
-					"jsonFile" : "target-content_tooling-Release-6f739d4bfa9e545fb0fe.json",
+					"jsonFile" : "target-content_tooling-Release-e2e7bc8cfaa8a5d4b3f3.json",
 					"name" : "content_tooling",
 					"projectIndex" : 0
 				},

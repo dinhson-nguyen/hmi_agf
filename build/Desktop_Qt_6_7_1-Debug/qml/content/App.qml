@@ -144,7 +144,7 @@ Window {
                 border.color: "#3D5AFE"
                 border.width: 5
             }
-            onClicked: loader.setSource("qrc:/content/Screen02.qml")
+            onClicked: loader.setSource("qrc:/content/component_test.ui.qml")
             onPressedChanged: {
                 if (pressed) {
                     background.color = "#B0BEC5"; 
