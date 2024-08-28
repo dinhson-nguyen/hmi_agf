@@ -33,7 +33,7 @@ Page {
     property string color_state: ""
     property bool state_panel_edit: false
     property bool state_panel_queue: false
-    property bool state_edit: false // false -> buffer | true -> queue 
+    property int state_edit: 0 // 0 -> buffer | 1 -> queue 
 
     Popup {
         id: popup
@@ -184,7 +184,7 @@ Page {
         width: page1.width * 0.9
         height: page1.height * 0.55
         opacity: 1
-        visible: true
+        visible: false
         background: Rectangle {
             color: "#ddffffff"
             border.color: "#db000000"
@@ -234,8 +234,7 @@ Page {
                 }
                 onClicked: {
 
-                    state_panel_edit = false
-                    state_panel_queue = false
+                    pop_up_2.close()
                 }
                 //     animation_goout.start();
                 //     animation_forward.start();
@@ -273,8 +272,29 @@ Page {
                 }
                 onClicked: {
 
-                    state_panel_edit = false
-                    state_panel_queue = false
+                    if (state_edit === 0) {
+                        var jsonObject = {
+                            "_id": ___id.text,
+                            "id": _id.text,
+                            "id_hang": _id_hang.text,
+                            "status": _status.text,
+                            "stt": _stt.text,
+                            "type": _type.text,
+
+                            "height": _height.text,
+                            "width": _width.text,
+                            "length": _length.text,
+                            "zone_id": _zone_id.text,
+                            "column_id": _column_id.text,
+                            "location_id": _location_id.text,
+                            
+                        
+                        };
+                        backend.deleteDataBuffer(JSON.stringify(jsonObject, null, 2))
+                    }
+                    else {
+                        backend.deleteDataQueue(uuid_queue.text)
+                    }
                 }
                 //     animation_goout.start();
                 //     animation_forward.start();
@@ -305,8 +325,48 @@ Page {
                 }
                 onClicked: {
 
-                    state_panel_edit = false
-                    state_panel_queue = false
+                    if (state_edit === 0) {
+                        var jsonObject = {
+                            "_id": ___id.text,
+                            "id": _id.text,
+                            "id_hang": _id_hang.text,
+                            "status": _status.text,
+                            "stt": _stt.text,
+                            "type": _type.text,
+
+                            "height": _height.text,
+                            "width": _width.text,
+                            "length": _length.text,
+                            "zone_id": _zone_id.text,
+                            "column_id": _column_id.text,
+                            "location_id": _location_id.text,
+                            
+                        
+                        };
+                      backend.saveDataBuffer(JSON.stringify(jsonObject, null, 2))
+                    } else {
+                        var jsonObject = {
+                            "_id": uuid_queue.text,
+                            "id": _id.text,
+                            "column_id": _column_id.text,
+                            "zone_id": _zone_id.text,
+                            "location_id": _location_id.text,
+                            "height": _height.text,
+                            "length": _length.text,
+                            "width": _width.text,
+                            "destination": _destination.text,
+                            "mechandise": _mechandise.text,
+                            "model": _model.text,
+                            "name_model": _name_model.text,
+
+                            "type": _type.text,
+                            "queue": _queue.text,
+                        
+                        };
+                        // console.log(JSON.stringify(jsonObject, null, 2))
+                        
+                        backend.saveDataQueue(JSON.stringify(jsonObject, null, 2))
+                    }
                 }
                 //     animation_goout.start();
                 //     animation_forward.start();
@@ -326,12 +386,12 @@ Page {
                 background: Rectangle {
                     color: "#FFFFFF"
                     radius: 10
-                    border.color: "#4CAF50"
+                    border.color: "#9E9E9E"
                     border.width: 5
                 }
                 onPressedChanged: {
                     if (pressed) {
-                        background.color = "#4CAF50"
+                        background.color = "#9E9E9E"
                     } else {
                         background.color = "#FFFFFF"
                     }
@@ -352,7 +412,7 @@ Page {
             anchors.right: parent.right
             height: parent.height * 0.73
             anchors.verticalCenter: parent.verticalCenter
-            currentIndex: 1
+            currentIndex: state_edit
             Item {
                 id: buffer_item
                 GridLayout {
@@ -1484,7 +1544,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(1)
                 }
@@ -1553,7 +1613,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(2)
                 }
@@ -1621,7 +1681,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(3)
                 }
@@ -1644,7 +1704,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(4)
                 }
@@ -1667,7 +1727,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(5)
                 }
@@ -1690,7 +1750,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(6)
                 }
@@ -1713,7 +1773,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(7)
                 }
@@ -1736,7 +1796,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(8)
                 }
@@ -1759,7 +1819,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(9)
                 }
@@ -1783,7 +1843,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(10)
                 }
@@ -1807,7 +1867,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(11)
                 }
@@ -1831,7 +1891,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(12)
                 }
@@ -1855,7 +1915,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(13)
                 }
@@ -1878,7 +1938,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(14)
                 }
@@ -1944,7 +2004,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 0
+                    state_edit = 0
                     pop_up_2.open()
 
                     backend.setDataBuffer("zone_1")
@@ -1964,7 +2024,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 0
+                    state_edit = 0
                     pop_up_2.open()
                     backend.setDataBuffer("zone_2")
                 }
@@ -1983,7 +2043,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 0
+                    state_edit = 0
                     pop_up_2.open()
                     backend.setDataBuffer("zone_3")
                 }
@@ -2002,7 +2062,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 0
+                    state_edit = 0
                     pop_up_2.open()
                     backend.setDataBuffer("zone_4")
                 }
@@ -2022,7 +2082,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 0
+                    state_edit = 0
                     pop_up_2.open()
                     backend.setDataBuffer("zone_5")
                 }
@@ -2043,7 +2103,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 0
+                    state_edit = 0
                     pop_up_2.open()
                     backend.setDataBuffer("zone_6")
                 }

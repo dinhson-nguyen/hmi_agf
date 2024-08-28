@@ -33,6 +33,7 @@ Page {
     property string color_state: ""
     property bool state_panel_edit: false
     property bool state_panel_queue: false
+    property int state_edit: 0 // 0 -> buffer | 1 -> queue 
 
     Popup {
         id: popup
@@ -183,7 +184,7 @@ Page {
         width: page1.width * 0.9
         height: page1.height * 0.55
         opacity: 1
-        visible: true
+        visible: false
         background: Rectangle {
             color: "#ddffffff"
             border.color: "#db000000"
@@ -233,8 +234,7 @@ Page {
                 }
                 onClicked: {
 
-                    state_panel_edit = false
-                    state_panel_queue = false
+                    pop_up_2.close()
                 }
                 //     animation_goout.start();
                 //     animation_forward.start();
@@ -272,8 +272,29 @@ Page {
                 }
                 onClicked: {
 
-                    state_panel_edit = false
-                    state_panel_queue = false
+                    if (state_edit === 0) {
+                        var jsonObject = {
+                            "_id": ___id.text,
+                            "id": _id.text,
+                            "id_hang": _id_hang.text,
+                            "status": _status.text,
+                            "stt": _stt.text,
+                            "type": _type.text,
+
+                            "height": _height.text,
+                            "width": _width.text,
+                            "length": _length.text,
+                            "zone_id": _zone_id.text,
+                            "column_id": _column_id.text,
+                            "location_id": _location_id.text,
+                            
+                        
+                        };
+                        backend.deleteDataBuffer(JSON.stringify(jsonObject, null, 2))
+                    }
+                    else {
+                        backend.deleteDataQueue(uuid_queue.text)
+                    }
                 }
                 //     animation_goout.start();
                 //     animation_forward.start();
@@ -304,8 +325,48 @@ Page {
                 }
                 onClicked: {
 
-                    state_panel_edit = false
-                    state_panel_queue = false
+                    if (state_edit === 0) {
+                        var jsonObject = {
+                            "_id": ___id.text,
+                            "id": _id.text,
+                            "id_hang": _id_hang.text,
+                            "status": _status.text,
+                            "stt": _stt.text,
+                            "type": _type.text,
+
+                            "height": _height.text,
+                            "width": _width.text,
+                            "length": _length.text,
+                            "zone_id": _zone_id.text,
+                            "column_id": _column_id.text,
+                            "location_id": _location_id.text,
+                            
+                        
+                        };
+                      backend.saveDataBuffer(JSON.stringify(jsonObject, null, 2))
+                    } else {
+                        var jsonObject = {
+                            "_id": uuid_queue.text,
+                            "id": _id.text,
+                            "column_id": _column_id.text,
+                            "zone_id": _zone_id.text,
+                            "location_id": _location_id.text,
+                            "height": _height.text,
+                            "length": _length.text,
+                            "width": _width.text,
+                            "destination": _destination.text,
+                            "mechandise": _mechandise.text,
+                            "model": _model.text,
+                            "name_model": _name_model.text,
+
+                            "type": _type.text,
+                            "queue": _queue.text,
+                        
+                        };
+                        // console.log(JSON.stringify(jsonObject, null, 2))
+                        
+                        backend.saveDataQueue(JSON.stringify(jsonObject, null, 2))
+                    }
                 }
                 //     animation_goout.start();
                 //     animation_forward.start();
@@ -325,12 +386,12 @@ Page {
                 background: Rectangle {
                     color: "#FFFFFF"
                     radius: 10
-                    border.color: "#4CAF50"
+                    border.color: "#9E9E9E"
                     border.width: 5
                 }
                 onPressedChanged: {
                     if (pressed) {
-                        background.color = "#4CAF50"
+                        background.color = "#9E9E9E"
                     } else {
                         background.color = "#FFFFFF"
                     }
@@ -351,7 +412,7 @@ Page {
             anchors.right: parent.right
             height: parent.height * 0.73
             anchors.verticalCenter: parent.verticalCenter
-            currentIndex: 1
+            currentIndex: state_edit
             Item {
                 id: buffer_item
                 GridLayout {
@@ -1483,7 +1544,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(1)
                 }
@@ -1552,7 +1613,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(2)
                 }
@@ -1620,7 +1681,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(3)
                 }
@@ -1643,7 +1704,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(4)
                 }
@@ -1666,7 +1727,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(5)
                 }
@@ -1689,7 +1750,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(6)
                 }
@@ -1712,7 +1773,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(7)
                 }
@@ -1735,7 +1796,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(8)
                 }
@@ -1758,7 +1819,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(9)
                 }
@@ -1782,7 +1843,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(10)
                 }
@@ -1806,7 +1867,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(11)
                 }
@@ -1830,7 +1891,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(12)
                 }
@@ -1854,7 +1915,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(13)
                 }
@@ -1877,7 +1938,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 1
+                    state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(14)
                 }
@@ -1943,7 +2004,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 0
+                    state_edit = 0
                     pop_up_2.open()
 
                     backend.setDataBuffer("zone_1")
@@ -1963,7 +2024,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 0
+                    state_edit = 0
                     pop_up_2.open()
                     backend.setDataBuffer("zone_2")
                 }
@@ -1982,7 +2043,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 0
+                    state_edit = 0
                     pop_up_2.open()
                     backend.setDataBuffer("zone_3")
                 }
@@ -2001,7 +2062,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 0
+                    state_edit = 0
                     pop_up_2.open()
                     backend.setDataBuffer("zone_4")
                 }
@@ -2021,7 +2082,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 0
+                    state_edit = 0
                     pop_up_2.open()
                     backend.setDataBuffer("zone_5")
                 }
@@ -2042,7 +2103,7 @@ Page {
                     color: "#CFD8DC"
                 }
                 onClicked: {
-                    stackLayout.currentIndex = 0
+                    state_edit = 0
                     pop_up_2.open()
                     backend.setDataBuffer("zone_6")
                 }
@@ -2148,130 +2209,17 @@ Page {
                 }
             }
         }
-        // Component {
-        //     id: status_agf
-
-        //     Page {
-        //         id: left_panel
-        //         width: stack_view_status.width * 0.5
-        //         // height: parent.height * 0.88
-        //         anchors.right: stack_view_status.right
-        //         anchors.top: stack_view_status.top
-        //         anchors.bottom: stack_view_status.bottom
-
-        //         anchors.rightMargin: 0
-        //         anchors.topMargin: 0
-        //         anchors.bottomMargin: 0
-
-        //         Button {
-        //             id: control_button
-        //             text: qsTr(control_mode)
-        //             anchors.left: parent.left
-        //             anchors.right: parent.right
-        //             anchors.top: parent.top
-        //             // anchors.bottom: parent.bottom
-        //             height: left_panel.width * 0.275
-        //             anchors.leftMargin: 5
-        //             anchors.rightMargin: 5
-        //             anchors.topMargin: 10
-        //             anchors.bottomMargin: 0
-        //             highlighted: false
-        //             font.bold: true
-        //             font.pointSize: 45 * left_panel.width / 430
-
-        //             background: Rectangle {
-        //                 color: "#2196F3"
-        //                 radius: 30 * parent.height / 104
-        //                 border.color: control_button.background.color
-        //                 border.width: 1
-        //             }
-        //             onClicked: {
-        //                 if (control_mode === "RUNNING") {
-        //                     backend.requestControl("STOP")
-        //                 } else if (control_mode === "PAUSED") {
-        //                     backend.requestControl("RUN")
-        //                 }
-        //             }
-        //         }
-        //         Button {
-        //             id: status_button
-        //             anchors.left: parent.left
-        //             anchors.right: parent.right
-        //             anchors.top: control_button.bottom
-        //             // anchors.bottom: parent.bottom
-        //             height: left_panel.width * 0.275
-        //             text: "INITIATING"
-        //             anchors.leftMargin: 5
-        //             anchors.rightMargin: 5
-        //             anchors.topMargin: 20
-        //             anchors.bottomMargin: 0
-        //             highlighted: false
-        //             font.bold: true
-        //             font.pointSize: 45 * left_panel.width / 430
-        //             background: Rectangle {
-        //                 color: "white"
-        //                 radius: 30 * parent.height / 104
-        //                 border.color: status_button.background.color
-        //                 border.width: 1
-        //             }
-        //             onClicked: {
-        //                 popup_mode = 0
-        //                 if (status_mode === "ERROR") {
-        //                     status_popup.text = backend.robotError
-        //                 } else
-        //                     status_popup.text = backend.robotDetail
-
-        //                 popup.open()
-        //             }
-        //         }
-        //         Button {
-        //             id: mode_button
-        //             text: qsTr(mode_mode)
-        //             anchors.left: parent.left
-        //             anchors.right: parent.right
-        //             anchors.top: status_button.bottom
-        //             height: left_panel.width * 0.275
-        //             anchors.leftMargin: 5
-        //             anchors.rightMargin: 5
-        //             anchors.topMargin: 20
-        //             anchors.bottomMargin: 0
-        //             font.bold: true
-        //             font.pointSize: 45 * left_panel.width / 430
-        //             background: Rectangle {
-        //                 color: "#4CAF50"
-        //                 radius: 30 * parent.height / 104
-        //                 border.color: mode_button.background.color
-        //                 border.width: 1
-        //             }
-        //             onClicked: {
-        //                 popup_mode = 1
-        //                 if (mode_mode === "MANUAL") {
-        //                     // mode_mode ="AUTO"
-        //                     status_popup.text = qsTr(
-        //                                 "Change robot mode to AUTO")
-        //                     mode_button.background.color = "#4CAF50"
-        //                 } else if (mode_mode === "AUTO") {
-        //                     // mode_mode =  "MANUAL"
-        //                     status_popup.text = qsTr(
-        //                                 "Change robot mode to MANUAL")
-        //                     mode_button.background.color = "#03A9F4"
-        //                 } else
-        //                     status_popup.text = qsTr("Data false")
-        //                 popup.open()
-        //             }
-        //         }
-            // }
-        // }
 
 
     }
 
     StackLayout {
         width: parent.width * 0.25
+        height: parent.height * 0.4
         visible: true
         anchors.right: parent.right
         anchors.top: up_panel.top
-        anchors.bottom: parent.bottom
+        // anchors.bottom: parent.bottom
         anchors.rightMargin: 0
         anchors.topMargin: 0
         anchors.bottomMargin: 0

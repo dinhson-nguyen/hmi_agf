@@ -401,3 +401,16 @@
 5109	5127	1724754064148758810	/home/dinhson/amr_ws/src/hmi_agf/build/Desktop_Qt_6_7_1-Debug/hmi_agf_autogen/EWIEGA46WW/qrc_qml.cpp	5c2c8cd3ecefe85a
 5127	5238	1724754064260759670	CMakeFiles/hmi_agf.dir/hmi_agf_autogen/EWIEGA46WW/qrc_qml.cpp.o	5e5be78f5a3af3cd
 5238	5771	1724754064788763725	devel/lib/hmi_agf/hmi_agf	2c11d4f989e328fb
+8	13	1724827455499465532	qml/content/Screen01.qml	af474b07e644077e
+8	13	1724827455499465532	/home/dinhson/amr_ws/src/hmi_agf/build/Desktop_Qt_6_7_1-Debug/qml/content/Screen01.qml	af474b07e644077e
+14	41	1724827455527465604	content/.qt/rcc/qrc_content_raw_qml_0.cpp	e51eca9b660526ee
+14	41	1724827455527465604	/home/dinhson/amr_ws/src/hmi_agf/build/Desktop_Qt_6_7_1-Debug/content/.qt/rcc/qrc_content_raw_qml_0.cpp	e51eca9b660526ee
+14	289	1724827455755466190	content/.rcc/qmlcache/content_Screen01_qml.cpp	3f319486b0380cc1
+14	289	1724827455755466190	/home/dinhson/amr_ws/src/hmi_agf/build/Desktop_Qt_6_7_1-Debug/content/.rcc/qmlcache/content_Screen01_qml.cpp	3f319486b0380cc1
+289	360	1724827455847466426	content/CMakeFiles/content.dir/.qt/rcc/qrc_content_raw_qml_0.cpp.o	2f20b02d6535daa3
+289	5333	1724827460815479034	content/CMakeFiles/content.dir/.rcc/qmlcache/content_Screen01_qml.cpp.o	e6d67d608e217609
+5333	5354	1724827460839479094	devel/lib/libcontent.a	7898504a7bfa03a9
+5354	5378	1724827460863479156	hmi_agf_autogen/EWIEGA46WW/qrc_qml.cpp	5c2c8cd3ecefe85a
+5354	5378	1724827460863479156	/home/dinhson/amr_ws/src/hmi_agf/build/Desktop_Qt_6_7_1-Debug/hmi_agf_autogen/EWIEGA46WW/qrc_qml.cpp	5c2c8cd3ecefe85a
+5378	5526	1724827461007479517	CMakeFiles/hmi_agf.dir/hmi_agf_autogen/EWIEGA46WW/qrc_qml.cpp.o	5e5be78f5a3af3cd
+5526	6183	1724827461663481162	devel/lib/hmi_agf/hmi_agf	2c11d4f989e328fb

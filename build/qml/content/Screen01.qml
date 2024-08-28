@@ -33,6 +33,7 @@ Page {
     property string color_state: ""
     property bool state_panel_edit: false
     property bool state_panel_queue: false
+    property bool state_edit: false // false -> buffer | true -> queue 
 
     Popup {
         id: popup
@@ -208,149 +209,141 @@ Page {
             id: footer_layout
             anchors.top: stackLayout.bottom
             anchors.bottom: parent.bottom
+            layoutDirection: Qt.RightToLeft
+            spacing: 50 * parent.width / 640
             anchors.left: parent.left
             anchors.right: parent.right
 
-            // Button {
-            //     id: view_button
-            //     // height: parent.height * 0.12
-            //     text: "Trở về"
-            //     width: parent.width * 0.2
-            //     anchors.right: parent.right
-            //     anchors.top: parent.top
-            //     anchors.bottom: parent.bottom
-            //     anchors.rightMargin: 10
-            //     anchors.bottomMargin: 0
-            //     font.pointSize: 25 * view_button.height / 118
-            //     font.family: "ubuntu"
-            //     font.bold: true
-            //     display: AbstractButton.TextOnly
-            //     background: Rectangle {
-            //         color: "#FFFFFF"
-            //         radius: 10
-            //         border.color: "#607D8B"
-            //         border.width: 5
-            //     }
-            //     onClicked: {
+            Button {
+                id: view_button
+                // height: parent.height * 0.12
+                text: "Trở về"
+                Layout.preferredWidth: parent.width * 0.15
+                Layout.fillHeight: true
 
-            //         state_panel_edit = false
-            //         state_panel_queue = false
-            //     }
-            //     //     animation_goout.start();
-            //     //     animation_forward.start();
-            //     onPressedChanged: {
-            //         if (pressed) {
-            //             background.color = "#607D8B"
-            //         } else {
-            //             background.color = "#FFFFFF"
-            //         }
-            //     }
-            // }
-            // Button {
-            //     id: del_button
-            //     // height: parent.height * 0.12
-            //     text: "Xóa"
-            //     width: parent.width * 0.2
-            //     anchors.right: view_button.left
-            //     anchors.top: parent.top
-            //     anchors.bottom: parent.bottom
-            //     anchors.rightMargin: 10
-            //     anchors.bottomMargin: 0
-            //     font.pointSize: 25 * del_button.height / 118
-            //     font.family: "ubuntu"
-            //     font.bold: true
-            //     display: AbstractButton.TextOnly
-            //     background: Rectangle {
-            //         color: "#FFFFFF"
-            //         radius: 10
-            //         border.color: "#F44336"
-            //         border.width: 5
-            //     }
-            //     onPressedChanged: {
-            //         if (pressed) {
-            //             background.color = "#F44336"
-            //         } else {
-            //             background.color = "#FFFFFF"
-            //         }
-            //     }
-            //     onClicked: {
 
-            //         state_panel_edit = false
-            //         state_panel_queue = false
-            //     }
-            //     //     animation_goout.start();
-            //     //     animation_forward.start();
-            // }
-            // Button {
-            //     id: save_button
-            //     // height: parent.height * 0.12
-            //     text: "Lưu"
-            //     width: parent.width * 0.2
-            //     anchors.right: del_button.left
-            //     anchors.top: parent.top
-            //     anchors.bottom: parent.bottom
-            //     anchors.rightMargin: 10
-            //     anchors.bottomMargin: 0
-            //     font.pointSize: 25 * save_button.height / 118
-            //     font.family: "ubuntu"
-            //     font.bold: true
-            //     display: AbstractButton.TextOnly
-            //     background: Rectangle {
-            //         color: "#FFFFFF"
-            //         radius: 10
-            //         border.color: "#4CAF50"
-            //         border.width: 5
-            //     }
-            //     onPressedChanged: {
-            //         if (pressed) {
-            //             background.color = "#4CAF50"
-            //         } else {
-            //             background.color = "#FFFFFF"
-            //         }
-            //     }
-            //     onClicked: {
+                font.pointSize: 25 * view_button.height / 118
+                font.family: "ubuntu"
+                font.bold: true
+                display: AbstractButton.TextOnly
+                background: Rectangle {
+                    color: "#FFFFFF"
+                    radius: 10
+                    border.color: "#607D8B"
+                    border.width: 5
+                }
+                onClicked: {
 
-            //         state_panel_edit = false
-            //         state_panel_queue = false
-            //     }
-            //     //     animation_goout.start();
-            //     //     animation_forward.start();
-            // }
-            // Button {
-            //     id: add_button
-            //     // height: parent.height * 0.12
-            //     text: "Thêm"
-            //     width: parent.width * 0.2
-            //     anchors.right: save_button.left
-            //     anchors.top: parent.top
-            //     anchors.bottom: parent.bottom
-            //     anchors.rightMargin: 10
-            //     anchors.bottomMargin: 0
-            //     font.pointSize: 25 * add_button.height / 118
-            //     font.family: "ubuntu"
-            //     font.bold: true
-            //     display: AbstractButton.TextOnly
-            //     background: Rectangle {
-            //         color: "#FFFFFF"
-            //         radius: 10
-            //         border.color: "#4CAF50"
-            //         border.width: 5
-            //     }
-            //     onPressedChanged: {
-            //         if (pressed) {
-            //             background.color = "#4CAF50"
-            //         } else {
-            //             background.color = "#FFFFFF"
-            //         }
-            //     }
-            //     onClicked: {
+                    state_panel_edit = false
+                    state_panel_queue = false
+                }
+                //     animation_goout.start();
+                //     animation_forward.start();
+                onPressedChanged: {
+                    if (pressed) {
+                        background.color = "#607D8B"
+                    } else {
+                        background.color = "#FFFFFF"
+                    }
+                }
+            }
+            Button {
+                id: del_button
+                // height: parent.height * 0.12
+                text: "Xóa"
+                Layout.preferredWidth: parent.width * 0.15
+                Layout.fillHeight: true
 
-            //         state_panel_edit = false
-            //         state_panel_queue = false
-            //     }
-            //     //     animation_goout.start();
-            //     //     animation_forward.start();
-            // }
+                font.pointSize: 25 * del_button.height / 118
+                font.family: "ubuntu"
+                font.bold: true
+                display: AbstractButton.TextOnly
+                background: Rectangle {
+                    color: "#FFFFFF"
+                    radius: 10
+                    border.color: "#F44336"
+                    border.width: 5
+                }
+                onPressedChanged: {
+                    if (pressed) {
+                        background.color = "#F44336"
+                    } else {
+                        background.color = "#FFFFFF"
+                    }
+                }
+                onClicked: {
+
+                    state_panel_edit = false
+                    state_panel_queue = false
+                }
+                //     animation_goout.start();
+                //     animation_forward.start();
+            }
+            Button {
+                id: save_button
+                // height: parent.height * 0.12
+                text: "Lưu"
+                Layout.fillHeight: true
+                Layout.preferredWidth: parent.width * 0.15
+
+                font.pointSize: 25 * save_button.height / 118
+                font.family: "ubuntu"
+                font.bold: true
+                display: AbstractButton.TextOnly
+                background: Rectangle {
+                    color: "#FFFFFF"
+                    radius: 10
+                    border.color: "#4CAF50"
+                    border.width: 5
+                }
+                onPressedChanged: {
+                    if (pressed) {
+                        background.color = "#4CAF50"
+                    } else {
+                        background.color = "#FFFFFF"
+                    }
+                }
+                onClicked: {
+
+                    state_panel_edit = false
+                    state_panel_queue = false
+                }
+                //     animation_goout.start();
+                //     animation_forward.start();
+            }
+            Button {
+                id: add_button
+                // height: parent.height * 0.12
+                text: "Thêm"
+
+                Layout.fillHeight: true
+                Layout.preferredWidth: parent.width * 0.15
+
+                font.pointSize: 25 * add_button.height / 118
+                font.family: "ubuntu"
+                font.bold: true
+                display: AbstractButton.TextOnly
+                background: Rectangle {
+                    color: "#FFFFFF"
+                    radius: 10
+                    border.color: "#4CAF50"
+                    border.width: 5
+                }
+                onPressedChanged: {
+                    if (pressed) {
+                        background.color = "#4CAF50"
+                    } else {
+                        background.color = "#FFFFFF"
+                    }
+                }
+                onClicked: {
+
+                    state_panel_edit = false
+                    state_panel_queue = false
+                }
+                //     animation_goout.start();
+                //     animation_forward.start();
+            }
         }
         StackLayout {
             id: stackLayout
@@ -360,875 +353,875 @@ Page {
             height: parent.height * 0.73
             anchors.verticalCenter: parent.verticalCenter
             currentIndex: 1
-            // Item {
-            //     id: buffer_item
-            //     GridLayout {
-            //         id: main_layout
-            //         anchors.top: parent.top
-            //         rowSpacing: 15
-            //         columnSpacing: 20
-            //         anchors.left: parent.left
-            //         anchors.right: parent.right
-            //         height: parent.height
-            //         anchors.verticalCenter: parent.verticalCenter
-            //         rows: 4
-            //         columns: 6
-            //         Text {
-            //             text: qsTr("Unique ID: ")
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            //             font.bold: true
-            //             font.pointSize: 20
-            //             Layout.column: 0
-            //             Layout.row: 0
-            //         }
-            //         Text {
-            //             text: qsTr("ID: ")
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            //             font.bold: true
-            //             font.pointSize: 20
-            //             Layout.column: 2
-            //             Layout.row: 0
-            //         }
-            //         Text {
-            //             text: qsTr("ID Hàng: ")
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             font.pointSize: 20
-            //             font.bold: true
-            //             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            //             Layout.column: 4
-            //             Layout.row: 0
-            //         }
-            //         Text {
-            //             text: qsTr("Trạng thái: ")
-            //             font.pointSize: 20
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            //             font.bold: true
-            //             Layout.column: 0
-            //             Layout.row: 1
-            //         }
-            //         Text {
-            //             text: qsTr("Số thứ tự: ")
-            //             font.pointSize: 20
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            //             font.bold: true
-            //             Layout.column: 2
-            //             Layout.row: 1
-            //         }
-            //         Text {
-            //             text: qsTr("type: ")
-            //             font.pointSize: 20
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            //             font.bold: true
-            //             Layout.column: 4
-            //             Layout.row: 1
-            //         }
-            //         Text {
-            //             text: qsTr("height")
-            //             font.pointSize: 20
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            //             font.bold: true
-            //             Layout.column: 0
-            //             Layout.row: 2
-            //         }
-            //         Text {
-            //             text: qsTr("width: ")
-            //             font.pointSize: 20
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            //             font.bold: true
-            //             Layout.column: 2
-            //             Layout.row: 2
-            //         }
-            //         Text {
-            //             text: qsTr("length: ")
-            //             font.pointSize: 20
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            //             font.bold: true
-            //             Layout.column: 4
-            //             Layout.row: 2
-            //         }
-            //         Text {
-            //             text: qsTr("zone_id: ")
-            //             font.pointSize: 20
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            //             font.bold: true
-            //             Layout.column: 0
-            //             Layout.row: 3
-            //         }
-            //         Text {
-            //             text: qsTr("column_id: ")
-            //             font.pointSize: 20
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            //             font.bold: true
-            //             Layout.column: 2
-            //             Layout.row: 3
-            //         }
-            //         Text {
-            //             text: qsTr("location_id: ")
-            //             font.pointSize: 20
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            //             font.bold: true
-            //             Layout.column: 4
-            //             Layout.row: 3
-            //         }
-
-            //         TextField {
-            //             id: ___id
-            //             font.pixelSize: 25 * _id.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             readOnly: true
-            //             objectName: "____id"
-            //             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            //             Layout.column: 1
-            //             Layout.row: 0
-            //             width: 150
-
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //                 anchors.verticalCenter: parent.verticalCenter
-            //                 anchors.left: parent.left
-            //                 anchors.top: parent.top
-            //                 anchors.bottom: parent.bottom
-            //                 anchors.horizontalCenter: parent.horizontalCenter
-            //             }
-            //         }
-
-            //         TextField {
-            //             id: _id
-            //             objectName: "___id"
-            //             font.pixelSize: 25 * _id.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             width: 150
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             Layout.column: 3
-            //             Layout.row: 0
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-            //         TextField {
-            //             id: _id_hang
-            //             objectName: "___id_hang"
-            //             font.pixelSize: 25 * _id_hang.height / 45
-
-            //             text: "---"
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             Layout.column: 5
-            //             Layout.row: 0
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-            //         TextField {
-            //             id: _status
-            //             objectName: "___status"
-            //             font.pixelSize: 25 * _status.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             Layout.column: 1
-            //             Layout.row: 1
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-            //         TextField {
-            //             id: _stt
-            //             objectName: "___stt"
-            //             font.pixelSize: 25 * _stt.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             Layout.column: 3
-            //             Layout.row: 1
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-            //         TextField {
-            //             id: _type
-            //             objectName: "___type"
-            //             font.pixelSize: 25 * _type.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             Layout.column: 5
-            //             Layout.row: 1
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-
-            //         TextField {
-            //             id: _height
-            //             objectName: "___height"
-            //             font.pixelSize: 25 * _type.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             Layout.column: 1
-            //             Layout.row: 2
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-
-            //         TextField {
-            //             id: _width
-            //             objectName: "___width"
-            //             font.pixelSize: 25 * _type.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             Layout.column: 3
-            //             Layout.row: 2
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-
-            //         TextField {
-            //             id: _length
-            //             objectName: "___length"
-            //             font.pixelSize: 25 * _type.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             Layout.column: 5
-            //             Layout.row: 2
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-
-            //         TextField {
-            //             id: _zone_id
-            //             objectName: "___zone_id"
-            //             font.pixelSize: 25 * _type.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             Layout.column: 1
-            //             Layout.row: 3
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-
-            //         TextField {
-            //             id: _column_id
-            //             objectName: "___column_id"
-            //             font.pixelSize: 25 * _type.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             Layout.column: 3
-            //             Layout.row: 3
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-
-            //         TextField {
-            //             id: _location_id
-            //             objectName: "___location_id"
-            //             font.pixelSize: 25 * _type.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             Layout.column: 5
-            //             Layout.row: 3
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-            //     }
-            // }
-            // Item {
-            //     id: grid_queue
-            //     GridLayout {
-            //         id: main_layout_queue
-            //         anchors.top: parent.top
-            //         rowSpacing: 15
-            //         columnSpacing: 20
-            //         anchors.left: parent.left
-            //         anchors.right: parent.right
-            //         height: parent.height
-            //         anchors.verticalCenter: parent.verticalCenter
-            //         rows: 5
-            //         columns: 6
-
-            //         Text {
-            //             text: qsTr("Unique ID")
-            //             font.pointSize: 18
-            //             font.family: "Ubuntu"
-            //             font.bold: true
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             Layout.row: 0
-            //             Layout.column: 0
-            //         }
-            //         Text {
-            //             text: qsTr("ID")
-            //             font.pointSize: 18
-            //             font.family: "Ubuntu"
-            //             font.bold: true
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             Layout.row: 0
-            //             Layout.column: 2
-            //         }
-            //         Text {
-            //             text: qsTr("ID Cột")
-            //             font.family: "Ubuntu"
-            //             font.bold: true
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             font.pointSize: 18
-            //             Layout.row: 0
-            //             Layout.column: 4
-            //         }
-            //         Text {
-            //             text: qsTr("Zone ID")
-            //             font.pointSize: 18
-            //             font.bold: true
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             font.family: "Ubuntu"
-            //             Layout.row: 1
-            //             Layout.column: 0
-            //         }
-            //         Text {
-            //             text: qsTr("ID vị trí")
-            //             font.pointSize: 18
-            //             font.family: "Ubuntu"
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             font.bold: true
-            //             Layout.row: 1
-            //             Layout.column: 2
-            //         }
-
-            //         Text {
-            //             text: qsTr("Chiều cao")
-            //             font.pointSize: 18
-            //             font.family: "Ubuntu"
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             font.bold: true
-            //             Layout.row: 1
-            //             Layout.column: 4
-            //         }
-
-            //         Text {
-            //             text: qsTr("Chiều dài")
-            //             font.pointSize: 18
-            //             font.family: "Ubuntu"
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             font.bold: true
-            //             Layout.row: 2
-            //             Layout.column: 0
-            //         }
-            //         Text {
-            //             text: qsTr("Chiều rộng")
-            //             font.pointSize: 18
-            //             font.family: "Ubuntu"
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             font.bold: true
-            //             Layout.row: 2
-            //             Layout.column: 2
-            //         }
-            //         Text {
-            //             text: qsTr("Điểm đến")
-            //             font.pointSize: 18
-            //             font.family: "Ubuntu"
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             font.bold: true
-            //             Layout.row: 2
-            //             Layout.column: 4
-            //         }
-            //         Text {
-            //             text: qsTr("Mechandise")
-            //             font.pointSize: 18
-            //             font.family: "Ubuntu"
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             font.bold: true
-            //             Layout.row: 3
-            //             Layout.column: 0
-            //         }
-            //         Text {
-            //             text: qsTr("Model")
-            //             font.pointSize: 18
-            //             font.family: "Ubuntu"
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             font.bold: true
-            //             Layout.row: 3
-            //             Layout.column: 2
-            //         }
-
-            //         Text {
-            //             text: qsTr("Tên model")
-            //             font.pointSize: 18
-            //             font.family: "Ubuntu"
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             font.bold: true
-            //             Layout.row: 3
-            //             Layout.column: 4
-            //         }
-            //         Text {
-            //             text: qsTr("Type")
-            //             font.pointSize: 18
-            //             font.family: "Ubuntu"
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             font.bold: true
-            //             Layout.row: 4
-            //             Layout.column: 0
-            //         }
-            //         Text {
-            //             text: qsTr("Vị trí")
-            //             font.pointSize: 18
-            //             font.family: "Ubuntu"
-            //             Layout.preferredWidth: parent.width * 0.15
-            //             Layout.fillHeight: true
-            //             font.bold: true
-            //             Layout.row: 4
-            //             Layout.column: 2
-            //         }
-
-            //         TextField {
-            //             id: uuid_queue
-            //             objectName: "uuid_queue"
-            //             font.pixelSize: 25 * _id.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             width: 150
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             Layout.column: 1
-            //             Layout.row: 0
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-            //         TextField {
-            //             id: _id_
-            //             objectName: "_id"
-            //             font.pixelSize: 25 * _id.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             width: 150
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             Layout.column: 3
-            //             Layout.row: 0
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-            //         TextField {
-            //             id: _column_id_
-            //             objectName: "_column_id"
-            //             font.pixelSize: 25 * _id.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             width: 150
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             Layout.column: 5
-            //             Layout.row: 0
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-            //         TextField {
-            //             id: _zone_id_
-            //             objectName: "_zone_id"
-            //             font.pixelSize: 25 * _id.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             width: 150
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             Layout.column: 1
-            //             Layout.row: 1
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-
-            //         TextField {
-            //             id: _location_id_
-            //             objectName: "_location_id"
-            //             font.pixelSize: 25 * _id.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             width: 150
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             Layout.column: 3
-            //             Layout.row: 1
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-
-            //         TextField {
-            //             id: _height_
-            //             objectName: "_height"
-            //             font.pixelSize: 25 * _id.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             width: 150
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             Layout.column: 5
-            //             Layout.row: 1
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-
-            //         TextField {
-            //             id: _length_
-            //             objectName: "_length"
-            //             font.pixelSize: 25 * _id.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             width: 150
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             Layout.column: 1
-            //             Layout.row: 2
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-
-            //         TextField {
-            //             id: _width_
-            //             objectName: "_width"
-            //             font.pixelSize: 25 * _id.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             width: 150
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             Layout.column: 3
-            //             Layout.row: 2
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-
-            //         TextField {
-            //             id: _destination_
-            //             objectName: "_destination"
-            //             font.pixelSize: 25 * _id.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             width: 150
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             Layout.column: 5
-            //             Layout.row: 2
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-
-            //         TextField {
-            //             id: _mechandise_
-            //             objectName: "_mechandise"
-            //             font.pixelSize: 25 * _id.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             width: 150
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             Layout.column: 1
-            //             Layout.row: 3
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-
-            //         TextField {
-            //             id: _model_
-            //             objectName: "_model"
-            //             font.pixelSize: 25 * _id.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             width: 150
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             Layout.column: 3
-            //             Layout.row: 3
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-
-            //         TextField {
-            //             id: _name_model_
-            //             objectName: "_name_model"
-            //             font.pixelSize: 25 * _id.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             width: 150
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             Layout.column: 5
-            //             Layout.row: 3
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-
-            //         TextField {
-            //             id: _type_
-            //             objectName: "_type"
-            //             font.pixelSize: 25 * _id.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             width: 150
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             Layout.column: 1
-            //             Layout.row: 4
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-
-            //         TextField {
-            //             id: _queue
-            //             objectName: "_queue"
-            //             font.pixelSize: 25 * _id.height / 45
-            //             Layout.fillWidth: true
-            //             text: "---"
-
-            //             property bool isBold: false
-            //             property real radius: 5
-            //             width: 150
-            //             Layout.preferredWidth: parent.width * 0.2
-            //             Layout.fillHeight: true
-            //             Layout.column: 3
-            //             Layout.row: 4
-            //             placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-            //             background: Rectangle {
-            //                 anchors.fill: parent
-            //                 radius: 5
-            //                 border.color: "#3850ff"
-            //             }
-            //         }
-            //     }
-            // }
+            Item {
+                id: buffer_item
+                GridLayout {
+                    id: main_layout
+                    anchors.top: parent.top
+                    rowSpacing: 15
+                    columnSpacing: 20
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    height: parent.height
+                    anchors.verticalCenter: parent.verticalCenter
+                    rows: 4
+                    columns: 6
+                    Text {
+                        text: qsTr("Unique ID: ")
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        font.bold: true
+                        font.pointSize: 20
+                        Layout.column: 0
+                        Layout.row: 0
+                    }
+                    Text {
+                        text: qsTr("ID: ")
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        font.bold: true
+                        font.pointSize: 20
+                        Layout.column: 2
+                        Layout.row: 0
+                    }
+                    Text {
+                        text: qsTr("ID Hàng: ")
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        font.pointSize: 20
+                        font.bold: true
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        Layout.column: 4
+                        Layout.row: 0
+                    }
+                    Text {
+                        text: qsTr("Trạng thái: ")
+                        font.pointSize: 20
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        font.bold: true
+                        Layout.column: 0
+                        Layout.row: 1
+                    }
+                    Text {
+                        text: qsTr("Số thứ tự: ")
+                        font.pointSize: 20
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        font.bold: true
+                        Layout.column: 2
+                        Layout.row: 1
+                    }
+                    Text {
+                        text: qsTr("type: ")
+                        font.pointSize: 20
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        font.bold: true
+                        Layout.column: 4
+                        Layout.row: 1
+                    }
+                    Text {
+                        text: qsTr("height")
+                        font.pointSize: 20
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        font.bold: true
+                        Layout.column: 0
+                        Layout.row: 2
+                    }
+                    Text {
+                        text: qsTr("width: ")
+                        font.pointSize: 20
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        font.bold: true
+                        Layout.column: 2
+                        Layout.row: 2
+                    }
+                    Text {
+                        text: qsTr("length: ")
+                        font.pointSize: 20
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        font.bold: true
+                        Layout.column: 4
+                        Layout.row: 2
+                    }
+                    Text {
+                        text: qsTr("zone_id: ")
+                        font.pointSize: 20
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        font.bold: true
+                        Layout.column: 0
+                        Layout.row: 3
+                    }
+                    Text {
+                        text: qsTr("column_id: ")
+                        font.pointSize: 20
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        font.bold: true
+                        Layout.column: 2
+                        Layout.row: 3
+                    }
+                    Text {
+                        text: qsTr("location_id: ")
+                        font.pointSize: 20
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        font.bold: true
+                        Layout.column: 4
+                        Layout.row: 3
+                    }
+
+                    TextField {
+                        id: ___id
+                        font.pixelSize: 25 * _id.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        readOnly: true
+                        objectName: "____id"
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                        Layout.column: 1
+                        Layout.row: 0
+                        width: 150
+
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            radius: 5
+                            border.color: "#3850ff"
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: parent.left
+                            anchors.top: parent.top
+                            anchors.bottom: parent.bottom
+                            anchors.horizontalCenter: parent.horizontalCenter
+                        }
+                    }
+
+                    TextField {
+                        id: _id
+                        objectName: "___id"
+                        font.pixelSize: 25 * _id.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.column: 3
+                        Layout.row: 0
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+                    TextField {
+                        id: _id_hang
+                        objectName: "___id_hang"
+                        font.pixelSize: 25 * _id_hang.height / 45
+
+                        text: "---"
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        property bool isBold: false
+                        property real radius: 5
+                        Layout.column: 5
+                        Layout.row: 0
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+                    TextField {
+                        id: _status
+                        objectName: "___status"
+                        font.pixelSize: 25 * _status.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        property bool isBold: false
+                        property real radius: 5
+                        Layout.column: 1
+                        Layout.row: 1
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+                    TextField {
+                        id: _stt
+                        objectName: "___stt"
+                        font.pixelSize: 25 * _stt.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        property bool isBold: false
+                        property real radius: 5
+                        Layout.column: 3
+                        Layout.row: 1
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+                    TextField {
+                        id: _type
+                        objectName: "___type"
+                        font.pixelSize: 25 * _type.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        property bool isBold: false
+                        property real radius: 5
+                        Layout.column: 5
+                        Layout.row: 1
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    TextField {
+                        id: _height
+                        objectName: "___height"
+                        font.pixelSize: 25 * _type.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        property bool isBold: false
+                        property real radius: 5
+                        Layout.column: 1
+                        Layout.row: 2
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    TextField {
+                        id: _width
+                        objectName: "___width"
+                        font.pixelSize: 25 * _type.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        property bool isBold: false
+                        property real radius: 5
+                        Layout.column: 3
+                        Layout.row: 2
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    TextField {
+                        id: _length
+                        objectName: "___length"
+                        font.pixelSize: 25 * _type.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        property bool isBold: false
+                        property real radius: 5
+                        Layout.column: 5
+                        Layout.row: 2
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    TextField {
+                        id: _zone_id
+                        objectName: "___zone_id"
+                        font.pixelSize: 25 * _type.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        property bool isBold: false
+                        property real radius: 5
+                        Layout.column: 1
+                        Layout.row: 3
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    TextField {
+                        id: _column_id
+                        objectName: "___column_id"
+                        font.pixelSize: 25 * _type.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        property bool isBold: false
+                        property real radius: 5
+                        Layout.column: 3
+                        Layout.row: 3
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    TextField {
+                        id: _location_id
+                        objectName: "___location_id"
+                        font.pixelSize: 25 * _type.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        property bool isBold: false
+                        property real radius: 5
+                        Layout.column: 5
+                        Layout.row: 3
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+                }
+            }
+            Item {
+                id: grid_queue
+                GridLayout {
+                    id: main_layout_queue
+                    anchors.top: parent.top
+                    rowSpacing: 15
+                    columnSpacing: 20
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    height: parent.height
+                    anchors.verticalCenter: parent.verticalCenter
+                    rows: 5
+                    columns: 6
+
+                    Text {
+                        text: qsTr("Unique ID")
+                        font.pointSize: 18
+                        font.family: "Ubuntu"
+                        font.bold: true
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        Layout.row: 0
+                        Layout.column: 0
+                    }
+                    Text {
+                        text: qsTr("ID")
+                        font.pointSize: 18
+                        font.family: "Ubuntu"
+                        font.bold: true
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        Layout.row: 0
+                        Layout.column: 2
+                    }
+                    Text {
+                        text: qsTr("ID Cột")
+                        font.family: "Ubuntu"
+                        font.bold: true
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        font.pointSize: 18
+                        Layout.row: 0
+                        Layout.column: 4
+                    }
+                    Text {
+                        text: qsTr("Zone ID")
+                        font.pointSize: 18
+                        font.bold: true
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        font.family: "Ubuntu"
+                        Layout.row: 1
+                        Layout.column: 0
+                    }
+                    Text {
+                        text: qsTr("ID vị trí")
+                        font.pointSize: 18
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 1
+                        Layout.column: 2
+                    }
+
+                    Text {
+                        text: qsTr("Chiều cao")
+                        font.pointSize: 18
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 1
+                        Layout.column: 4
+                    }
+
+                    Text {
+                        text: qsTr("Chiều dài")
+                        font.pointSize: 18
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 2
+                        Layout.column: 0
+                    }
+                    Text {
+                        text: qsTr("Chiều rộng")
+                        font.pointSize: 18
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 2
+                        Layout.column: 2
+                    }
+                    Text {
+                        text: qsTr("Điểm đến")
+                        font.pointSize: 18
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 2
+                        Layout.column: 4
+                    }
+                    Text {
+                        text: qsTr("Mechandise")
+                        font.pointSize: 18
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 3
+                        Layout.column: 0
+                    }
+                    Text {
+                        text: qsTr("Model")
+                        font.pointSize: 18
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 3
+                        Layout.column: 2
+                    }
+
+                    Text {
+                        text: qsTr("Tên model")
+                        font.pointSize: 18
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 3
+                        Layout.column: 4
+                    }
+                    Text {
+                        text: qsTr("Type")
+                        font.pointSize: 18
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 4
+                        Layout.column: 0
+                    }
+                    Text {
+                        text: qsTr("Vị trí")
+                        font.pointSize: 18
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 4
+                        Layout.column: 2
+                    }
+
+                    TextField {
+                        id: uuid_queue
+                        objectName: "uuid_queue"
+                        font.pixelSize: 25 * _id.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.column: 1
+                        Layout.row: 0
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+                    TextField {
+                        id: _id_
+                        objectName: "_id"
+                        font.pixelSize: 25 * _id.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.column: 3
+                        Layout.row: 0
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+                    TextField {
+                        id: _column_id_
+                        objectName: "_column_id"
+                        font.pixelSize: 25 * _id.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.column: 5
+                        Layout.row: 0
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+                    TextField {
+                        id: _zone_id_
+                        objectName: "_zone_id"
+                        font.pixelSize: 25 * _id.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.column: 1
+                        Layout.row: 1
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    TextField {
+                        id: _location_id_
+                        objectName: "_location_id"
+                        font.pixelSize: 25 * _id.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.column: 3
+                        Layout.row: 1
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    TextField {
+                        id: _height_
+                        objectName: "_height"
+                        font.pixelSize: 25 * _id.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.column: 5
+                        Layout.row: 1
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    TextField {
+                        id: _length_
+                        objectName: "_length"
+                        font.pixelSize: 25 * _id.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.column: 1
+                        Layout.row: 2
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    TextField {
+                        id: _width_
+                        objectName: "_width"
+                        font.pixelSize: 25 * _id.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.column: 3
+                        Layout.row: 2
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    TextField {
+                        id: _destination_
+                        objectName: "_destination"
+                        font.pixelSize: 25 * _id.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.column: 5
+                        Layout.row: 2
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    TextField {
+                        id: _mechandise_
+                        objectName: "_mechandise"
+                        font.pixelSize: 25 * _id.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.column: 1
+                        Layout.row: 3
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    TextField {
+                        id: _model_
+                        objectName: "_model"
+                        font.pixelSize: 25 * _id.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.column: 3
+                        Layout.row: 3
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    TextField {
+                        id: _name_model_
+                        objectName: "_name_model"
+                        font.pixelSize: 25 * _id.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.column: 5
+                        Layout.row: 3
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    TextField {
+                        id: _type_
+                        objectName: "_type"
+                        font.pixelSize: 25 * _id.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.column: 1
+                        Layout.row: 4
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    TextField {
+                        id: _queue
+                        objectName: "_queue"
+                        font.pixelSize: 25 * _id.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.column: 3
+                        Layout.row: 4
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+                }
+            }
 
         }
 
@@ -2156,130 +2149,17 @@ Page {
                 }
             }
         }
-        // Component {
-        //     id: status_agf
-
-        //     Page {
-        //         id: left_panel
-        //         width: stack_view_status.width * 0.5
-        //         // height: parent.height * 0.88
-        //         anchors.right: stack_view_status.right
-        //         anchors.top: stack_view_status.top
-        //         anchors.bottom: stack_view_status.bottom
-
-        //         anchors.rightMargin: 0
-        //         anchors.topMargin: 0
-        //         anchors.bottomMargin: 0
-
-        //         Button {
-        //             id: control_button
-        //             text: qsTr(control_mode)
-        //             anchors.left: parent.left
-        //             anchors.right: parent.right
-        //             anchors.top: parent.top
-        //             // anchors.bottom: parent.bottom
-        //             height: left_panel.width * 0.275
-        //             anchors.leftMargin: 5
-        //             anchors.rightMargin: 5
-        //             anchors.topMargin: 10
-        //             anchors.bottomMargin: 0
-        //             highlighted: false
-        //             font.bold: true
-        //             font.pointSize: 45 * left_panel.width / 430
-
-        //             background: Rectangle {
-        //                 color: "#2196F3"
-        //                 radius: 30 * parent.height / 104
-        //                 border.color: control_button.background.color
-        //                 border.width: 1
-        //             }
-        //             onClicked: {
-        //                 if (control_mode === "RUNNING") {
-        //                     backend.requestControl("STOP")
-        //                 } else if (control_mode === "PAUSED") {
-        //                     backend.requestControl("RUN")
-        //                 }
-        //             }
-        //         }
-        //         Button {
-        //             id: status_button
-        //             anchors.left: parent.left
-        //             anchors.right: parent.right
-        //             anchors.top: control_button.bottom
-        //             // anchors.bottom: parent.bottom
-        //             height: left_panel.width * 0.275
-        //             text: "INITIATING"
-        //             anchors.leftMargin: 5
-        //             anchors.rightMargin: 5
-        //             anchors.topMargin: 20
-        //             anchors.bottomMargin: 0
-        //             highlighted: false
-        //             font.bold: true
-        //             font.pointSize: 45 * left_panel.width / 430
-        //             background: Rectangle {
-        //                 color: "white"
-        //                 radius: 30 * parent.height / 104
-        //                 border.color: status_button.background.color
-        //                 border.width: 1
-        //             }
-        //             onClicked: {
-        //                 popup_mode = 0
-        //                 if (status_mode === "ERROR") {
-        //                     status_popup.text = backend.robotError
-        //                 } else
-        //                     status_popup.text = backend.robotDetail
-
-        //                 popup.open()
-        //             }
-        //         }
-        //         Button {
-        //             id: mode_button
-        //             text: qsTr(mode_mode)
-        //             anchors.left: parent.left
-        //             anchors.right: parent.right
-        //             anchors.top: status_button.bottom
-        //             height: left_panel.width * 0.275
-        //             anchors.leftMargin: 5
-        //             anchors.rightMargin: 5
-        //             anchors.topMargin: 20
-        //             anchors.bottomMargin: 0
-        //             font.bold: true
-        //             font.pointSize: 45 * left_panel.width / 430
-        //             background: Rectangle {
-        //                 color: "#4CAF50"
-        //                 radius: 30 * parent.height / 104
-        //                 border.color: mode_button.background.color
-        //                 border.width: 1
-        //             }
-        //             onClicked: {
-        //                 popup_mode = 1
-        //                 if (mode_mode === "MANUAL") {
-        //                     // mode_mode ="AUTO"
-        //                     status_popup.text = qsTr(
-        //                                 "Change robot mode to AUTO")
-        //                     mode_button.background.color = "#4CAF50"
-        //                 } else if (mode_mode === "AUTO") {
-        //                     // mode_mode =  "MANUAL"
-        //                     status_popup.text = qsTr(
-        //                                 "Change robot mode to MANUAL")
-        //                     mode_button.background.color = "#03A9F4"
-        //                 } else
-        //                     status_popup.text = qsTr("Data false")
-        //                 popup.open()
-        //             }
-        //         }
-            // }
-        // }
 
 
     }
 
     StackLayout {
         width: parent.width * 0.25
+        height: parent.height * 0.4
         visible: true
         anchors.right: parent.right
         anchors.top: up_panel.top
-        anchors.bottom: left_down_panel.top
+        // anchors.bottom: parent.bottom
         anchors.rightMargin: 0
         anchors.topMargin: 0
         anchors.bottomMargin: 0
