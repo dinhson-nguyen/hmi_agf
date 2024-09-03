@@ -85,6 +85,7 @@ private:
     ros::Publisher request_working_stt_pub;
     ros::Publisher reset_error_pub;
     ros::Publisher robot_control_pub;
+    ros::Publisher robot_stop_pub;
 
     ros::ServiceServer pop_last_pallet;
     bool servicePopPalletCallback(std_stamped_msgs::StringService::Request& req, std_stamped_msgs::StringService::Response& res );
@@ -93,6 +94,7 @@ private:
     bool serviceAppendPalletCallback(std_stamped_msgs::StringService::Request& req, std_stamped_msgs::StringService::Response& res );
     
     ros::ServiceClient reset_error_agf;
+    ros::ServiceClient stop_error_agf;
     ros::ServiceServer get_last_pallet;
     bool serviceLookupPalletCallback(std_stamped_msgs::StringService::Request& req, std_stamped_msgs::StringService::Response& res);
 
@@ -238,6 +240,9 @@ public:
     Q_INVOKABLE  int getVolume() ;
     Q_INVOKABLE  void shutdown(int state);
     Q_INVOKABLE void getVolume_on_off(int i);
+
+    Q_INVOKABLE void requestStop(const QString &str) ;
+    Q_INVOKABLE void requestReset(const QString &str) ;
 
     Q_INVOKABLE  void change_to_japan() ;
     Q_INVOKABLE  void change_to_eng() ;

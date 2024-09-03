@@ -22,6 +22,7 @@ public:
         type = json.at("type").get<std::string>();
         width = json.at("width").get<std::string>();
         zone_id = json.at("zone_id").get<std::string>();
+        pallet_type = json.at("pallet_type").get<std::string>();
         queue = queue_size;
     }
 
@@ -40,6 +41,7 @@ public:
             << "type" << type
             << "width" << width
             << "zone_id" << zone_id
+            << "pallet_type" << pallet_type
             << "queue" << queue
             << bsoncxx::builder::stream::finalize;
     }
@@ -86,6 +88,6 @@ private:
     std::string type;
     std::string width;
     std::string zone_id;
-    
+    std::string pallet_type;
     int queue;
 };

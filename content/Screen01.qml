@@ -20,6 +20,9 @@ Page {
     property double batteryVoltage: 0
     property double batteryCurrent: 0
     property int popup_mode: 0
+    property string reset_mode: "RESET"
+    property string homing_mode: "HOMING"
+    property string stop_mode: "STOP"
     property string control_mode: "RUNNING"
     property string mode_mode: "MANUAL"
     property string status_mode: "INITIATING"
@@ -347,20 +350,21 @@ Page {
                     } else {
                         var jsonObject = {
                             "_id": uuid_queue.text,
-                            "id": _id.text,
-                            "column_id": _column_id.text,
-                            "zone_id": _zone_id.text,
-                            "location_id": _location_id.text,
-                            "height": _height.text,
-                            "length": _length.text,
-                            "width": _width.text,
-                            "destination": _destination.text,
-                            "mechandise": _mechandise.text,
-                            "model": _model.text,
-                            "name_model": _name_model.text,
+                            "id": _id_.text,
+                            "column_id": _column_id_.text,
+                            "zone_id": _zone_id_.text,
+                            "location_id": _location_id_.text,
+                            "height": _height_.text,
+                            "length": _length_.text,
+                            "width": _width_.text,
+                            "destination": _destination_.text,
+                            "mechandise": _mechandise_.text,
+                            "model": _model_.text,
+                            "name_model": _name_model_.text,
 
-                            "type": _type.text,
-                            "queue": _queue.text,
+                            "type": _type_.text,
+                            "pallet_type": _pallet_type_.text,
+                            "queue": _queue_.text,
                         
                         };
                         // console.log(JSON.stringify(jsonObject, null, 2))
@@ -432,7 +436,7 @@ Page {
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                         font.bold: true
-                        font.pointSize: 20
+                        font.pointSize: 20 *  main_layout.height / 364
                         Layout.column: 0
                         Layout.row: 0
                     }
@@ -442,7 +446,7 @@ Page {
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                         font.bold: true
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.column: 2
                         Layout.row: 0
                     }
@@ -450,7 +454,7 @@ Page {
                         text: qsTr("ID Hàng: ")
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         font.bold: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                         Layout.column: 4
@@ -458,7 +462,7 @@ Page {
                     }
                     Text {
                         text: qsTr("Trạng thái: ")
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -468,7 +472,7 @@ Page {
                     }
                     Text {
                         text: qsTr("Số thứ tự: ")
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -478,7 +482,7 @@ Page {
                     }
                     Text {
                         text: qsTr("type: ")
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -488,7 +492,7 @@ Page {
                     }
                     Text {
                         text: qsTr("height")
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -498,7 +502,7 @@ Page {
                     }
                     Text {
                         text: qsTr("width: ")
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -508,7 +512,7 @@ Page {
                     }
                     Text {
                         text: qsTr("length: ")
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -518,7 +522,7 @@ Page {
                     }
                     Text {
                         text: qsTr("zone_id: ")
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -528,7 +532,7 @@ Page {
                     }
                     Text {
                         text: qsTr("column_id: ")
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -538,7 +542,7 @@ Page {
                     }
                     Text {
                         text: qsTr("location_id: ")
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -680,7 +684,7 @@ Page {
                     TextField {
                         id: _height
                         objectName: "___height"
-                        font.pixelSize: 25 * _type.height / 45
+                        font.pixelSize: 25 * _height.height / 45
                         Layout.fillWidth: true
                         text: "---"
                         Layout.preferredWidth: parent.width * 0.2
@@ -701,7 +705,7 @@ Page {
                     TextField {
                         id: _width
                         objectName: "___width"
-                        font.pixelSize: 25 * _type.height / 45
+                        font.pixelSize: 25 * _width.height / 45
                         Layout.fillWidth: true
                         text: "---"
                         Layout.preferredWidth: parent.width * 0.2
@@ -722,7 +726,7 @@ Page {
                     TextField {
                         id: _length
                         objectName: "___length"
-                        font.pixelSize: 25 * _type.height / 45
+                        font.pixelSize: 25 * _length.height / 45
                         Layout.fillWidth: true
                         text: "---"
                         Layout.preferredWidth: parent.width * 0.2
@@ -743,7 +747,7 @@ Page {
                     TextField {
                         id: _zone_id
                         objectName: "___zone_id"
-                        font.pixelSize: 25 * _type.height / 45
+                        font.pixelSize: 25 * _zone_id.height / 45
                         Layout.fillWidth: true
                         text: "---"
                         Layout.preferredWidth: parent.width * 0.2
@@ -764,7 +768,7 @@ Page {
                     TextField {
                         id: _column_id
                         objectName: "___column_id"
-                        font.pixelSize: 25 * _type.height / 45
+                        font.pixelSize: 25 * _column_id.height / 45
                         Layout.fillWidth: true
                         text: "---"
                         Layout.preferredWidth: parent.width * 0.2
@@ -785,7 +789,7 @@ Page {
                     TextField {
                         id: _location_id
                         objectName: "___location_id"
-                        font.pixelSize: 25 * _type.height / 45
+                        font.pixelSize: 25 * _location_id.height / 45
                         Layout.fillWidth: true
                         text: "---"
                         Layout.preferredWidth: parent.width * 0.2
@@ -820,7 +824,7 @@ Page {
 
                     Text {
                         text: qsTr("Unique ID")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         font.bold: true
                         Layout.preferredWidth: parent.width * 0.15
@@ -830,7 +834,7 @@ Page {
                     }
                     Text {
                         text: qsTr("ID")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         font.bold: true
                         Layout.preferredWidth: parent.width * 0.15
@@ -844,13 +848,13 @@ Page {
                         font.bold: true
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.row: 0
                         Layout.column: 4
                     }
                     Text {
                         text: qsTr("Zone ID")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.bold: true
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
@@ -860,7 +864,7 @@ Page {
                     }
                     Text {
                         text: qsTr("ID vị trí")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
@@ -871,7 +875,7 @@ Page {
 
                     Text {
                         text: qsTr("Chiều cao")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
@@ -882,7 +886,7 @@ Page {
 
                     Text {
                         text: qsTr("Chiều dài")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
@@ -892,7 +896,7 @@ Page {
                     }
                     Text {
                         text: qsTr("Chiều rộng")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
@@ -902,7 +906,7 @@ Page {
                     }
                     Text {
                         text: qsTr("Điểm đến")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
@@ -912,7 +916,7 @@ Page {
                     }
                     Text {
                         text: qsTr("Mechandise")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
@@ -922,7 +926,7 @@ Page {
                     }
                     Text {
                         text: qsTr("Model")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
@@ -933,7 +937,7 @@ Page {
 
                     Text {
                         text: qsTr("Tên model")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
@@ -943,7 +947,7 @@ Page {
                     }
                     Text {
                         text: qsTr("Type")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
@@ -952,14 +956,24 @@ Page {
                         Layout.column: 0
                     }
                     Text {
-                        text: qsTr("Vị trí")
-                        font.pointSize: 18
+                        text: qsTr("Pallet type")
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         font.bold: true
                         Layout.row: 4
                         Layout.column: 2
+                    }
+                    Text {
+                        text: qsTr("Vị trí")
+                        font.pointSize: 20 * main_layout.height / 364
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 4
+                        Layout.column: 4
                     }
 
                     TextField {
@@ -987,7 +1001,7 @@ Page {
                     TextField {
                         id: _id_
                         objectName: "_id"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _id_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1009,7 +1023,7 @@ Page {
                     TextField {
                         id: _column_id_
                         objectName: "_column_id"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _column_id_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1031,7 +1045,7 @@ Page {
                     TextField {
                         id: _zone_id_
                         objectName: "_zone_id"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _zone_id_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1054,7 +1068,7 @@ Page {
                     TextField {
                         id: _location_id_
                         objectName: "_location_id"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _location_id_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1077,7 +1091,7 @@ Page {
                     TextField {
                         id: _height_
                         objectName: "_height"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _height_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1100,7 +1114,7 @@ Page {
                     TextField {
                         id: _length_
                         objectName: "_length"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _length_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1123,7 +1137,7 @@ Page {
                     TextField {
                         id: _width_
                         objectName: "_width"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _width_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1146,7 +1160,7 @@ Page {
                     TextField {
                         id: _destination_
                         objectName: "_destination"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _destination_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1169,7 +1183,7 @@ Page {
                     TextField {
                         id: _mechandise_
                         objectName: "_mechandise"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _mechandise_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1192,7 +1206,7 @@ Page {
                     TextField {
                         id: _model_
                         objectName: "_model"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _model_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1215,7 +1229,7 @@ Page {
                     TextField {
                         id: _name_model_
                         objectName: "_name_model"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _name_model_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1238,7 +1252,7 @@ Page {
                     TextField {
                         id: _type_
                         objectName: "_type"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _type_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1257,11 +1271,10 @@ Page {
                             border.color: "#3850ff"
                         }
                     }
-
                     TextField {
-                        id: _queue
-                        objectName: "_queue"
-                        font.pixelSize: 25 * _id.height / 45
+                        id: _pallet_type_
+                        objectName: "_pallet_type"
+                        font.pixelSize: 25 * _pallet_type_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1271,6 +1284,30 @@ Page {
                         Layout.preferredWidth: parent.width * 0.2
                         Layout.fillHeight: true
                         Layout.column: 3
+                        Layout.row: 4
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+
+                    TextField {
+                        id: _queue_
+                        objectName: "_queue"
+                        font.pixelSize: 25 * _queue.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.column: 5
                         Layout.row: 4
                         placeholderTextColor: "#F44336" //AppStyle.placeholderColor
 
@@ -2213,111 +2250,179 @@ Page {
 
     }
 
-    StackLayout {
-        width: parent.width * 0.25
-        height: parent.height * 0.4
+    GridLayout {
+        width: parent.width * 0.3
+        height: parent.height * 0.3
         visible: true
         anchors.right: parent.right
         anchors.top: up_panel.top
         // anchors.bottom: parent.bottom
-        anchors.rightMargin: 0
-        anchors.topMargin: 0
-        anchors.bottomMargin: 0
-        currentIndex: 0
+        anchors.rightMargin: 10
+        anchors.topMargin: 10
+        anchors.bottomMargin: 10
+        rowSpacing: 10
+        columnSpacing: 10
+        rows: 3
+        columns: 2
 
-        Item {
-            Button {
-                id: control_button
-                text: qsTr(control_mode)
-                anchors.right: parent.right
-                anchors.top: parent.top
-                height: parent.height * 0.3
-                width: parent.width
-                anchors.rightMargin: 5
-                anchors.topMargin: 10
-                anchors.bottomMargin: 0
-                highlighted: false
-                font.bold: true
-                font.pointSize: 45 * parent.height / 420
+        Button {
+            id: stop_button
+            text: stop_mode
+            Layout.preferredWidth: parent.width * 0.5
+            Layout.column: 0
+            Layout.row: 0
+            Layout.fillHeight: true
+            highlighted: false
+            font.bold: true
+            font.pointSize: 45 * parent.height / 420
 
-                background: Rectangle {
-                    color: "#2196F3"
-                    radius: 30 * parent.height / 104
-                    border.color: control_button.background.color
-                    border.width: 1
-                }
-                onClicked: {
-                    if (control_mode === "RUNNING") {
-                        backend.requestControl("STOP")
-                    } else if (control_mode === "PAUSED") {
-                        backend.requestControl("RUN")
-                    }
+            background: Rectangle {
+                color: "#AB47BC"
+                radius: 30 * parent.height / 104
+                border.color: stop_button.background.color
+                border.width: 1
+            }
+            onClicked: {
+                if (stop_mode === "STOP") {
+                    backend.requestStop("STOP")
+                } else if (stop_mode === "PAUSED") {
+                    backend.requestStop("RUN")
                 }
             }
-            Button {
-                id: status_button
-                text: "INIT"
-                anchors.right: parent.right
-                anchors.top: control_button.bottom
-                height: parent.height * 0.3
-                width: parent.width
-                anchors.rightMargin: 5
-                anchors.topMargin: 10
-                anchors.bottomMargin: 0
-                highlighted: false
-                font.bold: true
-                font.pointSize: 45 * parent.height / 420
-                background: Rectangle {
-                    color: "white"
-                    radius: 30 * parent.height / 104
-                    border.color: status_button.background.color
-                    border.width: 1
-                }
-                onClicked: {
-                    popup_mode = 0
-                    if (status_mode === "ERROR") {
-                        status_popup.text = backend.robotError
-                    } else
-                        status_popup.text = backend.robotDetail
+        }
 
-                    popup.open()
+        Button {
+            id: reset_button
+            text: reset_mode
+            Layout.column: 0
+            Layout.row: 1
+            Layout.fillHeight: true
+            Layout.preferredWidth: parent.width * 0.5
+            highlighted: false
+            font.bold: true
+            font.pointSize: 45 * parent.height / 420
+
+            background: Rectangle {
+                color: "#4CAF50"
+                radius: 30 * parent.height / 104
+                border.color: reset_button.background.color
+                border.width: 1
+            }
+            onClicked: {
+                if (reset_mode === "RESET") {
+                    backend.requestReset("STOP")
+                } else if (reset_mode === "PAUSED") {
+                    backend.requestReset("RUN")
                 }
             }
-            Button {
-                id: mode_button
-                text: qsTr(mode_mode)
-                anchors.right: parent.right
-                anchors.top: status_button.bottom
-                height: parent.height * 0.3
-                width: parent.width
-                anchors.rightMargin: 5
-                anchors.topMargin: 10
-                anchors.bottomMargin: 0
-                highlighted: false
-                font.bold: true
-                font.pointSize: 45 * parent.height / 420
-                background: Rectangle {
-                    color: "#4CAF50"
-                    radius: 30 * parent.height / 104
-                    border.color: mode_button.background.color
-                    border.width: 1
+        }
+
+        Button {
+            id: homming_button
+            text: homing_mode
+            Layout.column: 0
+            Layout.row: 2
+            Layout.fillHeight: true
+            Layout.preferredWidth: parent.width * 0.5
+            highlighted: false
+            font.bold: true
+            font.pointSize: 45 * parent.height / 420
+
+            background: Rectangle {
+                color: "#4CAF50"
+                radius: 30 * parent.height / 104
+                border.color: homming_button.background.color
+                border.width: 1
+            }
+
+        }
+
+
+        Button {
+            id: control_button
+            text: qsTr(control_mode)
+            Layout.fillHeight: true
+            Layout.preferredWidth: parent.width * 0.5
+            highlighted: false
+            font.bold: true
+            font.pointSize: 45 * parent.height / 420
+            Layout.column: 1
+            Layout.row: 0
+            background: Rectangle {
+                color: "#2196F3"
+                radius: 30 * parent.height / 104
+                border.color: control_button.background.color
+                border.width: 1
+            }
+            onClicked: {
+                if (control_mode === "RUNNING") {
+                    backend.requestControl("STOP")
+                } else if (control_mode === "PAUSED") {
+                    backend.requestControl("RUN")
                 }
-                onClicked: {
-                    popup_mode = 1
-                    if (mode_mode === "MANUAL") {
-                        // mode_mode ="AUTO"
-                        status_popup.text = qsTr(
-                                    "Change robot mode to AUTO")
-                        mode_button.background.color = "#4CAF50"
-                    } else if (mode_mode === "AUTO") {
-                        // mode_mode =  "MANUAL"
-                        status_popup.text = qsTr(
-                                    "Change robot mode to MANUAL")
-                        mode_button.background.color = "#03A9F4"
-                    } else
-                        status_popup.text = qsTr("Data false")
-                    popup.open()
-                }
+            }
+        }
+        Button {
+            id: status_button
+            text: "INIT"
+
+            Layout.column: 1
+            Layout.row: 1
+
+            Layout.fillHeight: true
+            Layout.preferredWidth: parent.width * 0.5
+            highlighted: false
+            font.bold: true
+            font.pointSize: 45 * parent.height / 420
+            background: Rectangle {
+                color: "white"
+                radius: 30 * parent.height / 104
+                border.color: status_button.background.color
+                border.width: 1
+            }
+            onClicked: {
+                popup_mode = 0
+                if (status_mode === "ERROR") {
+                    status_popup.text = backend.robotError
+                } else
+                    status_popup.text = backend.robotDetail
+
+                popup.open()
+            }
+        }
+        Button {
+            id: mode_button
+            text: qsTr(mode_mode)
+
+            Layout.column: 1
+            Layout.row: 2
+
+            Layout.fillHeight: true
+            Layout.preferredWidth: parent.width * 0.5
+            highlighted: false
+            font.bold: true
+            font.pointSize: 45 * parent.height / 420
+            background: Rectangle {
+                color: "#4CAF50"
+                radius: 30 * parent.height / 104
+                border.color: mode_button.background.color
+                border.width: 1
+            }
+            onClicked: {
+                popup_mode = 1
+                if (mode_mode === "MANUAL") {
+                    // mode_mode ="AUTO"
+                    status_popup.text = qsTr(
+                                "Change robot mode to AUTO")
+                    mode_button.background.color = "#4CAF50"
+                } else if (mode_mode === "AUTO") {
+                    // mode_mode =  "MANUAL"
+                    status_popup.text = qsTr(
+                                "Change robot mode to MANUAL")
+                    mode_button.background.color = "#03A9F4"
+                } else
+                    status_popup.text = qsTr("Data false")
+                popup.open()
             }
         }
 

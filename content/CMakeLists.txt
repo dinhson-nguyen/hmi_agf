@@ -13,6 +13,6 @@ qt6_add_qml_module(content
         
     RESOURCES
         fonts/fonts.txt
-        QML_FILES Screen02.qml Screen03.qml  component_test.ui.qml
+        QML_FILES Screen02.qml Screen03.qml  component_test.ui.qml component_test_2.ui.qml
 
 )

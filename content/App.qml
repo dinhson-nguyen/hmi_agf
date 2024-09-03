@@ -118,7 +118,41 @@ Window {
                 }
             }
         }
+        Button {
+            id: mission_button
+            height: (toolBar.height -120) * 0.2
+            text: qsTr("MONITORING")
+            palette.buttonText: "#448AFF"
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: dashboard_button.bottom
+            anchors.leftMargin: 5
+            anchors.rightMargin: 5
+            anchors.topMargin: 20
+            font.family: "ubuntu"
+            font.bold: true
+            icon.color: "#448AFF"
+            icon.height: 60 * monitoring_button.width / 170
+            icon.width: 60 * monitoring_button.width / 170
+            icon.source: "qrc:/content/asset/dart-mission-goal-success-svgrepo-com.svg"
+            display: AbstractButton.IconOnly
+            font.pointSize: 25 * dashboard_button.height / 276
 
+            background: Rectangle {
+                color: "#F5F5F5"
+                radius: 25
+                border.color: "#3D5AFE"
+                border.width: 5
+            }
+            onPressedChanged: {
+                if (pressed) {
+                    background.color = "#B0BEC5";
+                } else {
+                    background.color = "#F5F5F5";
+                }
+            }
+            onClicked: loader.setSource("qrc:/content/component_test.ui.qml")
+        }
         Button {
             id: setup_button
             height: (toolBar.height -120) * 0.2
@@ -144,7 +178,7 @@ Window {
                 border.color: "#3D5AFE"
                 border.width: 5
             }
-            onClicked: loader.setSource("qrc:/content/component_test.ui.qml")
+            onClicked: loader.setSource("qrc:/content/Screen2.ui.qml")
             onPressedChanged: {
                 if (pressed) {
                     background.color = "#B0BEC5"; 
@@ -189,41 +223,7 @@ Window {
             }
             onClicked: loader.setSource("qrc:/content/Screen03.qml")
         }
-        Button {
-            id: mission_button
-            height: (toolBar.height -120) * 0.2
-            text: qsTr("MONITORING")
-            palette.buttonText: "#448AFF"
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: dashboard_button.bottom
-            anchors.leftMargin: 5
-            anchors.rightMargin: 5
-            anchors.topMargin: 20
-            font.family: "ubuntu"
-            font.bold: true
-            icon.color: "#448AFF"
-            icon.height: 60 * monitoring_button.width / 170
-            icon.width: 60 * monitoring_button.width / 170
-            icon.source: "qrc:/content/asset/dart-mission-goal-success-svgrepo-com.svg"
-            display: AbstractButton.IconOnly
-            font.pointSize: 25 * dashboard_button.height / 276
-
-            background: Rectangle {
-                color: "#F5F5F5"
-                radius: 25
-                border.color: "#3D5AFE"
-                border.width: 5
-            }
-            onPressedChanged: {
-                if (pressed) {
-                    background.color = "#B0BEC5";
-                } else {
-                    background.color = "#F5F5F5";
-                }
-            }
-            onClicked: loader.setSource("qrc:/content/Mission.qml")
-        }
+        
         Button {
             id: system_button
             text: qsTr("SYSTEM")
@@ -257,7 +257,7 @@ Window {
                     background.color = "#F5F5F5"; 
                 }
             }
-            onClicked: loader.setSource(pageComponent)
+            onClicked: loader.setSource("qrc:/content/component_test_2.ui.qml")
         }
     }
 

@@ -93,6 +93,28 @@
                     },
                     {
                         "access": "public",
+                        "arguments": [
+                            {
+                                "name": "str",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "requestStop",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "str",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "requestReset",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
                         "name": "change_to_japan",
                         "returnType": "void"
                     },

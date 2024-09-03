@@ -5,6 +5,7 @@
     <file alias="Screen02.qml">/home/dinhson/amr_ws/src/hmi_agf/content/Screen02.qml</file>
     <file alias="Screen03.qml">/home/dinhson/amr_ws/src/hmi_agf/content/Screen03.qml</file>
     <file alias="component_test.ui.qml">/home/dinhson/amr_ws/src/hmi_agf/content/component_test.ui.qml</file>
+    <file alias="component_test_2.ui.qml">/home/dinhson/amr_ws/src/hmi_agf/content/component_test_2.ui.qml</file>
     <file alias="fonts/fonts.txt">/home/dinhson/amr_ws/src/hmi_agf/content/fonts/fonts.txt</file>
   </qresource>
 </RCC>

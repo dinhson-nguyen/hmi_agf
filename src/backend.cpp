@@ -37,14 +37,15 @@ Backend::Backend(QObject* parent)
     robot_mode_pub = nh.advertise<std_stamped_msgs::StringStamped>("/request_mode", 1);
     robot_control_pub = nh.advertise<std_stamped_msgs::StringStamped>("/request_working_stt", 1);
     
-
+    robot_stop_pub = nh.advertise<std_stamped_msgs::StringStamped>("/request_start_mission", 1);
 
     // Service
     
     pop_last_pallet = nh.advertiseService("/conveyor_buffer/pop_buffer_last", &Backend::servicePopPalletCallback, this);
     append_head_pallet = nh.advertiseService("/conveyor_buffer/append_buffer_head", &Backend::serviceAppendPalletCallback, this); 
     get_last_pallet = nh.advertiseService("/conveyor_buffer/get_buffer_last", &Backend::serviceLookupPalletCallback, this);
-    reset_error_agf = nh.serviceClient<std_stamped_msgs::StringService>("/stop_trigger_manager");
+    stop_error_agf = nh.serviceClient<std_stamped_msgs::StringService>("/stop_trigger_manager");
+    reset_error_agf = nh.serviceClient<std_stamped_msgs::StringService>("/reset_trigger_manager");
     bug_manual_mode = true;
     index = 0;
     max_index = 0;
@@ -278,20 +279,7 @@ void Backend::resetError() {
         bug_manual_mode = false;
         // ROS_INFO_STREAM(robotModeStr.toStdString());
     }
-    std_stamped_msgs::StringService::Request req;
-    std_stamped_msgs::StringService::Response res;
-    std_stamped_msgs::StringService srv;
-    req.request = "Hello, this is a request stop_trigger_manager ";
-
     
-    if (reset_error_agf.call(req,res))
-    {
-        ROS_INFO("Response: %s", res.respond.c_str());
-    }
-    else
-    {
-        ROS_ERROR("Failed to call service string_service");
-    }
 }
 
 
@@ -523,14 +511,14 @@ void Backend::colorPalletQueue(mongocxx::collection coll,
         json object_ = json::parse(data_);
         
         // Determine color based on type
-        std::string high = object_["height"].get<std::string>();
+        std::string high = object_["pallet_type"].get<std::string>();
         float hig = stringToFloat(high);
 
         std::cout << hig << std::endl;
-        if (hig <= 0.5) {
+        if (hig == 0) {
             
             color = "#FFEB3B";
-        } else if (hig < 2) {
+        } else if (hig == 1) {
             
             color = "#FF9800";
         } else {
@@ -926,4 +914,50 @@ void Backend::deleteDataQueue(QString jsonstring) {
     }
     initColor();
     
+}
+
+
+void Backend::requestStop(const QString &str) {
+
+    std_stamped_msgs::StringStamped request_stop_msg;
+    request_stop_msg.stamp = ros::Time::now();
+    std::string data_ = "STOP";
+    request_stop_msg.data = data_;
+    robot_stop_pub.publish(request_stop_msg);
+
+    std_stamped_msgs::StringService::Request req;
+    std_stamped_msgs::StringService::Response res;
+    std_stamped_msgs::StringService srv;
+    req.request = "Hello, this is a request stop_trigger_manager ";
+
+    
+    if (stop_error_agf.call(req,res))
+    {
+        ROS_INFO("Response: %s", res.respond.c_str());
+    }
+    else
+    {
+        ROS_ERROR("Failed to call service string_service");
+    }
+
+}
+
+void Backend::requestReset(const QString &str) {
+
+
+
+    std_stamped_msgs::StringService::Request req;
+    std_stamped_msgs::StringService::Response res;
+    std_stamped_msgs::StringService srv;
+    req.request = "Hello, this is a request reset_trigger_manager ";
+
+    
+    if (reset_error_agf.call(req,res))
+    {
+        ROS_INFO("Response: %s", res.respond.c_str());
+    }
+    else
+    {
+        ROS_ERROR("Failed to call service string_service");
+    }
 }

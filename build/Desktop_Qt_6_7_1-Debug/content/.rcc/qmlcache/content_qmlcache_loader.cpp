@@ -40,6 +40,13 @@ namespace _qt_qml_content_component_test_ui_0x2e_qml {
         reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
     };
 }
+namespace _qt_qml_content_component_test_2_ui_0x2e_qml { 
+    extern const unsigned char qmlData[];
+    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
+    };
+}
 
 }
 namespace {
@@ -59,6 +66,7 @@ Registry::Registry() {
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/content/Screen02.qml"), &QmlCacheGeneratedCode::_qt_qml_content_Screen02_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/content/Screen03.qml"), &QmlCacheGeneratedCode::_qt_qml_content_Screen03_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/content/component_test.ui.qml"), &QmlCacheGeneratedCode::_qt_qml_content_component_test_ui_0x2e_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/qt/qml/content/component_test_2.ui.qml"), &QmlCacheGeneratedCode::_qt_qml_content_component_test_2_ui_0x2e_qml::unit);
     QQmlPrivate::RegisterQmlUnitCacheHook registration;
     registration.structVersion = 0;
     registration.lookupCachedQmlUnit = &lookupCachedUnit;

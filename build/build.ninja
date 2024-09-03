@@ -808,7 +808,7 @@ build .qt/rcc/qrc_hmi_agf_raw_qml_0.cpp: CUSTOM_COMMAND ../main.qml .qt/rcc/hmi_
 #############################################
 # Custom command for hmi_agf_autogen/EWIEGA46WW/qrc_qml.cpp
 
-build hmi_agf_autogen/EWIEGA46WW/qrc_qml.cpp: CUSTOM_COMMAND ../qml.qrc CMakeFiles/hmi_agf_autogen.dir/AutoRcc_qml_EWIEGA46WW_Info.json ../main.qml ../content/component_test.ui.qml ../content/Screen02.qml ../content/App.qml ../content/Mission.qml ../content/Screen01.qml ../content/Screen03.qml ../content/asset/svg.svg ../content/asset/battery-full$ (1).svg ../content/asset/sound.svg ../content/asset/Setting.svg ../content/asset/batt_bolder.svg ../content/asset/batt_inside.svg ../content/asset/batt_200.svg ../content/asset/setup.svg ../content/asset/Vector$ 48$ (Stroke).svg ../content/asset/battery-full.svg ../content/asset/batt_20.svg ../content/asset/close.svg ../content/asset/minimize.svg ../content/asset/battery-svgrepo-com.svg ../content/asset/tv.svg ../content/asset/dart-mission-goal-success-svgrepo-com.svg ../content/asset/battery-full.png ../content/asset/charge.svg ../content/asset/battery-svgrepo-com$ (1).svg ../content/asset/circle.svg ../content/asset/svg_2.svg ../content/asset/charge$ (1).svg ../content/asset/zoom.svg ../content/asset/low-battery-svgrepo-com.svg ../content/asset/mute.svg /home/dinhson/Qt/6.7.2/gcc_64/./libexec/rcc || content/content_autogen content/content_automoc_json_extraction content/content_resources_1 content/content_resources_2 content/content_tooling content/contentplugin_autogen content/contentplugin_init content/contentplugin_init_autogen devel/lib/libcontent.a hmi_agf_autogen hmi_agf_automoc_json_extraction hmi_agf_tooling qml/content/libcontentplugin.a
+build hmi_agf_autogen/EWIEGA46WW/qrc_qml.cpp: CUSTOM_COMMAND ../qml.qrc CMakeFiles/hmi_agf_autogen.dir/AutoRcc_qml_EWIEGA46WW_Info.json ../main.qml ../content/component_test.ui.qml ../content/Screen02.qml ../content/App.qml ../content/component_test_2.ui.qml ../content/Mission.qml ../content/Screen01.qml ../content/Screen03.qml ../content/asset/svg.svg ../content/asset/battery-full$ (1).svg ../content/asset/sound.svg ../content/asset/Setting.svg ../content/asset/batt_bolder.svg ../content/asset/batt_inside.svg ../content/asset/batt_200.svg ../content/asset/setup.svg ../content/asset/Vector$ 48$ (Stroke).svg ../content/asset/battery-full.svg ../content/asset/batt_20.svg ../content/asset/close.svg ../content/asset/minimize.svg ../content/asset/battery-svgrepo-com.svg ../content/asset/tv.svg ../content/asset/dart-mission-goal-success-svgrepo-com.svg ../content/asset/battery-full.png ../content/asset/charge.svg ../content/asset/battery-svgrepo-com$ (1).svg ../content/asset/circle.svg ../content/asset/svg_2.svg ../content/asset/charge$ (1).svg ../content/asset/zoom.svg ../content/asset/low-battery-svgrepo-com.svg ../content/asset/mute.svg /home/dinhson/Qt/6.7.2/gcc_64/./libexec/rcc || content/content_autogen content/content_automoc_json_extraction content/content_resources_1 content/content_resources_2 content/content_tooling content/contentplugin_autogen content/contentplugin_init content/contentplugin_init_autogen devel/lib/libcontent.a hmi_agf_autogen hmi_agf_automoc_json_extraction hmi_agf_tooling qml/content/libcontentplugin.a
   COMMAND = cd /home/dinhson/amr_ws/src/hmi_agf/build && /usr/bin/cmake -E cmake_autorcc /home/dinhson/amr_ws/src/hmi_agf/build/CMakeFiles/hmi_agf_autogen.dir/AutoRcc_qml_EWIEGA46WW_Info.json Debug
   DESC = Automatic RCC for qml.qrc
   restat = 1
@@ -1319,7 +1319,7 @@ build content/edit_cache: phony content/CMakeFiles/edit_cache.util
 #############################################
 # Order-only phony target for content
 
-build cmake_object_order_depends_target_content: phony || content/.qt/rcc/qrc_content_raw_qml_0.cpp content/.qt/rcc/qrc_qmake_content.cpp content/.rcc/qmlcache/content_App_qml.cpp content/.rcc/qmlcache/content_Screen01_qml.cpp content/.rcc/qmlcache/content_Screen02_qml.cpp content/.rcc/qmlcache/content_Screen03_qml.cpp content/.rcc/qmlcache/content_component_test.ui_qml.cpp content/.rcc/qmlcache/content_qmlcache_loader.cpp content/content_autogen content/content_automoc_json_extraction content/content_qmltyperegistrations.cpp content/content_tooling content/meta_types/qt6content_debug_metatypes.json content/meta_types/qt6content_debug_metatypes.json.gen qml/content/content.qmltypes
+build cmake_object_order_depends_target_content: phony || content/.qt/rcc/qrc_content_raw_qml_0.cpp content/.qt/rcc/qrc_qmake_content.cpp content/.rcc/qmlcache/content_App_qml.cpp content/.rcc/qmlcache/content_Screen01_qml.cpp content/.rcc/qmlcache/content_Screen02_qml.cpp content/.rcc/qmlcache/content_Screen03_qml.cpp content/.rcc/qmlcache/content_component_test.ui_qml.cpp content/.rcc/qmlcache/content_component_test_2.ui_qml.cpp content/.rcc/qmlcache/content_qmlcache_loader.cpp content/content_autogen content/content_automoc_json_extraction content/content_qmltyperegistrations.cpp content/content_tooling content/meta_types/qt6content_debug_metatypes.json content/meta_types/qt6content_debug_metatypes.json.gen qml/content/content.qmltypes
 
 build content/CMakeFiles/content.dir/content_autogen/mocs_compilation.cpp.o: CXX_COMPILER__content content/content_autogen/mocs_compilation.cpp || cmake_object_order_depends_target_content
   DEFINES = -DQT_CORE_LIB -DQT_NETWORK_LIB -DQT_QMLBUILTINS_LIB -DQT_QMLINTEGRATION_LIB -DQT_QML_LIB -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\"hmi_agf\"
@@ -1393,6 +1393,14 @@ build content/CMakeFiles/content.dir/.rcc/qmlcache/content_component_test.ui_qml
   OBJECT_DIR = content/CMakeFiles/content.dir
   OBJECT_FILE_DIR = content/CMakeFiles/content.dir/.rcc/qmlcache
 
+build content/CMakeFiles/content.dir/.rcc/qmlcache/content_component_test_2.ui_qml.cpp.o: CXX_COMPILER__content content/.rcc/qmlcache/content_component_test_2.ui_qml.cpp || cmake_object_order_depends_target_content
+  DEFINES = -DQT_CORE_LIB -DQT_NETWORK_LIB -DQT_QMLBUILTINS_LIB -DQT_QMLINTEGRATION_LIB -DQT_QML_LIB -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\"hmi_agf\"
+  DEP_FILE = content/CMakeFiles/content.dir/.rcc/qmlcache/content_component_test_2.ui_qml.cpp.o.d
+  FLAGS = -g   -fPIC -pthread -std=gnu++17
+  INCLUDES = -Icontent/content_autogen/include -I/home/dinhson/yaml-cpp/include/yaml-cpp -I/home/dinhson/Qt/6.7.2/gcc_64/qml -I../include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/home/dinhson/amr_ws/devel/include -I../content -isystem /home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/6.7.2 -isystem /home/dinhson/Qt/6.7.2/gcc_64/include/QtQml/6.7.2/QtQml -isystem /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/6.7.2 -isystem /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/6.7.2/QtCore -isystem /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore -isystem /home/dinhson/Qt/6.7.2/gcc_64/include -isystem /home/dinhson/Qt/6.7.2/gcc_64/mkspecs/linux-g++ -isystem /home/dinhson/Qt/6.7.2/gcc_64/include/QtQmlBuiltins/6.7.2 -isystem /home/dinhson/Qt/6.7.2/gcc_64/include/QtQmlBuiltins/6.7.2/QtQmlBuiltins -isystem /home/dinhson/Qt/6.7.2/gcc_64/include/QtQmlBuiltins -isystem /home/dinhson/Qt/6.7.2/gcc_64/include/QtQml -isystem /home/dinhson/Qt/6.7.2/gcc_64/include/QtQmlIntegration -isystem /home/dinhson/Qt/6.7.2/gcc_64/include/QtNetwork
+  OBJECT_DIR = content/CMakeFiles/content.dir
+  OBJECT_FILE_DIR = content/CMakeFiles/content.dir/.rcc/qmlcache
+
 build content/CMakeFiles/content.dir/.qt/rcc/qrc_content_raw_qml_0.cpp.o: CXX_COMPILER__content content/.qt/rcc/qrc_content_raw_qml_0.cpp || cmake_object_order_depends_target_content
   DEFINES = -DQT_CORE_LIB -DQT_NETWORK_LIB -DQT_QMLBUILTINS_LIB -DQT_QMLINTEGRATION_LIB -DQT_QML_LIB -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\"hmi_agf\"
   DEP_FILE = content/CMakeFiles/content.dir/.qt/rcc/qrc_content_raw_qml_0.cpp.o.d
@@ -1409,7 +1417,7 @@ build content/CMakeFiles/content.dir/.qt/rcc/qrc_content_raw_qml_0.cpp.o: CXX_CO
 #############################################
 # Link the static library devel/lib/libcontent.a
 
-build devel/lib/libcontent.a: CXX_STATIC_LIBRARY_LINKER__content content/CMakeFiles/content.dir/content_autogen/mocs_compilation.cpp.o content/CMakeFiles/content.dir/content_qmltyperegistrations.cpp.o content/CMakeFiles/content.dir/.qt/rcc/qrc_qmake_content.cpp.o content/CMakeFiles/content.dir/.rcc/qmlcache/content_qmlcache_loader.cpp.o content/CMakeFiles/content.dir/.rcc/qmlcache/content_App_qml.cpp.o content/CMakeFiles/content.dir/.rcc/qmlcache/content_Screen01_qml.cpp.o content/CMakeFiles/content.dir/.rcc/qmlcache/content_Screen02_qml.cpp.o content/CMakeFiles/content.dir/.rcc/qmlcache/content_Screen03_qml.cpp.o content/CMakeFiles/content.dir/.rcc/qmlcache/content_component_test.ui_qml.cpp.o content/CMakeFiles/content.dir/.qt/rcc/qrc_content_raw_qml_0.cpp.o || content/content_autogen content/content_automoc_json_extraction content/content_tooling /home/dinhson/Qt/6.7.2/gcc_64/lib/libQt6Qml.so.6.7.2 /home/dinhson/Qt/6.7.2/gcc_64/lib/libQt6Network.so.6.7.2 /home/dinhson/Qt/6.7.2/gcc_64/lib/libQt6Core.so.6.7.2
+build devel/lib/libcontent.a: CXX_STATIC_LIBRARY_LINKER__content content/CMakeFiles/content.dir/content_autogen/mocs_compilation.cpp.o content/CMakeFiles/content.dir/content_qmltyperegistrations.cpp.o content/CMakeFiles/content.dir/.qt/rcc/qrc_qmake_content.cpp.o content/CMakeFiles/content.dir/.rcc/qmlcache/content_qmlcache_loader.cpp.o content/CMakeFiles/content.dir/.rcc/qmlcache/content_App_qml.cpp.o content/CMakeFiles/content.dir/.rcc/qmlcache/content_Screen01_qml.cpp.o content/CMakeFiles/content.dir/.rcc/qmlcache/content_Screen02_qml.cpp.o content/CMakeFiles/content.dir/.rcc/qmlcache/content_Screen03_qml.cpp.o content/CMakeFiles/content.dir/.rcc/qmlcache/content_component_test.ui_qml.cpp.o content/CMakeFiles/content.dir/.rcc/qmlcache/content_component_test_2.ui_qml.cpp.o content/CMakeFiles/content.dir/.qt/rcc/qrc_content_raw_qml_0.cpp.o || content/content_autogen content/content_automoc_json_extraction content/content_tooling /home/dinhson/Qt/6.7.2/gcc_64/lib/libQt6Qml.so.6.7.2 /home/dinhson/Qt/6.7.2/gcc_64/lib/libQt6Network.so.6.7.2 /home/dinhson/Qt/6.7.2/gcc_64/lib/libQt6Core.so.6.7.2
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = content/CMakeFiles/content.dir
   POST_BUILD = :
@@ -1463,7 +1471,7 @@ build content/content_resources_2: phony content/CMakeFiles/content_resources_2.
 #############################################
 # Utility command for content_tooling
 
-build content/content_tooling: phony content/CMakeFiles/content_tooling qml/content/App.qml qml/content/Screen01.qml qml/content/Screen02.qml qml/content/Screen03.qml qml/content/component_test.ui.qml qml/content/fonts/fonts.txt
+build content/content_tooling: phony content/CMakeFiles/content_tooling qml/content/App.qml qml/content/Screen01.qml qml/content/Screen02.qml qml/content/Screen03.qml qml/content/component_test.ui.qml qml/content/component_test_2.ui.qml qml/content/fonts/fonts.txt
 
 
 #############################################
@@ -1705,9 +1713,18 @@ build content/.rcc/qmlcache/content_component_test.ui_qml.cpp: CUSTOM_COMMAND /h
 
 
 #############################################
+# Custom command for content/.rcc/qmlcache/content_component_test_2.ui_qml.cpp
+
+build content/.rcc/qmlcache/content_component_test_2.ui_qml.cpp: CUSTOM_COMMAND /home/dinhson/Qt/6.7.2/gcc_64/libexec/qmlcachegen ../content/component_test_2.ui.qml content/.qt/rcc/qmake_content.qrc content/.qt/rcc/content_raw_qml_0.qrc qml/content/content.qmltypes qml/content/qmldir || content/content_autogen content/content_automoc_json_extraction content/content_tooling
+  COMMAND = cd /home/dinhson/amr_ws/src/hmi_agf/build/content && /usr/bin/cmake -E make_directory /home/dinhson/amr_ws/src/hmi_agf/build/content/.rcc/qmlcache && /home/dinhson/Qt/6.7.2/gcc_64/./libexec/qmlcachegen --bare --resource-path /qt/qml/content/component_test_2.ui.qml -I /home/dinhson/amr_ws/src/hmi_agf/build/qml/ -I /home/dinhson/Qt/6.7.2/gcc_64/./qml -i /home/dinhson/amr_ws/src/hmi_agf/build/qml/content/qmldir --resource /home/dinhson/amr_ws/src/hmi_agf/build/content/.qt/rcc/qmake_content.qrc --resource /home/dinhson/amr_ws/src/hmi_agf/build/content/.qt/rcc/content_raw_qml_0.qrc -o /home/dinhson/amr_ws/src/hmi_agf/build/content/.rcc/qmlcache/content_component_test_2.ui_qml.cpp /home/dinhson/amr_ws/src/hmi_agf/content/component_test_2.ui.qml
+  DESC = Generating .rcc/qmlcache/content_component_test_2.ui_qml.cpp
+  restat = 1
+
+
+#############################################
 # Custom command for content/.qt/rcc/qrc_content_raw_qml_0.cpp
 
-build content/.qt/rcc/qrc_content_raw_qml_0.cpp: CUSTOM_COMMAND ../content/App.qml ../content/Screen01.qml ../content/Screen02.qml ../content/Screen03.qml ../content/component_test.ui.qml ../content/fonts/fonts.txt content/.qt/rcc/content_raw_qml_0.qrc /home/dinhson/Qt/6.7.2/gcc_64/./libexec/rcc || content/content_autogen content/content_automoc_json_extraction content/content_tooling
+build content/.qt/rcc/qrc_content_raw_qml_0.cpp: CUSTOM_COMMAND ../content/App.qml ../content/Screen01.qml ../content/Screen02.qml ../content/Screen03.qml ../content/component_test.ui.qml ../content/component_test_2.ui.qml ../content/fonts/fonts.txt content/.qt/rcc/content_raw_qml_0.qrc /home/dinhson/Qt/6.7.2/gcc_64/./libexec/rcc || content/content_autogen content/content_automoc_json_extraction content/content_tooling
   COMMAND = cd /home/dinhson/amr_ws/src/hmi_agf/build/content && /home/dinhson/Qt/6.7.2/gcc_64/./libexec/rcc --output /home/dinhson/amr_ws/src/hmi_agf/build/content/.qt/rcc/qrc_content_raw_qml_0.cpp --name content_raw_qml_0 /home/dinhson/amr_ws/src/hmi_agf/build/content/.qt/rcc/content_raw_qml_0.qrc --no-zstd
   DESC = Running rcc for resource content_raw_qml_0
   restat = 1
@@ -1716,14 +1733,14 @@ build content/.qt/rcc/qrc_content_raw_qml_0.cpp: CUSTOM_COMMAND ../content/App.q
 #############################################
 # Custom command for content/CMakeFiles/content_qmllint_json
 
-build content/CMakeFiles/content_qmllint_json: CUSTOM_COMMAND /home/dinhson/Qt/6.7.2/gcc_64/bin/qmllint ../content/App.qml ../content/Screen01.qml ../content/Screen02.qml ../content/Screen03.qml ../content/component_test.ui.qml content/.rcc/qmllint/content_json.rsp || all_qmltyperegistrations content/content_qmltyperegistration hmi_agf_qmltyperegistration
+build content/CMakeFiles/content_qmllint_json: CUSTOM_COMMAND /home/dinhson/Qt/6.7.2/gcc_64/bin/qmllint ../content/App.qml ../content/Screen01.qml ../content/Screen02.qml ../content/Screen03.qml ../content/component_test.ui.qml ../content/component_test_2.ui.qml content/.rcc/qmllint/content_json.rsp || all_qmltyperegistrations content/content_qmltyperegistration hmi_agf_qmltyperegistration
   COMMAND = cd /home/dinhson/amr_ws/src/hmi_agf/content && /home/dinhson/Qt/6.7.2/gcc_64/bin/qmllint @/home/dinhson/amr_ws/src/hmi_agf/build/content/.rcc/qmllint/content_json.rsp
 
 
 #############################################
 # Phony custom command for content/CMakeFiles/content_tooling
 
-build content/CMakeFiles/content_tooling: phony qml/content/App.qml qml/content/Screen01.qml qml/content/Screen02.qml qml/content/Screen03.qml qml/content/component_test.ui.qml qml/content/fonts/fonts.txt
+build content/CMakeFiles/content_tooling: phony qml/content/App.qml qml/content/Screen01.qml qml/content/Screen02.qml qml/content/Screen03.qml qml/content/component_test.ui.qml qml/content/component_test_2.ui.qml qml/content/fonts/fonts.txt
 
 
 #############################################
@@ -1772,6 +1789,15 @@ build qml/content/component_test.ui.qml: CUSTOM_COMMAND ../content/component_tes
 
 
 #############################################
+# Custom command for qml/content/component_test_2.ui.qml
+
+build qml/content/component_test_2.ui.qml: CUSTOM_COMMAND ../content/component_test_2.ui.qml
+  COMMAND = cd /home/dinhson/amr_ws/src/hmi_agf/content && /usr/bin/cmake -E copy /home/dinhson/amr_ws/src/hmi_agf/content/component_test_2.ui.qml /home/dinhson/amr_ws/src/hmi_agf/build/qml/content/component_test_2.ui.qml
+  DESC = Copying component_test_2.ui.qml to /home/dinhson/amr_ws/src/hmi_agf/build/qml/content/component_test_2.ui.qml
+  restat = 1
+
+
+#############################################
 # Custom command for qml/content/fonts/fonts.txt
 
 build qml/content/fonts/fonts.txt: CUSTOM_COMMAND ../content/fonts/fonts.txt
@@ -1789,7 +1815,7 @@ build content/CMakeFiles/content_qmltyperegistration: phony content/content_qmlt
 #############################################
 # Custom command for content/CMakeFiles/content_qmllint
 
-build content/CMakeFiles/content_qmllint: CUSTOM_COMMAND /home/dinhson/Qt/6.7.2/gcc_64/bin/qmllint ../content/App.qml ../content/Screen01.qml ../content/Screen02.qml ../content/Screen03.qml ../content/component_test.ui.qml content/.rcc/qmllint/content.rsp || all_qmltyperegistrations content/content_qmltyperegistration hmi_agf_qmltyperegistration
+build content/CMakeFiles/content_qmllint: CUSTOM_COMMAND /home/dinhson/Qt/6.7.2/gcc_64/bin/qmllint ../content/App.qml ../content/Screen01.qml ../content/Screen02.qml ../content/Screen03.qml ../content/component_test.ui.qml ../content/component_test_2.ui.qml content/.rcc/qmllint/content.rsp || all_qmltyperegistrations content/content_qmltyperegistration hmi_agf_qmltyperegistration
   COMMAND = cd /home/dinhson/amr_ws/src/hmi_agf/content && /home/dinhson/Qt/6.7.2/gcc_64/bin/qmllint @/home/dinhson/amr_ws/src/hmi_agf/build/content/.rcc/qmllint/content.rsp
 
 
@@ -1805,7 +1831,7 @@ build content/CMakeFiles/content_automoc_json_extraction content/meta_types/cont
 #############################################
 # Custom command for content/CMakeFiles/content_qmllint_module
 
-build content/CMakeFiles/content_qmllint_module: CUSTOM_COMMAND /home/dinhson/Qt/6.7.2/gcc_64/bin/qmllint ../content/App.qml ../content/Screen01.qml ../content/Screen02.qml ../content/Screen03.qml ../content/component_test.ui.qml content/.rcc/qmllint/content_module.rsp || all_qmltyperegistrations content/content_qmltyperegistration hmi_agf_qmltyperegistration
+build content/CMakeFiles/content_qmllint_module: CUSTOM_COMMAND /home/dinhson/Qt/6.7.2/gcc_64/bin/qmllint ../content/App.qml ../content/Screen01.qml ../content/Screen02.qml ../content/Screen03.qml ../content/component_test.ui.qml ../content/component_test_2.ui.qml content/.rcc/qmllint/content_module.rsp || all_qmltyperegistrations content/content_qmltyperegistration hmi_agf_qmltyperegistration
   COMMAND = cd /home/dinhson/amr_ws/src/hmi_agf/content && /home/dinhson/Qt/6.7.2/gcc_64/bin/qmllint @/home/dinhson/amr_ws/src/hmi_agf/build/content/.rcc/qmllint/content_module.rsp
 
 

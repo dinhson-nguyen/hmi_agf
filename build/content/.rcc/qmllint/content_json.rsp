@@ -14,5 +14,6 @@
 /home/dinhson/amr_ws/src/hmi_agf/content/Screen02.qml
 /home/dinhson/amr_ws/src/hmi_agf/content/Screen03.qml
 /home/dinhson/amr_ws/src/hmi_agf/content/component_test.ui.qml
+/home/dinhson/amr_ws/src/hmi_agf/content/component_test_2.ui.qml
 --json
 /home/dinhson/amr_ws/src/hmi_agf/build/content_qmllint.json
