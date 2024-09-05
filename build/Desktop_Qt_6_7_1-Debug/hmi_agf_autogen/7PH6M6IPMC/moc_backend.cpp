@@ -51,6 +51,7 @@ constexpr auto qt_meta_stringdata_CLASSBackendENDCLASS = QtMocHelpers::stringDat
     "getFastechOutputChanged",
     "velChanged",
     "volumePercentageChanged",
+    "systemStatusChanged",
     "getFastechRear",
     "index",
     "getFastechFront",
@@ -81,6 +82,7 @@ constexpr auto qt_meta_stringdata_CLASSBackendENDCLASS = QtMocHelpers::stringDat
     "saveDataQueue",
     "deleteDataBuffer",
     "deleteDataQueue",
+    "getStateSystem",
     "batteryPercentage",
     "batteryVoltage",
     "batteryCurrent",
@@ -90,7 +92,8 @@ constexpr auto qt_meta_stringdata_CLASSBackendENDCLASS = QtMocHelpers::stringDat
     "getControl",
     "robotMode",
     "getLinear",
-    "getAngular"
+    "getAngular",
+    "systemStatus"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -103,53 +106,55 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSBackendENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-      37,   14, // methods
-      10,  303, // properties
+      39,   14, // methods
+      11,  317, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-      14,       // signalCount
+      15,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,  236,    2, 0x06,   11 /* Public */,
-       3,    0,  237,    2, 0x06,   12 /* Public */,
-       4,    0,  238,    2, 0x06,   13 /* Public */,
-       5,    0,  239,    2, 0x06,   14 /* Public */,
-       6,    0,  240,    2, 0x06,   15 /* Public */,
-       7,    0,  241,    2, 0x06,   16 /* Public */,
-       8,    0,  242,    2, 0x06,   17 /* Public */,
-       9,    0,  243,    2, 0x06,   18 /* Public */,
-      10,    0,  244,    2, 0x06,   19 /* Public */,
-      11,    0,  245,    2, 0x06,   20 /* Public */,
-      12,    0,  246,    2, 0x06,   21 /* Public */,
-      13,    0,  247,    2, 0x06,   22 /* Public */,
-      14,    0,  248,    2, 0x06,   23 /* Public */,
-      15,    0,  249,    2, 0x06,   24 /* Public */,
+       1,    0,  248,    2, 0x06,   12 /* Public */,
+       3,    0,  249,    2, 0x06,   13 /* Public */,
+       4,    0,  250,    2, 0x06,   14 /* Public */,
+       5,    0,  251,    2, 0x06,   15 /* Public */,
+       6,    0,  252,    2, 0x06,   16 /* Public */,
+       7,    0,  253,    2, 0x06,   17 /* Public */,
+       8,    0,  254,    2, 0x06,   18 /* Public */,
+       9,    0,  255,    2, 0x06,   19 /* Public */,
+      10,    0,  256,    2, 0x06,   20 /* Public */,
+      11,    0,  257,    2, 0x06,   21 /* Public */,
+      12,    0,  258,    2, 0x06,   22 /* Public */,
+      13,    0,  259,    2, 0x06,   23 /* Public */,
+      14,    0,  260,    2, 0x06,   24 /* Public */,
+      15,    0,  261,    2, 0x06,   25 /* Public */,
+      16,    0,  262,    2, 0x06,   26 /* Public */,
 
  // methods: name, argc, parameters, tag, flags, initial metatype offsets
-      16,    1,  250,    2, 0x02,   25 /* Public */,
-      18,    1,  253,    2, 0x02,   27 /* Public */,
-      19,    0,  256,    2, 0x02,   29 /* Public */,
-      20,    1,  257,    2, 0x02,   30 /* Public */,
-      22,    1,  260,    2, 0x02,   32 /* Public */,
-      23,    1,  263,    2, 0x02,   34 /* Public */,
-      25,    0,  266,    2, 0x02,   36 /* Public */,
-      26,    1,  267,    2, 0x02,   37 /* Public */,
-      28,    1,  270,    2, 0x02,   39 /* Public */,
-      30,    1,  273,    2, 0x02,   41 /* Public */,
-      31,    1,  276,    2, 0x02,   43 /* Public */,
-      32,    0,  279,    2, 0x02,   45 /* Public */,
-      33,    0,  280,    2, 0x02,   46 /* Public */,
-      34,    0,  281,    2, 0x02,   47 /* Public */,
-      35,    0,  282,    2, 0x02,   48 /* Public */,
-      36,    0,  283,    2, 0x02,   49 /* Public */,
-      37,    0,  284,    2, 0x02,   50 /* Public */,
-      38,    1,  285,    2, 0x02,   51 /* Public */,
-      40,    1,  288,    2, 0x02,   53 /* Public */,
-      41,    1,  291,    2, 0x02,   55 /* Public */,
-      43,    1,  294,    2, 0x02,   57 /* Public */,
-      44,    1,  297,    2, 0x02,   59 /* Public */,
-      45,    1,  300,    2, 0x02,   61 /* Public */,
+      17,    1,  263,    2, 0x02,   27 /* Public */,
+      19,    1,  266,    2, 0x02,   29 /* Public */,
+      20,    0,  269,    2, 0x02,   31 /* Public */,
+      21,    1,  270,    2, 0x02,   32 /* Public */,
+      23,    1,  273,    2, 0x02,   34 /* Public */,
+      24,    1,  276,    2, 0x02,   36 /* Public */,
+      26,    0,  279,    2, 0x02,   38 /* Public */,
+      27,    1,  280,    2, 0x02,   39 /* Public */,
+      29,    1,  283,    2, 0x02,   41 /* Public */,
+      31,    1,  286,    2, 0x02,   43 /* Public */,
+      32,    1,  289,    2, 0x02,   45 /* Public */,
+      33,    0,  292,    2, 0x02,   47 /* Public */,
+      34,    0,  293,    2, 0x02,   48 /* Public */,
+      35,    0,  294,    2, 0x02,   49 /* Public */,
+      36,    0,  295,    2, 0x02,   50 /* Public */,
+      37,    0,  296,    2, 0x02,   51 /* Public */,
+      38,    0,  297,    2, 0x02,   52 /* Public */,
+      39,    1,  298,    2, 0x02,   53 /* Public */,
+      41,    1,  301,    2, 0x02,   55 /* Public */,
+      42,    1,  304,    2, 0x02,   57 /* Public */,
+      44,    1,  307,    2, 0x02,   59 /* Public */,
+      45,    1,  310,    2, 0x02,   61 /* Public */,
+      46,    1,  313,    2, 0x02,   63 /* Public */,
+      47,    0,  316,    2, 0x02,   65 /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -166,43 +171,46 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSBackendENDCLASS[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void,
 
  // methods: parameters
-    QMetaType::Int, QMetaType::Int,   17,
-    QMetaType::Int, QMetaType::Int,   17,
+    QMetaType::Int, QMetaType::Int,   18,
+    QMetaType::Int, QMetaType::Int,   18,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   21,
-    QMetaType::Void, QMetaType::QString,   21,
-    QMetaType::Int, QMetaType::Int,   24,
+    QMetaType::Void, QMetaType::QString,   22,
+    QMetaType::Void, QMetaType::QString,   22,
+    QMetaType::Int, QMetaType::Int,   25,
     QMetaType::Int,
-    QMetaType::Void, QMetaType::Int,   27,
-    QMetaType::Void, QMetaType::Int,   29,
-    QMetaType::Void, QMetaType::QString,   21,
-    QMetaType::Void, QMetaType::QString,   21,
+    QMetaType::Void, QMetaType::Int,   28,
+    QMetaType::Void, QMetaType::Int,   30,
+    QMetaType::Void, QMetaType::QString,   22,
+    QMetaType::Void, QMetaType::QString,   22,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::QString,
     QMetaType::QString,
     QMetaType::QString,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   39,
-    QMetaType::Void, QMetaType::Int,   39,
-    QMetaType::Void, QMetaType::QString,   42,
-    QMetaType::Void, QMetaType::QString,   42,
-    QMetaType::Void, QMetaType::QString,   42,
-    QMetaType::Void, QMetaType::QString,   42,
+    QMetaType::Void, QMetaType::QString,   40,
+    QMetaType::Void, QMetaType::Int,   40,
+    QMetaType::Void, QMetaType::QString,   43,
+    QMetaType::Void, QMetaType::QString,   43,
+    QMetaType::Void, QMetaType::QString,   43,
+    QMetaType::Void, QMetaType::QString,   43,
+    QMetaType::QString,
 
  // properties: name, type, flags
-      46, QMetaType::Double, 0x00015001, uint(0), 0,
-      47, QMetaType::Double, 0x00015001, uint(1), 0,
-      48, QMetaType::Double, 0x00015001, uint(2), 0,
-      49, QMetaType::QString, 0x00015001, uint(4), 0,
-      50, QMetaType::QString, 0x00015001, uint(5), 0,
-      51, QMetaType::QString, 0x00015001, uint(6), 0,
-      52, QMetaType::QString, 0x00015001, uint(9), 0,
-      53, QMetaType::QString, 0x00015001, uint(3), 0,
-      54, QMetaType::Double, 0x00015001, uint(12), 0,
-      55, QMetaType::Double, 0x00015001, uint(12), 0,
+      48, QMetaType::Double, 0x00015001, uint(0), 0,
+      49, QMetaType::Double, 0x00015001, uint(1), 0,
+      50, QMetaType::Double, 0x00015001, uint(2), 0,
+      51, QMetaType::QString, 0x00015001, uint(4), 0,
+      52, QMetaType::QString, 0x00015001, uint(5), 0,
+      53, QMetaType::QString, 0x00015001, uint(6), 0,
+      54, QMetaType::QString, 0x00015001, uint(9), 0,
+      55, QMetaType::QString, 0x00015001, uint(3), 0,
+      56, QMetaType::Double, 0x00015001, uint(12), 0,
+      57, QMetaType::Double, 0x00015001, uint(12), 0,
+      58, QMetaType::QString, 0x00015001, uint(14), 0,
 
        0        // eod
 };
@@ -234,6 +242,8 @@ Q_CONSTINIT const QMetaObject Backend::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<double, std::true_type>,
         // property 'getAngular'
         QtPrivate::TypeAndForceComplete<double, std::true_type>,
+        // property 'systemStatus'
+        QtPrivate::TypeAndForceComplete<QString, std::true_type>,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<Backend, std::true_type>,
         // method 'batteryPercentageChanged'
@@ -263,6 +273,8 @@ Q_CONSTINIT const QMetaObject Backend::staticMetaObject = { {
         // method 'velChanged'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'volumePercentageChanged'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'systemStatusChanged'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'getFastechRear'
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
@@ -324,6 +336,8 @@ Q_CONSTINIT const QMetaObject Backend::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         // method 'deleteDataQueue'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        // method 'getStateSystem'
         QtPrivate::TypeAndForceComplete<QString, std::false_type>
     >,
     nullptr
@@ -349,36 +363,39 @@ void Backend::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 11: _t->getFastechOutputChanged(); break;
         case 12: _t->velChanged(); break;
         case 13: _t->volumePercentageChanged(); break;
-        case 14: { int _r = _t->getFastechRear((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])));
+        case 14: _t->systemStatusChanged(); break;
+        case 15: { int _r = _t->getFastechRear((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 15: { int _r = _t->getFastechFront((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])));
+        case 16: { int _r = _t->getFastechFront((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 16: _t->resetError(); break;
-        case 17: _t->requestMode((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 18: _t->requestControl((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 19: { int _r = _t->setVolume((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])));
+        case 17: _t->resetError(); break;
+        case 18: _t->requestMode((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 19: _t->requestControl((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 20: { int _r = _t->setVolume((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])));
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 20: { int _r = _t->getVolume();
+        case 21: { int _r = _t->getVolume();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 21: _t->shutdown((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 22: _t->getVolume_on_off((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 23: _t->requestStop((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 24: _t->requestReset((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 25: _t->change_to_japan(); break;
-        case 26: _t->change_to_eng(); break;
-        case 27: { QString _r = _t->getNameAGV();
+        case 22: _t->shutdown((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 23: _t->getVolume_on_off((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 24: _t->requestStop((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 25: _t->requestReset((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 26: _t->change_to_japan(); break;
+        case 27: _t->change_to_eng(); break;
+        case 28: { QString _r = _t->getNameAGV();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
-        case 28: { QString _r = _t->getIP();
+        case 29: { QString _r = _t->getIP();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
-        case 29: { QString _r = _t->getIPServer();
+        case 30: { QString _r = _t->getIPServer();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
-        case 30: _t->initColor(); break;
-        case 31: _t->setDataBuffer((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 32: _t->setDataQueue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 33: _t->saveDataBuffer((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 34: _t->saveDataQueue((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 35: _t->deleteDataBuffer((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 36: _t->deleteDataQueue((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 31: _t->initColor(); break;
+        case 32: _t->setDataBuffer((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 33: _t->setDataQueue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 34: _t->saveDataBuffer((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 35: _t->saveDataQueue((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 36: _t->deleteDataBuffer((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 37: _t->deleteDataQueue((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 38: { QString _r = _t->getStateSystem();
+            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -481,6 +498,13 @@ void Backend::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
                 return;
             }
         }
+        {
+            using _t = void (Backend::*)();
+            if (_t _q_method = &Backend::systemStatusChanged; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
+                *result = 14;
+                return;
+            }
+        }
     } else if (_c == QMetaObject::ReadProperty) {
         auto *_t = static_cast<Backend *>(_o);
         (void)_t;
@@ -496,6 +520,7 @@ void Backend::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 7: *reinterpret_cast< QString*>(_v) = _t->robotMode(); break;
         case 8: *reinterpret_cast< double*>(_v) = _t->getLinear(); break;
         case 9: *reinterpret_cast< double*>(_v) = _t->getAngular(); break;
+        case 10: *reinterpret_cast< QString*>(_v) = _t->systemStatus(); break;
         default: break;
         }
     } else if (_c == QMetaObject::WriteProperty) {
@@ -523,18 +548,18 @@ int Backend::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 37)
+        if (_id < 39)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 37;
+        _id -= 39;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 37)
+        if (_id < 39)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 37;
+        _id -= 39;
     }else if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
             || _c == QMetaObject::ResetProperty || _c == QMetaObject::BindableProperty
             || _c == QMetaObject::RegisterPropertyMetaType) {
         qt_static_metacall(this, _c, _id, _a);
-        _id -= 10;
+        _id -= 11;
     }
     return _id;
 }
@@ -621,5 +646,11 @@ void Backend::velChanged()
 void Backend::volumePercentageChanged()
 {
     QMetaObject::activate(this, &staticMetaObject, 13, nullptr);
+}
+
+// SIGNAL 14
+void Backend::systemStatusChanged()
+{
+    QMetaObject::activate(this, &staticMetaObject, 14, nullptr);
 }
 QT_WARNING_POP

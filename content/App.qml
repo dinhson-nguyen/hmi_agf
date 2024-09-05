@@ -19,35 +19,7 @@ Window {
     title: "HMI_appication"
 
 
-    StackView {
-          id: stackView
-        
 
-        anchors.left: toolBar.right
-        anchors.right: parent.right
-        anchors.top: control_panel.bottom
-        anchors.bottom: parent.bottom
-        anchors.leftMargin: 0
-        anchors.topMargin: 0
-        anchors.verticalCenter: window.verticalCenter
-        Loader
-        {
-            id: loader
-            anchors.fill: parent
-            onLoaded: {
-                fadeIn.start(); // Start fade-in animation after content is loaded
-                
-            }
-
-            // Property to control the opacity for animation
-            opacity: 0
-
-        }
-
-
-        initialItem: loader.setSource("qrc:/content/Screen01.qml")
-        
-    }
     PropertyAnimation {
         id: fadeIn
         target: loader
@@ -264,12 +236,13 @@ Window {
 
     ToolBar {
         id: control_panel
-        width: stackView.width
+        // width: stackView.width
         // anchors.left: toolBar.right
         anchors.right: parent.right
         anchors.top: parent.top
         height: 25 + 75 * window.height / 1080
-        anchors.leftMargin: 0
+        width: parent.width * 0.25
+        // anchors.leftMargin: 0
         anchors.rightMargin: 0
         anchors.topMargin: 0
         anchors.bottomMargin: 0
@@ -277,35 +250,7 @@ Window {
             color: "#BBDEFB"
             radius: 10 
         }
-        RowLayout {
-            anchors.left: parent.left
-            anchors.right: minimal_button.left
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            anchors.rightMargin: 100
-            spacing: 5
-            Text {
-                id: agv_name
-                text:  qsTr("AGF Name: ")
-                width: parent.width * 0.4
-                Layout.fillHeight:  true
-                Layout.preferredWidth:  parent.width * 0.4
-                font.pixelSize: 40 * agv_name.height / 100
-                horizontalAlignment: Text.AlignLeft
-                verticalAlignment: Text.AlignVCenter
-                font.italic: true
-            }
-            Text {
-                id: ip
-                text:  qsTr("AGF IP: ")
-                Layout.fillHeight:  true
-                Layout.preferredWidth:  parent.width * 0.4
-                font.pixelSize: 40 * agv_name.height / 100
-                horizontalAlignment: Text.AlignLeft
-                verticalAlignment: Text.AlignVCenter
-                font.italic: true
-            }
-        }
+
 
         MouseArea {
                     id: dragArea
@@ -405,6 +350,36 @@ Window {
                     window.showMinimized();
                 }
             }
+    }
+
+    StackView {
+          id: stackView
+
+
+        anchors.left: toolBar.right
+        anchors.right: parent.right
+        anchors.top: control_panel.bottom
+        anchors.bottom: parent.bottom
+        anchors.leftMargin: 0
+        anchors.topMargin: 0
+        anchors.verticalCenter: window.verticalCenter
+        Loader
+        {
+            id: loader
+            anchors.fill: parent
+            onLoaded: {
+                fadeIn.start(); // Start fade-in animation after content is loaded
+
+            }
+
+            // Property to control the opacity for animation
+            opacity: 0
+
+        }
+
+
+        initialItem: loader.setSource("qrc:/content/Screen01.qml")
+
     }
 
 

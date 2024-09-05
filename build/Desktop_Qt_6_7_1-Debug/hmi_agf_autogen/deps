@@ -782,6 +782,22 @@ hmi_agf_autogen/timestamp: \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Quick/Qt6QuickTargets-relwithdebinfo.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Quick/Qt6QuickTargets.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Quick/Qt6QuickVersionlessTargets.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickControls2/Qt6QuickControls2AdditionalTargetInfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickControls2/Qt6QuickControls2Config.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickControls2/Qt6QuickControls2ConfigVersion.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickControls2/Qt6QuickControls2ConfigVersionImpl.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickControls2/Qt6QuickControls2Dependencies.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickControls2/Qt6QuickControls2Targets-relwithdebinfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickControls2/Qt6QuickControls2Targets.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickControls2/Qt6QuickControls2VersionlessTargets.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTemplates2/Qt6QuickTemplates2AdditionalTargetInfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTemplates2/Qt6QuickTemplates2Config.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTemplates2/Qt6QuickTemplates2ConfigVersion.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTemplates2/Qt6QuickTemplates2ConfigVersionImpl.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTemplates2/Qt6QuickTemplates2Dependencies.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTemplates2/Qt6QuickTemplates2Targets-relwithdebinfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTemplates2/Qt6QuickTemplates2Targets.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTemplates2/Qt6QuickTemplates2VersionlessTargets.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTools/Qt6QuickToolsAdditionalTargetInfo.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTools/Qt6QuickToolsConfig.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTools/Qt6QuickToolsConfigVersion.cmake \

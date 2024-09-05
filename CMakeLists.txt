@@ -30,7 +30,8 @@ find_package(bsoncxx CONFIG REQUIRED)
 find_package(mongocxx CONFIG REQUIRED)
 find_package(yaml-cpp REQUIRED)
 message(STATUS "yaml-cpp found at: ${yaml-cpp_DIR}")
-find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Qml Quick Linguist)
+find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Qml Quick Linguist QuickControls2)
+# find_package(Qt6 REQUIRED COMPONENTS VirtualKeyboard)
 # qt6_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} simplequick.ts)
 # configure_file(${QM_FILES} ${CMAKE_SOURCE_DIR} COPYONLY)
 
@@ -80,6 +81,7 @@ target_link_libraries(hmi_agf PRIVATE
     Qt6::Qml
     Qt6::Quick
     Qt6::Linguist
+    Qt6::QuickControls2
     yaml-cpp
     mongocxx
     bsoncxx

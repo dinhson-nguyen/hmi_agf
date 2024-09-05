@@ -20,6 +20,7 @@ private:
     std_stamped_msgs::StringStamped hmi_msg;
 
     void set_qt_environment() {
+        // qputenv( "QT_IM_MODULE", QByteArray( "qtvirtualkeyboard" ) );
         engine.rootContext()->setContextProperty("backend", &backend);
     }
 
@@ -87,6 +88,7 @@ int hmiApp::_exit() {
 
 int main(int argc, char** argv) {
     ros::init(argc, argv, "backend_node");
+    qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
     hmiApp hmi(argc, argv);
     // hmi.init_ros_timer();
 

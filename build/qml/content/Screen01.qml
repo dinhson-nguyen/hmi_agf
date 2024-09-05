@@ -9,6 +9,8 @@ Check out https://doc.qt.io/qtcreator/creator-quick-ui-forms.html for details on
 import QtQuick 6.2
 import QtQuick.Controls 6.2
 import QtQuick.Layouts 6.2
+// import QtQuick.VirtualKeyboard
+import QtQuick.VirtualKeyboard 2.15
 
 // import backendqt 1.0
 Page {
@@ -20,6 +22,11 @@ Page {
     property double batteryVoltage: 0
     property double batteryCurrent: 0
     property int popup_mode: 0
+    property string state_system: ""
+    property string status_system: ""
+    property string reset_mode: "RESET"
+    property string homing_mode: "HOMING"
+    property string stop_mode: "STOP"
     property string control_mode: "RUNNING"
     property string mode_mode: "MANUAL"
     property string status_mode: "INITIATING"
@@ -33,6 +40,7 @@ Page {
     property string color_state: ""
     property bool state_panel_edit: false
     property bool state_panel_queue: false
+    property bool popup_confirm_visible: true
     property int state_edit: 0 // 0 -> buffer | 1 -> queue 
 
     Popup {
@@ -126,7 +134,7 @@ Page {
             anchors.leftMargin: 25
             anchors.topMargin: 0
             anchors.bottomMargin: 10
-
+            visible: popup_confirm_visible
             font.pixelSize: 40 * popup.width / 884
             background: Rectangle {
                 color: "white"
@@ -147,6 +155,10 @@ Page {
                 } else if (popup_mode === 0) {
                     confirm_button_popup.text = qsTr("Reset")
                     backend.resetError()
+                }
+                else if (popup_mode === 2) {
+                    confirm_button_popup.text = qsTr("Reset")
+                    backend.requestReset("request_reset")
                 }
 
                 popup.close()
@@ -213,6 +225,7 @@ Page {
             spacing: 50 * parent.width / 640
             anchors.left: parent.left
             anchors.right: parent.right
+            anchors.topMargin: 10
 
             Button {
                 id: view_button
@@ -347,20 +360,21 @@ Page {
                     } else {
                         var jsonObject = {
                             "_id": uuid_queue.text,
-                            "id": _id.text,
-                            "column_id": _column_id.text,
-                            "zone_id": _zone_id.text,
-                            "location_id": _location_id.text,
-                            "height": _height.text,
-                            "length": _length.text,
-                            "width": _width.text,
-                            "destination": _destination.text,
-                            "mechandise": _mechandise.text,
-                            "model": _model.text,
-                            "name_model": _name_model.text,
+                            "id": _id_.text,
+                            "column_id": _column_id_.text,
+                            "zone_id": _zone_id_.text,
+                            "location_id": _location_id_.text,
+                            "height": _height_.text,
+                            "length": _length_.text,
+                            "width": _width_.text,
+                            "destination": _destination_.text,
+                            "mechandise": _mechandise_.text,
+                            "model": _model_.text,
+                            "name_model": _name_model_.text,
 
-                            "type": _type.text,
-                            "queue": _queue.text,
+                            "type": _type_.text,
+                            "pallet_type": _pallet_type_.text,
+                            "queue": _queue_.text,
                         
                         };
                         // console.log(JSON.stringify(jsonObject, null, 2))
@@ -432,7 +446,7 @@ Page {
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                         font.bold: true
-                        font.pointSize: 20
+                        font.pointSize: 20 *  main_layout.height / 364
                         Layout.column: 0
                         Layout.row: 0
                     }
@@ -442,7 +456,7 @@ Page {
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                         font.bold: true
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.column: 2
                         Layout.row: 0
                     }
@@ -450,7 +464,7 @@ Page {
                         text: qsTr("ID Hàng: ")
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         font.bold: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                         Layout.column: 4
@@ -458,7 +472,7 @@ Page {
                     }
                     Text {
                         text: qsTr("Trạng thái: ")
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -468,7 +482,7 @@ Page {
                     }
                     Text {
                         text: qsTr("Số thứ tự: ")
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -478,7 +492,7 @@ Page {
                     }
                     Text {
                         text: qsTr("type: ")
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -488,7 +502,7 @@ Page {
                     }
                     Text {
                         text: qsTr("height")
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -498,7 +512,7 @@ Page {
                     }
                     Text {
                         text: qsTr("width: ")
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -508,7 +522,7 @@ Page {
                     }
                     Text {
                         text: qsTr("length: ")
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -518,7 +532,7 @@ Page {
                     }
                     Text {
                         text: qsTr("zone_id: ")
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -528,7 +542,7 @@ Page {
                     }
                     Text {
                         text: qsTr("column_id: ")
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -538,7 +552,7 @@ Page {
                     }
                     Text {
                         text: qsTr("location_id: ")
-                        font.pointSize: 20
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
@@ -680,7 +694,7 @@ Page {
                     TextField {
                         id: _height
                         objectName: "___height"
-                        font.pixelSize: 25 * _type.height / 45
+                        font.pixelSize: 25 * _height.height / 45
                         Layout.fillWidth: true
                         text: "---"
                         Layout.preferredWidth: parent.width * 0.2
@@ -701,7 +715,7 @@ Page {
                     TextField {
                         id: _width
                         objectName: "___width"
-                        font.pixelSize: 25 * _type.height / 45
+                        font.pixelSize: 25 * _width.height / 45
                         Layout.fillWidth: true
                         text: "---"
                         Layout.preferredWidth: parent.width * 0.2
@@ -722,7 +736,7 @@ Page {
                     TextField {
                         id: _length
                         objectName: "___length"
-                        font.pixelSize: 25 * _type.height / 45
+                        font.pixelSize: 25 * _length.height / 45
                         Layout.fillWidth: true
                         text: "---"
                         Layout.preferredWidth: parent.width * 0.2
@@ -743,7 +757,7 @@ Page {
                     TextField {
                         id: _zone_id
                         objectName: "___zone_id"
-                        font.pixelSize: 25 * _type.height / 45
+                        font.pixelSize: 25 * _zone_id.height / 45
                         Layout.fillWidth: true
                         text: "---"
                         Layout.preferredWidth: parent.width * 0.2
@@ -764,7 +778,7 @@ Page {
                     TextField {
                         id: _column_id
                         objectName: "___column_id"
-                        font.pixelSize: 25 * _type.height / 45
+                        font.pixelSize: 25 * _column_id.height / 45
                         Layout.fillWidth: true
                         text: "---"
                         Layout.preferredWidth: parent.width * 0.2
@@ -785,7 +799,7 @@ Page {
                     TextField {
                         id: _location_id
                         objectName: "___location_id"
-                        font.pixelSize: 25 * _type.height / 45
+                        font.pixelSize: 25 * _location_id.height / 45
                         Layout.fillWidth: true
                         text: "---"
                         Layout.preferredWidth: parent.width * 0.2
@@ -820,7 +834,7 @@ Page {
 
                     Text {
                         text: qsTr("Unique ID")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         font.bold: true
                         Layout.preferredWidth: parent.width * 0.15
@@ -830,7 +844,7 @@ Page {
                     }
                     Text {
                         text: qsTr("ID")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         font.bold: true
                         Layout.preferredWidth: parent.width * 0.15
@@ -844,13 +858,13 @@ Page {
                         font.bold: true
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         Layout.row: 0
                         Layout.column: 4
                     }
                     Text {
                         text: qsTr("Zone ID")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.bold: true
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
@@ -860,7 +874,7 @@ Page {
                     }
                     Text {
                         text: qsTr("ID vị trí")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
@@ -871,7 +885,7 @@ Page {
 
                     Text {
                         text: qsTr("Chiều cao")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
@@ -882,7 +896,7 @@ Page {
 
                     Text {
                         text: qsTr("Chiều dài")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
@@ -892,7 +906,7 @@ Page {
                     }
                     Text {
                         text: qsTr("Chiều rộng")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
@@ -902,7 +916,7 @@ Page {
                     }
                     Text {
                         text: qsTr("Điểm đến")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
@@ -912,7 +926,7 @@ Page {
                     }
                     Text {
                         text: qsTr("Mechandise")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
@@ -922,7 +936,7 @@ Page {
                     }
                     Text {
                         text: qsTr("Model")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
@@ -933,7 +947,7 @@ Page {
 
                     Text {
                         text: qsTr("Tên model")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
@@ -943,7 +957,7 @@ Page {
                     }
                     Text {
                         text: qsTr("Type")
-                        font.pointSize: 18
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
@@ -952,14 +966,24 @@ Page {
                         Layout.column: 0
                     }
                     Text {
-                        text: qsTr("Vị trí")
-                        font.pointSize: 18
+                        text: qsTr("Pallet type")
+                        font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         font.bold: true
                         Layout.row: 4
                         Layout.column: 2
+                    }
+                    Text {
+                        text: qsTr("Vị trí")
+                        font.pointSize: 20 * main_layout.height / 364
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 4
+                        Layout.column: 4
                     }
 
                     TextField {
@@ -987,7 +1011,7 @@ Page {
                     TextField {
                         id: _id_
                         objectName: "_id"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _id_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1009,7 +1033,7 @@ Page {
                     TextField {
                         id: _column_id_
                         objectName: "_column_id"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _column_id_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1031,7 +1055,7 @@ Page {
                     TextField {
                         id: _zone_id_
                         objectName: "_zone_id"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _zone_id_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1054,7 +1078,7 @@ Page {
                     TextField {
                         id: _location_id_
                         objectName: "_location_id"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _location_id_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1077,7 +1101,7 @@ Page {
                     TextField {
                         id: _height_
                         objectName: "_height"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _height_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1100,7 +1124,7 @@ Page {
                     TextField {
                         id: _length_
                         objectName: "_length"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _length_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1123,7 +1147,7 @@ Page {
                     TextField {
                         id: _width_
                         objectName: "_width"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _width_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1146,7 +1170,7 @@ Page {
                     TextField {
                         id: _destination_
                         objectName: "_destination"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _destination_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1169,7 +1193,7 @@ Page {
                     TextField {
                         id: _mechandise_
                         objectName: "_mechandise"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _mechandise_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1192,7 +1216,7 @@ Page {
                     TextField {
                         id: _model_
                         objectName: "_model"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _model_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1215,7 +1239,7 @@ Page {
                     TextField {
                         id: _name_model_
                         objectName: "_name_model"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _name_model_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1238,7 +1262,7 @@ Page {
                     TextField {
                         id: _type_
                         objectName: "_type"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * _type_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1257,11 +1281,10 @@ Page {
                             border.color: "#3850ff"
                         }
                     }
-
                     TextField {
-                        id: _queue
-                        objectName: "_queue"
-                        font.pixelSize: 25 * _id.height / 45
+                        id: _pallet_type_
+                        objectName: "_pallet_type"
+                        font.pixelSize: 25 * _pallet_type_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1271,6 +1294,30 @@ Page {
                         Layout.preferredWidth: parent.width * 0.2
                         Layout.fillHeight: true
                         Layout.column: 3
+                        Layout.row: 4
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+
+                    TextField {
+                        id: _queue_
+                        objectName: "_queue"
+                        font.pixelSize: 25 * _queue.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.column: 5
                         Layout.row: 4
                         placeholderTextColor: "#F44336" //AppStyle.placeholderColor
 
@@ -1450,12 +1497,11 @@ Page {
 
         ColumnLayout {
             id: may_cuon_phim
-            width: 120
+            width: parent.width * 0.075
             Rectangle {
                 anchors.fill: parent
                 color: "#F9A825"
-                radius: 30
-
+                radius: 30 * parent.width / 100
                 border.width: 1
             }
             anchors.left: parent.left
@@ -1463,8 +1509,8 @@ Page {
             anchors.bottom: parent.bottom
             anchors.leftMargin: 15
             anchors.rightMargin: 15
-            anchors.topMargin: 50 * down_panel.height / 445
-            anchors.bottomMargin: 50 * down_panel.height / 445
+            anchors.topMargin: 75 * down_panel.height / 445
+            anchors.bottomMargin: 75 * down_panel.height / 445
             Text {
                 text: qsTr("Máy") + '\n' + qsTr("cuốn") + '\n' + qsTr("phim")
                 anchors.fill: parent
@@ -1477,7 +1523,6 @@ Page {
 
         RowLayout {
             id: bang_tai
-
             anchors.left: may_cuon_phim.right
             anchors.right: parent.right
             anchors.top: header.bottom
@@ -1533,10 +1578,10 @@ Page {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.rightMargin: 20
-                anchors.topMargin: 15 + 22 * parent.height / 150
-                anchors.bottomMargin: 15 + 22 * parent.height / 150
+                anchors.topMargin: 10 + 22 * parent.height / 150
+                anchors.bottomMargin: 10 + 22 * parent.height / 150
                 font.bold: true
-                font.pointSize: 40
+                font.pointSize: 30 * parent.height / 150
 
                 background: Rectangle {
                     id: animation_palet_1
@@ -1602,10 +1647,10 @@ Page {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.rightMargin: 50 * parent.height / 216
-                anchors.topMargin: 15 + 22 * parent.height / 150
-                anchors.bottomMargin: 15 + 22 * parent.height / 150
+                anchors.topMargin: 10 + 22 * parent.height / 150
+                anchors.bottomMargin: 10 + 22 * parent.height / 150
                 font.bold: true
-                font.pointSize: 40
+                font.pointSize: 30 * parent.height / 150
 
                 background: Rectangle {
                     id: animation_palet_3
@@ -1671,10 +1716,10 @@ Page {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.rightMargin: 10
-                anchors.topMargin: 15 + 22 * parent.height / 150
-                anchors.bottomMargin: 15 + 22 * parent.height / 150
+                anchors.topMargin: 10 + 22 * parent.height / 150
+                anchors.bottomMargin: 10 + 22 * parent.height / 150
                 font.bold: true
-                font.pointSize: 40
+                font.pointSize: 30 * parent.height / 150
 
                 background: Rectangle {
                     objectName: "zone_3_queue"
@@ -1694,10 +1739,10 @@ Page {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.rightMargin: 10
-                anchors.topMargin: 15 + 22 * parent.height / 150
-                anchors.bottomMargin: 15 + 22 * parent.height / 150
+                anchors.topMargin: 10 + 22 * parent.height / 150
+                anchors.bottomMargin: 10 + 22 * parent.height / 150
                 font.bold: true
-                font.pointSize: 40
+                font.pointSize: 30 * parent.height / 150
 
                 background: Rectangle {
                     objectName: "zone_4_queue"
@@ -1717,10 +1762,10 @@ Page {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.rightMargin: 10
-                anchors.topMargin: 15 + 22 * parent.height / 150
-                anchors.bottomMargin: 15 + 22 * parent.height / 150
+                anchors.topMargin: 10 + 22 * parent.height / 150
+                anchors.bottomMargin: 10 + 22 * parent.height / 150
                 font.bold: true
-                font.pointSize: 40
+                font.pointSize: 30 * parent.height / 150
 
                 background: Rectangle {
                     objectName: "zone_5_queue"
@@ -1740,10 +1785,10 @@ Page {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.rightMargin: 10
-                anchors.topMargin: 15 + 22 * parent.height / 150
-                anchors.bottomMargin: 15 + 22 * parent.height / 150
+                anchors.topMargin: 10 + 22 * parent.height / 150
+                anchors.bottomMargin: 10 + 22 * parent.height / 150
                 font.bold: true
-                font.pointSize: 40
+                font.pointSize: 30 * parent.height / 150
 
                 background: Rectangle {
                     objectName: "zone_6_queue"
@@ -1763,10 +1808,10 @@ Page {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.rightMargin: 10
-                anchors.topMargin: 15 + 22 * parent.height / 150
-                anchors.bottomMargin: 15 + 22 * parent.height / 150
+                anchors.topMargin: 10 + 22 * parent.height / 150
+                anchors.bottomMargin: 10 + 22 * parent.height / 150
                 font.bold: true
-                font.pointSize: 40
+                font.pointSize: 30 * parent.height / 150
 
                 background: Rectangle {
                     objectName: "zone_7_queue"
@@ -1786,10 +1831,10 @@ Page {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.rightMargin: 10
-                anchors.topMargin: 15 + 22 * parent.height / 150
-                anchors.bottomMargin: 15 + 22 * parent.height / 150
+                anchors.topMargin: 10 + 22 * parent.height / 150
+                anchors.bottomMargin: 10 + 22 * parent.height / 150
                 font.bold: true
-                font.pointSize: 40
+                font.pointSize: 30 * parent.height / 150
 
                 background: Rectangle {
                     objectName: "zone_8_queue"
@@ -1809,10 +1854,10 @@ Page {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.rightMargin: 10
-                anchors.topMargin: 15 + 22 * parent.height / 150
-                anchors.bottomMargin: 15 + 22 * parent.height / 150
+                anchors.topMargin: 10 + 22 * parent.height / 150
+                anchors.bottomMargin: 10 + 22 * parent.height / 150
                 font.bold: true
-                font.pointSize: 40
+                font.pointSize: 30 * parent.height / 150
 
                 background: Rectangle {
                     objectName: "zone_9_queue"
@@ -1833,10 +1878,10 @@ Page {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.rightMargin: 10
-                anchors.topMargin: 15 + 22 * parent.height / 150
-                anchors.bottomMargin: 15 + 22 * parent.height / 150
+                anchors.topMargin: 10 + 22 * parent.height / 150
+                anchors.bottomMargin: 10 + 22 * parent.height / 150
                 font.bold: true
-                font.pointSize: 40
+                font.pointSize: 30 * parent.height / 150
 
                 background: Rectangle {
                     objectName: "zone_10_queue"
@@ -1857,10 +1902,10 @@ Page {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.rightMargin: 10
-                anchors.topMargin: 15 + 22 * parent.height / 150
-                anchors.bottomMargin: 15 + 22 * parent.height / 150
+                anchors.topMargin: 10 + 22 * parent.height / 150
+                anchors.bottomMargin: 10 + 22 * parent.height / 150
                 font.bold: true
-                font.pointSize: 40
+                font.pointSize: 30 * parent.height / 150
 
                 background: Rectangle {
                     objectName: "zone_11_queue"
@@ -1881,10 +1926,10 @@ Page {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.rightMargin: 10
-                anchors.topMargin: 15 + 22 * parent.height / 150
-                anchors.bottomMargin: 15 + 22 * parent.height / 150
+                anchors.topMargin: 10 + 22 * parent.height / 150
+                anchors.bottomMargin: 10 + 22 * parent.height / 150
                 font.bold: true
-                font.pointSize: 40
+                font.pointSize: 30 * parent.height / 150
 
                 background: Rectangle {
                     objectName: "zone_12_queue"
@@ -1905,10 +1950,10 @@ Page {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.rightMargin: 10
-                anchors.topMargin: 15 + 22 * parent.height / 150
-                anchors.bottomMargin: 15 + 22 * parent.height / 150
+                anchors.topMargin: 10 + 22 * parent.height / 150
+                anchors.bottomMargin: 10 + 22 * parent.height / 150
                 font.bold: true
-                font.pointSize: 40
+                font.pointSize: 30 * parent.height / 150
 
                 background: Rectangle {
                     objectName: "zone_13_queue"
@@ -1920,29 +1965,29 @@ Page {
                     backend.setDataQueue(13)
                 }
             }
-            Button {
-                id: palet_14
-                width: palet_14.height
-                text: qsTr("14")
-                anchors.right: palet_13.left
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.rightMargin: 10
-                anchors.topMargin: 15 + 22 * parent.height / 150
-                anchors.bottomMargin: 15 + 22 * parent.height / 150
-                font.bold: true
-                font.pointSize: 40
+            // Button {
+            //     id: palet_14
+            //     width: palet_14.height
+            //     text: qsTr("14")
+            //     anchors.right: palet_13.left
+            //     anchors.top: parent.top
+            //     anchors.bottom: parent.bottom
+            //     anchors.rightMargin: 10
+            //     anchors.topMargin: 10 + 22 * parent.height / 150
+            //     anchors.bottomMargin: 10 + 22 * parent.height / 150
+            //     font.bold: true
+            //     font.pointSize: 30 * parent.height / 150
 
-                background: Rectangle {
-                    objectName: "zone_14_queue"
-                    color: "#CFD8DC"
-                }
-                onClicked: {
-                    state_edit = 1
-                    pop_up_2.open()
-                    backend.setDataQueue(14)
-                }
-            }
+            //     background: Rectangle {
+            //         objectName: "zone_14_queue"
+            //         color: "#CFD8DC"
+            //     }
+            //     onClicked: {
+            //         state_edit = 1
+            //         pop_up_2.open()
+            //         backend.setDataQueue(14)
+            //     }
+            // }
 
             Image {
                 id: ready_icon
@@ -1984,7 +2029,7 @@ Page {
                     text: qsTr("Hàng ") + qsTr("chờ")
                     anchors.bottom: parent.top
                     anchors.left: parent.left
-                    font.pixelSize: 40
+                    font.pixelSize: 40 * parent.width / 800
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     font.italic: false
@@ -1997,7 +2042,7 @@ Page {
                 Layout.fillHeight: true
                 Layout.preferredWidth: waiting.height
                 font.bold: true
-                font.pointSize: 40
+                font.pointSize: 40 * parent.height / 150
 
                 background: Rectangle {
                     objectName: "zone_1"
@@ -2017,7 +2062,7 @@ Page {
                 Layout.fillHeight: true
                 Layout.preferredWidth: waiting.height
                 font.bold: true
-                font.pointSize: 40
+                font.pointSize: 40 * parent.height / 150
 
                 background: Rectangle {
                     objectName: "zone_2"
@@ -2036,7 +2081,7 @@ Page {
                 Layout.fillHeight: true
                 Layout.preferredWidth: waiting.height
                 font.bold: true
-                font.pointSize: 40
+                font.pointSize: 40 * parent.height / 150
 
                 background: Rectangle {
                     objectName: "zone_3"
@@ -2055,7 +2100,7 @@ Page {
                 Layout.fillHeight: true
                 Layout.preferredWidth: waiting.height
                 font.bold: true
-                font.pointSize: 40
+                font.pointSize: 40 * parent.height / 150
 
                 background: Rectangle {
                     objectName: "zone_4"
@@ -2075,7 +2120,7 @@ Page {
                 Layout.fillHeight: true
                 Layout.preferredWidth: waiting.height
                 font.bold: true
-                font.pointSize: 40
+                font.pointSize: 40 * parent.height / 150
 
                 background: Rectangle {
                     objectName: "zone_5"
@@ -2096,7 +2141,7 @@ Page {
                 Layout.fillHeight: true
                 Layout.preferredWidth: waiting.height
                 font.bold: true
-                font.pointSize: 40
+                font.pointSize: 40 * parent.height / 150
 
                 background: Rectangle {
                     objectName: "zone_6"
@@ -2213,111 +2258,216 @@ Page {
 
     }
 
-    StackLayout {
-        width: parent.width * 0.25
-        height: parent.height * 0.4
+    GridLayout {
+        width: parent.width * 0.3
+        height: parent.height * 0.3
         visible: true
         anchors.right: parent.right
         anchors.top: up_panel.top
         // anchors.bottom: parent.bottom
-        anchors.rightMargin: 0
-        anchors.topMargin: 0
-        anchors.bottomMargin: 0
-        currentIndex: 0
+        anchors.rightMargin: 10
+        anchors.topMargin: 10
+        anchors.bottomMargin: 10
+        rowSpacing: 10
+        columnSpacing: 10
+        rows: 3
+        columns: 2
 
-        Item {
-            Button {
-                id: control_button
-                text: qsTr(control_mode)
-                anchors.right: parent.right
-                anchors.top: parent.top
-                height: parent.height * 0.3
-                width: parent.width
-                anchors.rightMargin: 5
-                anchors.topMargin: 10
-                anchors.bottomMargin: 0
-                highlighted: false
-                font.bold: true
-                font.pointSize: 45 * parent.height / 420
+        Button {
+            id: stop_button
+            text: stop_mode
+            Layout.preferredWidth: parent.width * 0.5
+            Layout.column: 0
+            Layout.row: 0
+            Layout.fillHeight: true
+            highlighted: false
+            font.bold: true
+            font.pointSize: 45 * parent.height / 420
 
-                background: Rectangle {
-                    color: "#2196F3"
-                    radius: 30 * parent.height / 104
-                    border.color: control_button.background.color
-                    border.width: 1
-                }
-                onClicked: {
-                    if (control_mode === "RUNNING") {
-                        backend.requestControl("STOP")
-                    } else if (control_mode === "PAUSED") {
-                        backend.requestControl("RUN")
-                    }
+            background: Rectangle {
+                color: "#AB47BC"
+                radius: 30 * parent.height / 104
+                border.color: stop_button.background.color
+                border.width: 1
+            }
+            onClicked: {
+                if (stop_mode === "STOP") {
+                    backend.requestStop("STOP")
+                } else if (stop_mode === "PAUSED") {
+                    backend.requestStop("RUN")
                 }
             }
-            Button {
-                id: status_button
-                text: "INIT"
-                anchors.right: parent.right
-                anchors.top: control_button.bottom
-                height: parent.height * 0.3
-                width: parent.width
-                anchors.rightMargin: 5
-                anchors.topMargin: 10
-                anchors.bottomMargin: 0
-                highlighted: false
-                font.bold: true
-                font.pointSize: 45 * parent.height / 420
-                background: Rectangle {
-                    color: "white"
-                    radius: 30 * parent.height / 104
-                    border.color: status_button.background.color
-                    border.width: 1
-                }
-                onClicked: {
-                    popup_mode = 0
-                    if (status_mode === "ERROR") {
-                        status_popup.text = backend.robotError
-                    } else
-                        status_popup.text = backend.robotDetail
-
-                    popup.open()
+            onPressedChanged: {
+                if (pressed) {
+                    background.color = "#E1BEE7";
+                } else {
+                    background.color = "#AB47BC";
                 }
             }
-            Button {
-                id: mode_button
-                text: qsTr(mode_mode)
-                anchors.right: parent.right
-                anchors.top: status_button.bottom
-                height: parent.height * 0.3
-                width: parent.width
-                anchors.rightMargin: 5
-                anchors.topMargin: 10
-                anchors.bottomMargin: 0
-                highlighted: false
-                font.bold: true
-                font.pointSize: 45 * parent.height / 420
-                background: Rectangle {
-                    color: "#4CAF50"
-                    radius: 30 * parent.height / 104
-                    border.color: mode_button.background.color
-                    border.width: 1
+        }
+
+        Button {
+            id: reset_button
+            text: reset_mode
+            Layout.column: 0
+            Layout.row: 1
+            Layout.fillHeight: true
+            Layout.preferredWidth: parent.width * 0.5
+            highlighted: false
+            font.bold: true
+            font.pointSize: 45 * parent.height / 420
+
+            background: Rectangle {
+                color: "#4CAF50"
+                radius: 30 * parent.height / 104
+                border.color: reset_button.background.color
+                border.width: 1
+            }
+            onClicked: {
+                popup_mode = 2
+                status_popup.text = state_system
+                if ( status_system === "ERROR") {
+                    popup_confirm_visible = false
+                } else {
+                    popup_confirm_visible = true
                 }
-                onClicked: {
-                    popup_mode = 1
-                    if (mode_mode === "MANUAL") {
-                        // mode_mode ="AUTO"
-                        status_popup.text = qsTr(
-                                    "Change robot mode to AUTO")
-                        mode_button.background.color = "#4CAF50"
-                    } else if (mode_mode === "AUTO") {
-                        // mode_mode =  "MANUAL"
-                        status_popup.text = qsTr(
-                                    "Change robot mode to MANUAL")
-                        mode_button.background.color = "#03A9F4"
-                    } else
-                        status_popup.text = qsTr("Data false")
-                    popup.open()
+                popup.open()
+            }
+            onPressedChanged: {
+                if (pressed) {
+                    background.color = "#A5D6A7";
+                } else {
+                    background.color = "#4CAF50";
                 }
+            }
+        }
+
+        Button {
+            id: homming_button
+            text: homing_mode
+            Layout.column: 0
+            Layout.row: 2
+            Layout.fillHeight: true
+            Layout.preferredWidth: parent.width * 0.5
+            highlighted: false
+            font.bold: true
+            font.pointSize: 45 * parent.height / 420
+
+            background: Rectangle {
+                color: "#4CAF50"
+                radius: 30 * parent.height / 104
+                border.color: homming_button.background.color
+                border.width: 1
+            }
+            onPressedChanged: {
+                if (pressed) {
+                    background.color = "#A5D6A7";
+                } else {
+                    background.color = "#4CAF50";
+                }
+            }
+            // onClicked: {
+            //     Qt.callLater(function() {
+            //     Qt.openUrlExternally("onboard")
+            // })
+            // }
+
+        }
+
+
+        Button {
+            id: control_button
+            text: qsTr(control_mode)
+            Layout.fillHeight: true
+            Layout.preferredWidth: parent.width * 0.5
+            highlighted: false
+            font.bold: true
+            font.pointSize: 45 * parent.height / 420
+            Layout.column: 1
+            Layout.row: 0
+            background: Rectangle {
+                color: "#2196F3"
+                radius: 30 * parent.height / 104
+                border.color: control_button.background.color
+                border.width: 1
+            }
+            onClicked: {
+                if (control_mode === "RUNNING") {
+                    backend.requestControl("STOP")
+                } else if (control_mode === "PAUSED") {
+                    backend.requestControl("RUN")
+                }
+            }
+            onPressedChanged: {
+                if (pressed) {
+                    background.color = "#A5D6A7";
+                } else {
+                    background.color = "#4CAF50";
+                }
+            }
+        }
+        Button {
+            id: status_button
+            text: "INIT"
+
+            Layout.column: 1
+            Layout.row: 1
+
+            Layout.fillHeight: true
+            Layout.preferredWidth: parent.width * 0.5
+            highlighted: false
+            font.bold: true
+            font.pointSize: 45 * parent.height / 420
+            background: Rectangle {
+                color: "white"
+                radius: 30 * parent.height / 104
+                border.color: status_button.background.color
+                border.width: 1
+            }
+            onClicked: {
+                popup_mode = 0
+                if (status_mode === "ERROR") {
+                    status_popup.text = backend.robotError
+                } else
+                    status_popup.text = backend.robotDetail
+
+                popup.open()
+            }
+            
+        }
+        Button {
+            id: mode_button
+            text: qsTr(mode_mode)
+
+            Layout.column: 1
+            Layout.row: 2
+
+            Layout.fillHeight: true
+            Layout.preferredWidth: parent.width * 0.5
+            highlighted: false
+            font.bold: true
+            font.pointSize: 45 * parent.height / 420
+            background: Rectangle {
+                color: "#4CAF50"
+                radius: 30 * parent.height / 104
+                border.color: mode_button.background.color
+                border.width: 1
+            }
+            onClicked: {
+                popup_mode = 1
+                if (mode_mode === "MANUAL") {
+                    // mode_mode ="AUTO"
+                    status_popup.text = qsTr(
+                                "Change robot mode to AUTO")
+                    mode_button.background.color = "#4CAF50"
+                } else if (mode_mode === "AUTO") {
+                    // mode_mode =  "MANUAL"
+                    status_popup.text = qsTr(
+                                "Change robot mode to MANUAL")
+                    mode_button.background.color = "#03A9F4"
+                } else
+                    status_popup.text = qsTr("Data false")
+                popup.open()
             }
         }
 
@@ -2356,73 +2506,21 @@ Page {
 
             if ((status_mode === "ERROR") || (status_mode === "EMG")) {
                 status_button.background.color = "#F44336"
+                popup_confirm_visible = true
             } else if (status_mode === "WAITING_INIT_POSE") {
                 status_button.background.color = "#FFFFFF"
+                popup_confirm_visible = false
             } else if (status_mode === "NORMAL") {
                 status_button.background.color = "#4CAF50"
+                popup_confirm_visible = false
             } else if (status_mode === "WAITING") {
                 status_button.background.color = "#FFEB3B"
-            } else
-                status_button.background.color = "#FF9800"
-        }
-        onGetControlChanged: {
-            control_mode = backend.getControl
-            if (mode_mode === "AUTO" && control_mode === "RUNNING") {
-                if (status_mode === "WAITING") {
-                    control_button.background.color = "#2196F3"
-                } else {
-                    control_button.background.color = "#4CAF50"
-                }
-            } else if (mode_mode === "MANUAL" && control_mode === "RUNNING") {
-                control_button.background.color = "#2196F3"
-            } else if (control_mode === "PAUSE") {
-                control_button.background.color = "#FFEB3B"
-            } else
-                control_button.background.color = "#FFEB3B"
-        }
-    }
-
-    Connections {
-        target: backend
-        onBatteryPercentageChanged: {
-            batteryPercentage = backend.batteryPercentage
-        }
-        onBatteryVoltageChanged: {
-            batteryVoltage = backend.batteryVoltage
-        }
-        onBatteryCurrentChanged: {
-            batteryCurrent = backend.batteryCurrent
-        }
-        onRobotDetailChanged: {
-            if (status_mode === "ERROR") {
-                status_header.text = backend.robotError
+                popup_confirm_visible = false
             } else {
-                status_header.text = backend.robotDetail
+                status_button.background.color = "#FF9800"
+                popup_confirm_visible = false
             }
         }
-        onRobotModeChanged: {
-            mode_mode = backend.robotMode
-            if (mode_mode === "MANUAL") {
-                mode_button.background.color = "#03A9F4"
-            } else if (mode_mode === "AUTO") {
-                mode_button.background.color = "#4CAF50"
-            } else
-                mode_button.background.color = "#FF9800"
-        }
-        onRobotStatusChanged: {
-            status_mode = backend.robotStatus
-
-            if ((status_mode === "ERROR") || (status_mode === "EMG")) {
-                status_button.background.color = "#F44336"
-            } else if (status_mode === "WAITING_INIT_POSE") {
-                status_button.background.color = "#FFFFFF"
-            } else if (status_mode === "NORMAL") {
-                status_button.background.color = "#4CAF50"
-            } else if (status_mode === "WAITING") {
-                status_button.background.color = "#FFEB3B"
-            } else
-                status_button.background.color = "#FF9800"
-        }
         onGetControlChanged: {
             control_mode = backend.getControl
             if (mode_mode === "AUTO" && control_mode === "RUNNING") {
@@ -2438,5 +2536,70 @@ Page {
             } else
                 control_button.background.color = "#FFEB3B"
         }
+        onSystemStatusChanged: {
+            state_system = backend.getStateSystem
+            
+            status_system = backend.systemStatus
+            
+        }
     }
+
+    // Connections {
+    //     target: backend
+    //     onBatteryPercentageChanged: {
+    //         batteryPercentage = backend.batteryPercentage
+    //     }
+    //     onBatteryVoltageChanged: {
+    //         batteryVoltage = backend.batteryVoltage
+    //     }
+    //     onBatteryCurrentChanged: {
+    //         batteryCurrent = backend.batteryCurrent
+    //     }
+    //     onRobotDetailChanged: {
+    //         if (status_mode === "ERROR") {
+    //             status_header.text = backend.robotError
+    //         } else {
+    //             status_header.text = backend.robotDetail
+    //         }
+    //     }
+    //     onRobotModeChanged: {
+    //         mode_mode = backend.robotMode
+    //         if (mode_mode === "MANUAL") {
+    //             mode_button.background.color = "#03A9F4"
+    //         } else if (mode_mode === "AUTO") {
+    //             mode_button.background.color = "#4CAF50"
+    //         } else
+    //             mode_button.background.color = "#FF9800"
+    //     }
+    //     onRobotStatusChanged: {
+    //         status_mode = backend.robotStatus
+
+    //         if ((status_mode === "ERROR") || (status_mode === "EMG")) {
+    //             status_button.background.color = "#F44336"
+    //         } else if (status_mode === "WAITING_INIT_POSE") {
+    //             status_button.background.color = "#FFFFFF"
+    //         } else if (status_mode === "NORMAL") {
+    //             status_button.background.color = "#4CAF50"
+    //         } else if (status_mode === "WAITING") {
+    //             status_button.background.color = "#FFEB3B"
+    //         } else
+    //             status_button.background.color = "#FF9800"
+    //     }
+    //     onGetControlChanged: {
+    //         control_mode = backend.getControl
+    //         if (mode_mode === "AUTO" && control_mode === "RUNNING") {
+    //             if (status_mode === "WAITING") {
+    //                 control_button.background.color = "#2196F3"
+    //             } else {
+    //                 control_button.background.color = "#4CAF50"
+    //             }
+    //         } else if (mode_mode === "MANUAL" && control_mode === "RUNNING") {
+    //             control_button.background.color = "#2196F3"
+    //         } else if (control_mode === "PAUSE") {
+    //             control_button.background.color = "#FFEB3B"
+    //         } else
+    //             control_button.background.color = "#FFEB3B"
+    //     }
+        
+    // }
 }

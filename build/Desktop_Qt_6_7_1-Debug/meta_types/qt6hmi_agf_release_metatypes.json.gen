@@ -208,6 +208,11 @@
                         ],
                         "name": "deleteDataQueue",
                         "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getStateSystem",
+                        "returnType": "QString"
                     }
                 ],
                 "object": true,
@@ -351,6 +356,20 @@
                         "stored": true,
                         "type": "double",
                         "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "index": 10,
+                        "name": "systemStatus",
+                        "notify": "systemStatusChanged",
+                        "read": "systemStatus",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QString",
+                        "user": false
                     }
                 ],
                 "qualifiedClassName": "Backend",
@@ -423,6 +442,11 @@
                     {
                         "access": "public",
                         "name": "volumePercentageChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "systemStatusChanged",
                         "returnType": "void"
                     }
                 ],

@@ -31,6 +31,7 @@ Backend::Backend(QObject* parent)
     fastech_output_sub = nh.subscribe("/fastech_output", 1, &Backend::fastechOutputCallBack, this);
     velocity_sub = nh.subscribe("/final_cmd_vel_mux/output", 1, &Backend::cmdVelCallBack, this);
     pallet_status_sub = nh.subscribe("/empty_topic", 1, &Backend::palletStatusCallback, this);
+    system_status_sub = nh.subscribe("/current_triggered_mission", 1, &Backend::systemStatusCallback, this);
 
     request_run_stop_pub = nh.advertise<std_stamped_msgs::StringStamped>("/request_run_stop", 1);
     reset_error_pub = nh.advertise<std_stamped_msgs::EmptyStamped>("/reset_error", 1);
@@ -173,6 +174,27 @@ void Backend::robotStatusCallback(const std_stamped_msgs::StringStamped::ConstPt
 
 }
 
+void Backend::systemStatusCallback(const std_stamped_msgs::StringStamped::ConstPtr &msg) {
+    std::string data = msg->data;
+    try
+    {
+        json jsondata = json::parse(data);
+        stateValueSystem = jsondata["state"];
+        statusValueSystem = jsondata["status"];
+    }
+    catch (...)
+    {
+        ROS_WARN("Loi chuyen doi json callback /current_triggered_mission");
+    }
+    stateValueSystemStr = QString::fromStdString(stateValueSystem);
+    
+    statusValueSystemStr = QString::fromStdString(statusValueSystem);
+    emit systemStatusChanged();
+}
+QString Backend::getStateSystem() {
+    return stateValueSystemStr;
+}
+
 void Backend::fastechInputCallBack(const std_msgs::Int16MultiArray::ConstPtr& msg) {
     std::vector<int16_t> data_ = msg->data;
     fastechData.clear();
@@ -265,6 +287,10 @@ double Backend::getLinear() const {
 
 double Backend::getAngular() const {
     return vel_angular;
+}
+
+QString Backend::systemStatus() const {
+    return statusValueSystemStr;
 }
 
 

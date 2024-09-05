@@ -287,6 +287,7 @@
 #define __UINT16_TYPE__ short unsigned int
 #define __WCHAR_TYPE__ int
 #define __SIZEOF_FLOAT__ 4
+#define QT_QUICKCONTROLS2_LIB 1
 #define __pic__ 2
 #define __UINTPTR_MAX__ 0xffffffffffffffffUL
 #define __INT_FAST64_WIDTH__ 64

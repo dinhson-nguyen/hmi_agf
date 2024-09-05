@@ -62,6 +62,7 @@ class Backend : public QObject
     Q_PROPERTY(QString robotMode READ robotMode NOTIFY robotModeChanged)
     Q_PROPERTY(double getLinear READ getLinear NOTIFY velChanged)
     Q_PROPERTY(double getAngular READ getAngular NOTIFY velChanged)
+    Q_PROPERTY(QString systemStatus READ systemStatus NOTIFY systemStatusChanged)
     // Q_PROPERTY(NOTIFY colorChanged)
 private:
     ros::NodeHandle nh;
@@ -78,6 +79,7 @@ private:
     ros::Subscriber velocity_sub;
     // ros::Subscriber run_pause_sub;
     ros::Subscriber pallet_status_sub;
+    ros::Subscriber system_status_sub;
 
     
     ros::Publisher robot_mode_pub;
@@ -112,6 +114,7 @@ private:
     void fastechInputCallBack(const std_msgs::Int16MultiArray::ConstPtr &msg);
     void fastechOutputCallBack(const std_msgs::Int16MultiArray::ConstPtr &msg);
     void cmdVelCallBack(const geometry_msgs::Twist &msg);
+    void systemStatusCallback(const std_stamped_msgs::StringStamped::ConstPtr &msg);
     // void standardIoCallback(const std_stamped_msgs::StringStamped &msg);
 
 
@@ -127,6 +130,8 @@ private:
     QString agv_name;
     QString server_address;
     QColor randomColor;
+    QString statusValueSystemStr;
+    QString stateValueSystemStr;
     mongocxx::uri uri;
     mongocxx::client client;
     mongocxx::database db;
@@ -141,6 +146,8 @@ private:
     std::string robot_mode;
     std::string detailValue;
     std::string errorValue;
+    std::string stateValueSystem;
+    std::string statusValueSystem;
     std::string _queue;
     std::string zone_;
     bool bug_manual_mode;
@@ -222,6 +229,7 @@ public:
     QString robotDetail() const;
     QString robotError() const;
     QString getControl() const;
+    QString systemStatus() const;
     double getLinear() const;
     double getAngular() const;
     
@@ -256,6 +264,7 @@ public:
     Q_INVOKABLE void saveDataQueue(QString jsonstring) ;
     Q_INVOKABLE void deleteDataBuffer(QString jsonstring) ;
     Q_INVOKABLE void deleteDataQueue(QString jsonstring) ;
+    Q_INVOKABLE QString getStateSystem() ;
 
 
 signals:
@@ -273,6 +282,7 @@ signals:
     void getFastechOutputChanged();
     void velChanged();
     void volumePercentageChanged();
+    void systemStatusChanged();
 
 
 };
