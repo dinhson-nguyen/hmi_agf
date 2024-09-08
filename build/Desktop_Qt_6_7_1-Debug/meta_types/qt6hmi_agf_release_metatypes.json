@@ -464,6 +464,51 @@
     {
         "classes": [
             {
+                "className": "ConfigManager",
+                "methods": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "configData",
+                                "type": "QVariantMap"
+                            },
+                            {
+                                "name": "configPath",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "saveConfig",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "configPath",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "loadConfig",
+                        "returnType": "QVariantMap"
+                    }
+                ],
+                "object": true,
+                "qualifiedClassName": "ConfigManager",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "config_manager.h",
+        "outputRevision": 68
+    },
+    {
+        "classes": [
+            {
                 "className": "hmiApp",
                 "object": true,
                 "qualifiedClassName": "hmiApp",

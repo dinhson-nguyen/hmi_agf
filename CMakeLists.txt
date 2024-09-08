@@ -6,7 +6,6 @@ set(CMAKE_PREFIX_PATH "/opt/ros/noetic;/home/dinhson/amr_ws/devel;/home/dinhson/
 # set(CMAKE_MODULE_PATH "/home/dinhson/Qt/6.7.2/gcc_64/bin")
 list(APPEND QML_IMPORT_PATH "/home/dinhson/Qt/6.7.2/gcc_64/qml")
 project(hmi_agf LANGUAGES CXX)
-
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
@@ -68,6 +67,7 @@ qt6_add_executable(hmi_agf
     src/include/model_buffer.h 
     src/include/json.hpp
     qml.qrc
+    src/include/config_manager.h
     ${PROJECT_SOURCES}
     # ${QM_FILES}
 )

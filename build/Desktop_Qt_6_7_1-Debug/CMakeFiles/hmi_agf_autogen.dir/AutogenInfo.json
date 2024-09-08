@@ -1075,6 +1075,12 @@
 			null
 		],
 		[
+			"/home/dinhson/amr_ws/src/hmi_agf/src/include/config_manager.h",
+			"MU",
+			"7PH6M6IPMC/moc_config_manager.cpp",
+			null
+		],
+		[
 			"/home/dinhson/amr_ws/src/hmi_agf/src/include/json.hpp",
 			"MU",
 			"7PH6M6IPMC/moc_json.cpp",

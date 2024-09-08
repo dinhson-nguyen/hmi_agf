@@ -247,7 +247,7 @@ Window {
         anchors.topMargin: 0
         anchors.bottomMargin: 0
         background: Rectangle {
-            color: "#BBDEFB"
+            color: "#FFFFFF"
             radius: 10 
         }
 
@@ -347,6 +347,11 @@ Window {
                     border.width: 2
                 }
                 onClicked: {
+                    window.width = Screen.width / 1.5;
+                    window.height = Screen.height / 1.5;
+                    window.x = (Screen.width - window.width) / 2;
+                    window.y = (Screen.height - window.height) / 2;
+                    window.visibility = Window.FullScreen;
                     window.showMinimized();
                 }
             }

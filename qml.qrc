@@ -7,6 +7,7 @@
         <file>content/component_test.ui.qml</file>
         <file>content/component_test_2.ui.qml</file>
         <file>main.qml</file>
+        <file>cfg/config.json</file>
         <file>content/App.qml</file>
         <file>content/asset/batt_20.svg</file>
         <file>content/asset/batt_200.svg</file>

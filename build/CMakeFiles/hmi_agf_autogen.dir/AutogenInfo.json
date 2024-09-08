@@ -13,6 +13,11 @@
 			"7PH6M6IPMC/moc_backend.cpp"
 		],
 		[
+			"/home/dinhson/amr_ws/src/hmi_agf/src/include/config_manager.h",
+			"MU",
+			"7PH6M6IPMC/moc_config_manager.cpp"
+		],
+		[
 			"/home/dinhson/amr_ws/src/hmi_agf/src/include/json.hpp",
 			"MU",
 			"7PH6M6IPMC/moc_json.cpp"

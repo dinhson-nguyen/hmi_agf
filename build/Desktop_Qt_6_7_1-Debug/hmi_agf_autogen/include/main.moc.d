@@ -2,9 +2,11 @@
   /home/dinhson/amr_ws/src/hmi_agf/build/Desktop_Qt_6_7_1-Debug/hmi_agf_autogen/moc_predefs.h \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QDebug \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QDir \
+  /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QFile \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QJsonDocument \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QJsonObject \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QList \
+  /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QMap \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QObject \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QRect \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QSize \
@@ -13,6 +15,7 @@
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QTimer \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QTranslator \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QVariant \
+  /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QVariantMap \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/q20functional.h \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/q20memory.h \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/q20type_traits.h \
@@ -158,6 +161,7 @@
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/qutf8stringview.h \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/quuid.h \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/qvariant.h \
+  /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/qvariantmap.h \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/qvarlengtharray.h \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/qversionnumber.h \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/qversiontagging.h \
@@ -230,6 +234,7 @@
   /home/dinhson/amr_ws/devel/include/std_stamped_msgs/StringServiceResponse.h \
   /home/dinhson/amr_ws/devel/include/std_stamped_msgs/StringStamped.h \
   /home/dinhson/amr_ws/src/hmi_agf/src/include/backend.h \
+  /home/dinhson/amr_ws/src/hmi_agf/src/include/config_manager.h \
   /home/dinhson/amr_ws/src/hmi_agf/src/include/json.hpp \
   /home/dinhson/amr_ws/src/hmi_agf/src/include/model.h \
   /home/dinhson/amr_ws/src/hmi_agf/src/include/model_buffer.h \

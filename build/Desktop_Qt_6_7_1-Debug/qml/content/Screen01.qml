@@ -9,8 +9,6 @@ Check out https://doc.qt.io/qtcreator/creator-quick-ui-forms.html for details on
 import QtQuick 6.2
 import QtQuick.Controls 6.2
 import QtQuick.Layouts 6.2
-// import QtQuick.VirtualKeyboard
-// import QtQuick.VirtualKeyboard 2.15
 
 // import backendqt 1.0
 Page {
@@ -42,7 +40,28 @@ Page {
     property bool state_panel_queue: false
     property bool popup_confirm_visible: true
     property int state_edit: 0 // 0 -> buffer | 1 -> queue 
+    property int  width_current: 100
+    property int  item_count: loadConfig()
+    
+    // Khi cần khôi phục cấu hình
+    function loadConfig() {
+        var config = configManager.loadConfig("config.json")
+        if (config.item_count !== undefined) {
+            item_count = config.item_count
+        }
+        return item_count
+    }
+    function saveConfig(value_) {
+            var config = {
+                "item_count": value_
+            }
+            configManager.saveConfig(config, "config.json")
+        }
+    // Component.onCompleted: loadConfig()
 
+    // onClosing: {
+    //         saveConfig()
+    //     }
     Popup {
         id: popup
         x: page1.width * 0.15
@@ -223,7 +242,7 @@ Page {
             anchors.bottom: parent.bottom
             layoutDirection: Qt.RightToLeft
             spacing: 50 * parent.width / 640
-            anchors.left: parent.left
+            width: parent.width * 0.6
             anchors.right: parent.right
             anchors.topMargin: 10
 
@@ -1308,7 +1327,7 @@ Page {
                     TextField {
                         id: _queue_
                         objectName: "_queue"
-                        font.pixelSize: 25 * _queue.height / 45
+                        font.pixelSize: 25 * _queue_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1531,11 +1550,10 @@ Page {
             anchors.rightMargin: 15
             anchors.topMargin: 78 * down_panel.height / 445
             anchors.bottomMargin: 78 * down_panel.height / 445
-            layoutDirection: Qt.RightToLeft
+            spacing: 0
+            layoutDirection: Qt.LeftToRight
 
             Rectangle {
-                anchors.left: parent.left
-                anchors.top: parent.top
                 Layout.preferredWidth: parent.width * 0.4
                 Layout.preferredHeight:  parent.height
                 color: "#64B5F6"
@@ -1552,8 +1570,6 @@ Page {
 
             }
             Rectangle {
-                anchors.right: parent.right
-                anchors.top: parent.top
                 Layout.preferredWidth: parent.width * 0.6
                 Layout.preferredHeight:  parent.height
                 color: "#B3E5FC"
@@ -1570,160 +1586,86 @@ Page {
 
             }
 
+        }
+
+        RowLayout {
+            id: bang_tai_
+            anchors.fill: bang_tai
+            anchors.leftMargin: 0
+            anchors.rightMargin: 0
+            anchors.topMargin: 0
+            anchors.bottomMargin: 0
+            spacing: 2
+
+            layoutDirection: Qt.RightToLeft
+            // Rectangle {
+            //     color: "#ae0808"
+            //     anchors.fill: parent
+
+            // }
+
             Button {
                 id: palet_1
-                width: palet_1.height
+
                 text: qsTr("1")
-                anchors.right: parent.right
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.rightMargin: 20
-                anchors.topMargin: 10 + 22 * parent.height / 150
-                anchors.bottomMargin: 10 + 22 * parent.height / 150
+                Layout.preferredHeight: width_current * parent.height / 167
+                Layout.preferredWidth: width_current * parent.height / 167
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+
                 font.bold: true
-                font.pointSize: 30 * parent.height / 150
+                font.pointSize: 30 * parent.height / 155
 
                 background: Rectangle {
-                    id: animation_palet_1
                     objectName: "zone_1_queue"
                     color: "#CFD8DC"
+                    border.color: "#FF9800"
+                    border.width: 2
                 }
                 onClicked: {
                     state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(1)
                 }
-                Rectangle {
-                    id: animation_palet_2
-                    x: 0
-                    y: 00
-                    width: parent.width
-                    height: parent.height
-                    color: "#00000000"
-                }
-                SequentialAnimation {
-                    id: animation_goout
-                    running: false
 
-                    ColorAnimation {
-                        target: animation_palet_2
-                        property: "color"
-                        to: animation_palet_1.color
-                        duration: 000
-                    }
-
-                    ParallelAnimation {
-                        PropertyAnimation {
-                            target: animation_palet_2
-                            property: "y"
-                            to: animation_palet_2.y - 200
-                            duration: 1000
-                        }
-                        OpacityAnimator {
-                            target: animation_palet_2
-                            to: 0
-                            duration: 1000
-                        }
-                    }
-
-                    PropertyAnimation {
-                        target: animation_palet_2
-                        property: "y"
-                        to: animation_palet_2.y
-                        duration: 000
-                    }
-                    OpacityAnimator {
-                        target: animation_palet_2
-                        to: 1000
-                        duration: 000
-                    }
-                }
             }
             Button {
                 id: palet_2
-                width: palet_2.height
+                
                 text: qsTr("2")
-                anchors.right: palet_1.left
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.rightMargin: 50 * parent.height / 216
-                anchors.topMargin: 10 + 22 * parent.height / 150
-                anchors.bottomMargin: 10 + 22 * parent.height / 150
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.preferredHeight: width_current * parent.height / 167
+                Layout.preferredWidth: width_current * parent.height / 167
                 font.bold: true
-                font.pointSize: 30 * parent.height / 150
+                font.pointSize: 30 * parent.height / 155
 
                 background: Rectangle {
-                    id: animation_palet_3
                     objectName: "zone_2_queue"
                     color: "#CFD8DC"
+                    border.color: "#FF9800"
+                    border.width: 2
                 }
                 onClicked: {
                     state_edit = 1
                     pop_up_2.open()
                     backend.setDataQueue(2)
                 }
-                Rectangle {
-                    id: animation_palet_4
-                    x: 0
-                    y: 00
-                    width: parent.width
-                    height: parent.height
-                    color: "#00000000"
-                }
-                SequentialAnimation {
-                    id: animation_forward
-                    running: false
 
-                    ColorAnimation {
-                        target: animation_palet_4
-                        property: "color"
-                        to: animation_palet_3.color
-                        duration: 000
-                    }
-
-                    ParallelAnimation {
-                        PropertyAnimation {
-                            target: animation_palet_4
-                            property: "x"
-                            to: animation_palet_4.x + 100
-                            duration: 1000
-                        }
-                        OpacityAnimator {
-                            target: animation_palet_4
-                            to: 0
-                            duration: 1000
-                        }
-                    }
-
-                    PropertyAnimation {
-                        target: animation_palet_4
-                        property: "x"
-                        to: animation_palet_4.x
-                        duration: 000
-                    }
-                    OpacityAnimator {
-                        target: animation_palet_4
-                        to: 1000
-                        duration: 000
-                    }
-                }
             }
             Button {
                 id: palet_3
-                width: palet_3.height
+                
                 text: qsTr("3")
-                anchors.right: palet_2.left
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.rightMargin: 10
-                anchors.topMargin: 10 + 22 * parent.height / 150
-                anchors.bottomMargin: 10 + 22 * parent.height / 150
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.preferredHeight: width_current * parent.height / 167
+                Layout.preferredWidth: width_current * parent.height / 167
                 font.bold: true
-                font.pointSize: 30 * parent.height / 150
+                font.pointSize: 30 * parent.height / 155
 
                 background: Rectangle {
                     objectName: "zone_3_queue"
                     color: "#CFD8DC"
+                    border.color: "#FF9800"
+                    border.width: 2
                 }
                 onClicked: {
                     state_edit = 1
@@ -1733,20 +1675,19 @@ Page {
             }
             Button {
                 id: palet_4
-                width: palet_4.height
+                Layout.preferredHeight: width_current * parent.height / 167
+                Layout.preferredWidth: width_current * parent.height / 167
                 text: qsTr("4")
-                anchors.right: palet_3.left
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.rightMargin: 10
-                anchors.topMargin: 10 + 22 * parent.height / 150
-                anchors.bottomMargin: 10 + 22 * parent.height / 150
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                
                 font.bold: true
-                font.pointSize: 30 * parent.height / 150
+                font.pointSize: 30 * parent.height / 155
 
                 background: Rectangle {
                     objectName: "zone_4_queue"
                     color: "#CFD8DC"
+                    border.color: "#FF9800"
+                    border.width: 2
                 }
                 onClicked: {
                     state_edit = 1
@@ -1756,20 +1697,19 @@ Page {
             }
             Button {
                 id: palet_5
-                width: palet_5.height
+                
                 text: qsTr("5")
-                anchors.right: palet_4.left
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.rightMargin: 10
-                anchors.topMargin: 10 + 22 * parent.height / 150
-                anchors.bottomMargin: 10 + 22 * parent.height / 150
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.preferredHeight: width_current * parent.height / 167
+                Layout.preferredWidth: width_current * parent.height / 167
                 font.bold: true
-                font.pointSize: 30 * parent.height / 150
+                font.pointSize: 30 * parent.height / 155
 
                 background: Rectangle {
                     objectName: "zone_5_queue"
                     color: "#CFD8DC"
+                    border.color: "#FF9800"
+                    border.width: 2
                 }
                 onClicked: {
                     state_edit = 1
@@ -1779,20 +1719,19 @@ Page {
             }
             Button {
                 id: palet_6
-                width: palet_6.height
+                
                 text: qsTr("6")
-                anchors.right: palet_5.left
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.rightMargin: 10
-                anchors.topMargin: 10 + 22 * parent.height / 150
-                anchors.bottomMargin: 10 + 22 * parent.height / 150
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.preferredHeight: width_current * parent.height / 167
+                Layout.preferredWidth: width_current * parent.height / 167
                 font.bold: true
-                font.pointSize: 30 * parent.height / 150
-
+                font.pointSize: 30 * parent.height / 155
+                visible: true
                 background: Rectangle {
                     objectName: "zone_6_queue"
                     color: "#CFD8DC"
+                    border.color: "#FF9800"
+                    border.width: 2
                 }
                 onClicked: {
                     state_edit = 1
@@ -1802,20 +1741,21 @@ Page {
             }
             Button {
                 id: palet_7
-                width: palet_7.height
+                
                 text: qsTr("7")
-                anchors.right: palet_6.left
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.rightMargin: 10
-                anchors.topMargin: 10 + 22 * parent.height / 150
-                anchors.bottomMargin: 10 + 22 * parent.height / 150
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.preferredHeight: width_current * parent.height / 167
+                Layout.preferredWidth: width_current * parent.height / 167
+                visible: true
+
                 font.bold: true
-                font.pointSize: 30 * parent.height / 150
+                font.pointSize: 30 * parent.height / 155
 
                 background: Rectangle {
                     objectName: "zone_7_queue"
                     color: "#CFD8DC"
+                    border.color: "#FF9800"
+                    border.width: 2
                 }
                 onClicked: {
                     state_edit = 1
@@ -1825,20 +1765,21 @@ Page {
             }
             Button {
                 id: palet_8
-                width: palet_8.height
+                Layout.preferredHeight: width_current * parent.height / 167
+                Layout.preferredWidth: width_current * parent.height / 167
                 text: qsTr("8")
-                anchors.right: palet_7.left
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.rightMargin: 10
-                anchors.topMargin: 10 + 22 * parent.height / 150
-                anchors.bottomMargin: 10 + 22 * parent.height / 150
+
+
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                
                 font.bold: true
-                font.pointSize: 30 * parent.height / 150
+                font.pointSize: 30 * parent.height / 155
 
                 background: Rectangle {
                     objectName: "zone_8_queue"
                     color: "#CFD8DC"
+                    border.color: "#FF9800"
+                    border.width: 2
                 }
                 onClicked: {
                     state_edit = 1
@@ -1848,20 +1789,19 @@ Page {
             }
             Button {
                 id: palet_9
-                width: palet_9.height
+                Layout.preferredHeight: width_current * parent.height / 167
+                Layout.preferredWidth: width_current * parent.height / 167
                 text: qsTr("9")
-                anchors.right: palet_8.left
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.rightMargin: 10
-                anchors.topMargin: 10 + 22 * parent.height / 150
-                anchors.bottomMargin: 10 + 22 * parent.height / 150
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                visible: item_count > 8
                 font.bold: true
-                font.pointSize: 30 * parent.height / 150
+                font.pointSize: 30 * parent.height / 155
 
                 background: Rectangle {
                     objectName: "zone_9_queue"
                     color: "#CFD8DC"
+                    border.color: "#FF9800"
+                    border.width: 2
                 }
                 onClicked: {
                     state_edit = 1
@@ -1872,20 +1812,20 @@ Page {
 
             Button {
                 id: palet_10
-                width: palet_10.height
+                Layout.preferredHeight: width_current * parent.height / 167
+                Layout.preferredWidth: width_current * parent.height / 167
                 text: qsTr("10")
-                anchors.right: palet_9.left
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.rightMargin: 10
-                anchors.topMargin: 10 + 22 * parent.height / 150
-                anchors.bottomMargin: 10 + 22 * parent.height / 150
-                font.bold: true
-                font.pointSize: 30 * parent.height / 150
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                
 
+                font.bold: true
+                font.pointSize: 30 * parent.height / 155
+                visible: item_count > 9
                 background: Rectangle {
                     objectName: "zone_10_queue"
                     color: "#CFD8DC"
+                    border.color: "#FF9800"
+                    border.width: 2
                 }
                 onClicked: {
                     state_edit = 1
@@ -1896,20 +1836,18 @@ Page {
 
             Button {
                 id: palet_11
-                width: palet_11.height
+                Layout.preferredHeight: width_current * parent.height / 167
+                Layout.preferredWidth: width_current * parent.height / 167
                 text: qsTr("11")
-                anchors.right: palet_10.left
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.rightMargin: 10
-                anchors.topMargin: 10 + 22 * parent.height / 150
-                anchors.bottomMargin: 10 + 22 * parent.height / 150
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 font.bold: true
-                font.pointSize: 30 * parent.height / 150
-
+                font.pointSize: 30 * parent.height / 155
+                visible: item_count > 10
                 background: Rectangle {
                     objectName: "zone_11_queue"
                     color: "#CFD8DC"
+                    border.color: "#FF9800"
+                    border.width: 2
                 }
                 onClicked: {
                     state_edit = 1
@@ -1920,20 +1858,20 @@ Page {
 
             Button {
                 id: palet_12
-                width: palet_12.height
+                Layout.preferredHeight: width_current * parent.height / 167
+                Layout.preferredWidth: width_current * parent.height / 167
                 text: qsTr("12")
-                anchors.right: palet_11.left
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.rightMargin: 10
-                anchors.topMargin: 10 + 22 * parent.height / 150
-                anchors.bottomMargin: 10 + 22 * parent.height / 150
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                visible: item_count > 11
+
                 font.bold: true
-                font.pointSize: 30 * parent.height / 150
+                font.pointSize: 30 * parent.height / 155
 
                 background: Rectangle {
                     objectName: "zone_12_queue"
                     color: "#CFD8DC"
+                    border.color: "#FF9800"
+                    border.width: 2
                 }
                 onClicked: {
                     state_edit = 1
@@ -1944,20 +1882,18 @@ Page {
 
             Button {
                 id: palet_13
-                width: palet_13.height
+                Layout.preferredHeight: width_current * parent.height / 167
+                Layout.preferredWidth: width_current * parent.height / 167
                 text: qsTr("13")
-                anchors.right: palet_12.left
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.rightMargin: 10
-                anchors.topMargin: 10 + 22 * parent.height / 150
-                anchors.bottomMargin: 10 + 22 * parent.height / 150
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 font.bold: true
-                font.pointSize: 30 * parent.height / 150
-
+                font.pointSize: 30 * parent.height / 155
+                visible: item_count > 12
                 background: Rectangle {
                     objectName: "zone_13_queue"
                     color: "#CFD8DC"
+                    border.color: "#FF9800"
+                    border.width: 2
                 }
                 onClicked: {
                     state_edit = 1
@@ -1965,42 +1901,62 @@ Page {
                     backend.setDataQueue(13)
                 }
             }
-            // Button {
-            //     id: palet_14
-            //     width: palet_14.height
-            //     text: qsTr("14")
-            //     anchors.right: palet_13.left
-            //     anchors.top: parent.top
-            //     anchors.bottom: parent.bottom
-            //     anchors.rightMargin: 10
-            //     anchors.topMargin: 10 + 22 * parent.height / 150
-            //     anchors.bottomMargin: 10 + 22 * parent.height / 150
-            //     font.bold: true
-            //     font.pointSize: 30 * parent.height / 150
-
-            //     background: Rectangle {
-            //         objectName: "zone_14_queue"
-            //         color: "#CFD8DC"
-            //     }
-            //     onClicked: {
-            //         state_edit = 1
-            //         pop_up_2.open()
-            //         backend.setDataQueue(14)
-            //     }
-            // }
-
-            Image {
-                id: ready_icon
-                x: palet_1.x + palet_1.width * 0.25
-                y: palet_1.y - palet_1.width * 0.75
-                source: ready_icon_source
-                rotation: -180
-                fillMode: Image.PreserveAspectFit
-                // visible: true
-                height: palet_1.height * 0.5
-                width: ready_icon.height
+            Button {
+                id: palet_14
+                Layout.preferredHeight: width_current * parent.height / 167
+                Layout.preferredWidth: width_current * parent.height / 167
+                text: qsTr("14")
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                visible: item_count > 13
+                font.bold: true
+                font.pointSize: 30 * parent.height / 155
+                background: Rectangle {
+                    objectName: "zone_14_queue"
+                    color: "#CFD8DC"
+                    border.color: "#FF9800"
+                    border.width: 2
+                }
+                onClicked: {
+                    state_edit = 1
+                    pop_up_2.open()
+                    backend.setDataQueue(14)
+                }
             }
+            Button {
+                id: palet_15
+                Layout.preferredHeight: width_current * parent.height / 167
+                Layout.preferredWidth: width_current * parent.height / 167
+                text: qsTr("15")
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                visible: item_count > 14
+                font.bold: true
+                font.pointSize: 30 * parent.height / 155
+                background: Rectangle {
+                    objectName: "zone_14_queue"
+                    color: "#CFD8DC"
+                    border.color: "#FF9800"
+                    border.width: 2
+                }
+                onClicked: {
+                    state_edit = 1
+                    pop_up_2.open()
+                    backend.setDataQueue(15)
+                }
+            }
+
+
         }
+        // Image {
+        //     id: ready_icon
+        //     x: palet_1.x + palet_1.width * 0.25
+        //     y: palet_1.y - palet_1.width * 0.75
+        //     source: ready_icon_source
+        //     rotation: -180
+        //     fillMode: Image.PreserveAspectFit
+        //     visible: true
+        //     height: palet_1.height * 0.5
+        //     width: height
+        // }
     }
 
     Page {
@@ -2255,6 +2211,28 @@ Page {
             }
         }
 
+        Slider {
+            id: slider
+
+            width: parent.width * 0.2
+            height: parent.height * 0.1
+            value: item_count
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.rightMargin: 20
+            anchors.bottomMargin: 10
+            live: true
+            stepSize: 1
+            to: 15
+            from: 8
+            onValueChanged: {
+                item_count = value
+                width_current = 140 - (value -8) * 7
+                saveConfig(value)
+
+            }
+        }
+
 
     }
 
@@ -2322,11 +2300,9 @@ Page {
             onClicked: {
                 popup_mode = 2
                 status_popup.text = state_system
-                if ( status_system === "ERROR") {
-                    popup_confirm_visible = false
-                } else {
-                    popup_confirm_visible = true
-                }
+                
+                popup_confirm_visible = true
+                
                 popup.open()
             }
             onPressedChanged: {
@@ -2349,16 +2325,16 @@ Page {
             font.pointSize: 45 * parent.height / 420
 
             background: Rectangle {
-                color: "#4CAF50"
+                color: "#FFFFFF"
                 radius: 30 * parent.height / 120
-                border.color: homming_button.background.color
-                border.width: 1
+                border.color: "#607D8B"
+                border.width: 2
             }
             onPressedChanged: {
                 if (pressed) {
                     background.color = "#A5D6A7";
                 } else {
-                    background.color = "#4CAF50";
+                    background.color = "#FFFFFF";
                 }
             }
             // onClicked: {
@@ -2375,8 +2351,8 @@ Page {
 
     }
     RowLayout {
-        width: parent.width * 0.475
-        height: 25 + 75 * parent.height / 1100
+        width: parent.width * 0.5
+        height: 25 + 75 * parent.height / 1200
         visible: true
         anchors.left: parent.left
         anchors.bottom: down_panel.top
@@ -2439,8 +2415,12 @@ Page {
                 popup_mode = 0
                 if (status_mode === "ERROR") {
                     status_popup.text = backend.robotError
-                } else
+                    popup_confirm_visible = true
+                } else {
                     status_popup.text = backend.robotDetail
+                    popup_confirm_visible = false
+                }
+                    
 
                 popup.open()
             }
@@ -2465,6 +2445,7 @@ Page {
             }
             onClicked: {
                 popup_mode = 1
+                popup_confirm_visible = true
                 if (mode_mode === "MANUAL") {
                     // mode_mode ="AUTO"
                     status_popup.text = qsTr(
@@ -2514,19 +2495,14 @@ Page {
 
             if ((status_mode === "ERROR") || (status_mode === "EMG")) {
                 status_button.background.color = "#F44336"
-                popup_confirm_visible = true
             } else if (status_mode === "WAITING_INIT_POSE") {
                 status_button.background.color = "#FFFFFF"
-                popup_confirm_visible = false
             } else if (status_mode === "NORMAL") {
                 status_button.background.color = "#4CAF50"
-                popup_confirm_visible = false
             } else if (status_mode === "WAITING") {
                 status_button.background.color = "#FFEB3B"
-                popup_confirm_visible = false
             } else {
                 status_button.background.color = "#FF9800"
-                popup_confirm_visible = false
             }
         }
         onGetControlChanged: {
@@ -2545,69 +2521,22 @@ Page {
                 control_button.background.color = "#FFEB3B"
         }
         onSystemStatusChanged: {
-            state_system = backend.getStateSystem
+            state_system = "State AGF: " + backend.getStateSystem()
             
             status_system = backend.systemStatus
+            reset_mode = backend.systemStatus
+            if (backend.systemStatus === "ERROR") {
+                reset_button.background.color = "#F44336"
+                
+                
+                
+            }
+            else if (backend.systemStatus === "NORMAL") {
+                reset_button.background.color = "#4CAF50"
+            }
             
         }
     }
 
-    // Connections {
-    //     target: backend
-    //     onBatteryPercentageChanged: {
-    //         batteryPercentage = backend.batteryPercentage
-    //     }
-    //     onBatteryVoltageChanged: {
-    //         batteryVoltage = backend.batteryVoltage
-    //     }
-    //     onBatteryCurrentChanged: {
-    //         batteryCurrent = backend.batteryCurrent
-    //     }
-    //     onRobotDetailChanged: {
-    //         if (status_mode === "ERROR") {
-    //             status_header.text = backend.robotError
-    //         } else {
-    //             status_header.text = backend.robotDetail
-    //         }
-    //     }
-    //     onRobotModeChanged: {
-    //         mode_mode = backend.robotMode
-    //         if (mode_mode === "MANUAL") {
-    //             mode_button.background.color = "#03A9F4"
-    //         } else if (mode_mode === "AUTO") {
-    //             mode_button.background.color = "#4CAF50"
-    //         } else
-    //             mode_button.background.color = "#FF9800"
-    //     }
-    //     onRobotStatusChanged: {
-    //         status_mode = backend.robotStatus
-
-    //         if ((status_mode === "ERROR") || (status_mode === "EMG")) {
-    //             status_button.background.color = "#F44336"
-    //         } else if (status_mode === "WAITING_INIT_POSE") {
-    //             status_button.background.color = "#FFFFFF"
-    //         } else if (status_mode === "NORMAL") {
-    //             status_button.background.color = "#4CAF50"
-    //         } else if (status_mode === "WAITING") {
-    //             status_button.background.color = "#FFEB3B"
-    //         } else
-    //             status_button.background.color = "#FF9800"
-    //     }
-    //     onGetControlChanged: {
-    //         control_mode = backend.getControl
-    //         if (mode_mode === "AUTO" && control_mode === "RUNNING") {
-    //             if (status_mode === "WAITING") {
-    //                 control_button.background.color = "#2196F3"
-    //             } else {
-    //                 control_button.background.color = "#4CAF50"
-    //             }
-    //         } else if (mode_mode === "MANUAL" && control_mode === "RUNNING") {
-    //             control_button.background.color = "#2196F3"
-    //         } else if (control_mode === "PAUSE") {
-    //             control_button.background.color = "#FFEB3B"
-    //         } else
-    //             control_button.background.color = "#FFEB3B"
-    //     }
-        
-    // }
+   
 }

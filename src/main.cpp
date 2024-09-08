@@ -8,6 +8,7 @@
 #include <QTranslator>
 #include <QDebug>
 #include <QDir>
+#include "include/config_manager.h"
 class hmiApp : public QObject {
     Q_OBJECT
 private:
@@ -16,12 +17,15 @@ private:
 
     QQmlApplicationEngine engine;
     Backend backend;
+    ConfigManager configManager;
     ros::Publisher hmi_status_pub;
     std_stamped_msgs::StringStamped hmi_msg;
 
     void set_qt_environment() {
         // qputenv( "QT_IM_MODULE", QByteArray( "qtvirtualkeyboard" ) );
         engine.rootContext()->setContextProperty("backend", &backend);
+        
+        engine.rootContext()->setContextProperty("configManager", &configManager);
     }
 
 
@@ -87,7 +91,7 @@ int hmiApp::_exit() {
 }
 
 int main(int argc, char** argv) {
-    ros::init(argc, argv, "backend_node");
+    ros::init(argc, argv, "hmi_agf_node");
     qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
     hmiApp hmi(argc, argv);
     // hmi.init_ros_timer();
