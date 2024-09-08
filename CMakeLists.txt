@@ -63,8 +63,9 @@ qt6_add_executable(hmi_agf
     src/main.cpp 
     src/backend.cpp 
     src/include/backend.h 
-    src/include/model.h 
+    src/include/model_queue.h 
     src/include/model_buffer.h 
+    src/include/model_pallet.h 
     src/include/json.hpp
     qml.qrc
     src/include/config_manager.h

@@ -347,6 +347,11 @@ Window {
                     border.width: 2
                 }
                 onClicked: {
+                    window.width = Screen.width / 1.5;
+                    window.height = Screen.height / 1.5;
+                    window.x = (Screen.width - window.width) / 2;
+                    window.y = (Screen.height - window.height) / 2;
+                    window.visibility = Window.FullScreen;
                     window.showMinimized();
                 }
             }

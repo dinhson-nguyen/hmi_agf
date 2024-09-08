@@ -6,7 +6,8 @@
 		[
 			"add_custom_target",
 			"qt6_add_lupdate",
-			"qt6_add_translations"
+			"qt6_add_translations",
+			"add_dependencies"
 		],
 		"files" : 
 		[
@@ -21,7 +22,7 @@
 			{
 				"command" : 2,
 				"file" : 1,
-				"line" : 75,
+				"line" : 76,
 				"parent" : 0
 			},
 			{
@@ -39,49 +40,31 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 327,
+				"line" : 372,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 374,
 				"parent" : 3
 			}
 		]
 	},
-	"id" : "hmi_agf_lupdate::@6890427a1f51a3e7e1df",
-	"name" : "hmi_agf_lupdate",
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 5,
+			"id" : "hmi_agf_lupdate::@6890427a1f51a3e7e1df"
+		}
+	],
+	"id" : "update_translations::@6890427a1f51a3e7e1df",
+	"name" : "update_translations",
 	"paths" : 
 	{
 		"build" : ".",
 		"source" : "."
 	},
-	"sourceGroups" : 
-	[
-		{
-			"name" : "",
-			"sourceIndexes" : 
-			[
-				0
-			]
-		},
-		{
-			"name" : "CMake Rules",
-			"sourceIndexes" : 
-			[
-				1
-			]
-		}
-	],
-	"sources" : 
-	[
-		{
-			"backtrace" : 4,
-			"isGenerated" : true,
-			"path" : "build/CMakeFiles/hmi_agf_lupdate",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 0,
-			"isGenerated" : true,
-			"path" : "build/CMakeFiles/hmi_agf_lupdate.rule",
-			"sourceGroupIndex" : 1
-		}
-	],
+	"sources" : [],
 	"type" : "UTILITY"
 }

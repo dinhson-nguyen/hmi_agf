@@ -17,7 +17,8 @@ Backend::Backend(QObject* parent)
     uri("mongodb://localhost:27017"),
     client(uri), db(client["admin"]),
     collection(db["pallet_buffer"]),
-    collection_queue(db["pallet_queue"])
+    collection_queue(db["pallet_queue"]),
+    collection_model(db["pallet_model"])
     
 {
     // Initialize the subscriber in the constructor
@@ -457,7 +458,7 @@ bool Backend::serviceAppendPalletCallback(std_stamped_msgs::StringService::Reque
     json data_obj = json::parse(req.request);
     int height_ = 10  ;
     ROS_INFO_STREAM("call service append success");
-    Model model(data_obj);
+    ModelQueue model(data_obj);
     // Chèn vào MongoDB
     int result = model.insert(collection_queue);
 
@@ -863,7 +864,7 @@ void Backend::saveDataQueue(QString jsonstring) {
     bsoncxx::builder::stream::document filter_builder;
     filter_builder << "_id" << id;
 
-    Model modelupdate(jsonObj, jsonObj["queue"]);
+    ModelQueue modelupdate(jsonObj, jsonObj["queue"]);
     modelupdate.update(collection_queue, filter_builder.view());
     initColor();
 }

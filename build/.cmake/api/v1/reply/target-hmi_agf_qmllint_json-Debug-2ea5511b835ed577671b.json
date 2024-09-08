@@ -24,7 +24,7 @@
 			{
 				"command" : 4,
 				"file" : 2,
-				"line" : 108,
+				"line" : 109,
 				"parent" : 0
 			},
 			{
@@ -52,7 +52,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 971,
+				"line" : 998,
 				"parent" : 5
 			}
 		]
@@ -67,8 +67,8 @@
 	{
 		"name" : "QtInternalTargets/QmlLinter"
 	},
-	"id" : "hmi_agf_qmllint::@6890427a1f51a3e7e1df",
-	"name" : "hmi_agf_qmllint",
+	"id" : "hmi_agf_qmllint_json::@6890427a1f51a3e7e1df",
+	"name" : "hmi_agf_qmllint_json",
 	"paths" : 
 	{
 		"build" : ".",
@@ -96,13 +96,13 @@
 		{
 			"backtrace" : 6,
 			"isGenerated" : true,
-			"path" : "build/CMakeFiles/hmi_agf_qmllint",
+			"path" : "build/CMakeFiles/hmi_agf_qmllint_json",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/CMakeFiles/hmi_agf_qmllint.rule",
+			"path" : "build/CMakeFiles/hmi_agf_qmllint_json.rule",
 			"sourceGroupIndex" : 1
 		}
 	],

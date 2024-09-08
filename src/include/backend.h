@@ -11,8 +11,9 @@
 #include <string>
 #include <iostream>
 #include "json.hpp"
-#include "model.h"
+#include "model_queue.h"
 #include "model_buffer.h"
+#include "model_pallet.h"
 #include <fstream> 
 #include <cmath> 
 #include <std_msgs/Int16MultiArray.h>
@@ -137,6 +138,7 @@ private:
     mongocxx::database db;
     mongocxx::collection collection;
     mongocxx::collection collection_queue;
+    mongocxx::collection collection_model;
     
 
     std::vector<int> fastechData;

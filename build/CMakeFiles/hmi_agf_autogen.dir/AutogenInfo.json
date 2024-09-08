@@ -23,14 +23,19 @@
 			"7PH6M6IPMC/moc_json.cpp"
 		],
 		[
-			"/home/dinhson/amr_ws/src/hmi_agf/src/include/model.h",
-			"MU",
-			"7PH6M6IPMC/moc_model.cpp"
-		],
-		[
 			"/home/dinhson/amr_ws/src/hmi_agf/src/include/model_buffer.h",
 			"MU",
 			"7PH6M6IPMC/moc_model_buffer.cpp"
+		],
+		[
+			"/home/dinhson/amr_ws/src/hmi_agf/src/include/model_pallet.h",
+			"MU",
+			"7PH6M6IPMC/moc_model_pallet.cpp"
+		],
+		[
+			"/home/dinhson/amr_ws/src/hmi_agf/src/include/model_queue.h",
+			"MU",
+			"7PH6M6IPMC/moc_model_queue.cpp"
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],

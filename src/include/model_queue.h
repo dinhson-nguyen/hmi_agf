@@ -6,16 +6,16 @@
 #include <iostream>
 #include <string>
 
-class Model {
+class ModelQueue {
 public:
     // Constructor để khởi tạo từ nlohmann::json
     Model(const nlohmann::json& json, int queue_size = 8) {
-        column_id = json.at("column_id").get<std::string>();
-        destination = json.at("destination").get<std::string>();
-        id = json.at("id").get<std::string>();
-        length = json.at("length").get<std::string>();
-        location_id = json.at("location_id").get<std::string>();
-        mechandise = json.at("mechandise").get<std::string>();
+        id = json.at("Id").get<std::string>();
+        Time = json.at("PalletInfo").get<std::string>();
+        Model = json.at("Model").get<std::string>();
+        length = json.at("Merchandise").get<std::string>();
+        location_id = json.at("NameModel").get<std::string>();
+        mechandise = json.at("Destination").get<std::string>();
         height = json.at("height").get<std::string>();
         model = json.at("model").get<std::string>();
         name_model = json.at("name_model").get<std::string>();
@@ -29,7 +29,7 @@ public:
     // Phương thức để chuyển đối tượng thành BSON
     bsoncxx::document::value to_bson() const {
         return bsoncxx::builder::stream::document{} 
-            << "column_id" << id
+            << "Id" << id
             << "destination" << destination
             << "id" << id
             << "length" << length

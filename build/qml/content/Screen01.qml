@@ -9,8 +9,6 @@ Check out https://doc.qt.io/qtcreator/creator-quick-ui-forms.html for details on
 import QtQuick 6.2
 import QtQuick.Controls 6.2
 import QtQuick.Layouts 6.2
-// import QtQuick.VirtualKeyboard
-// import QtQuick.VirtualKeyboard 2.15
 
 // import backendqt 1.0
 Page {
@@ -43,22 +41,23 @@ Page {
     property bool popup_confirm_visible: true
     property int state_edit: 0 // 0 -> buffer | 1 -> queue 
     property int  width_current: 100
-    property int  item_count: 10
-
+    property int  item_count: loadConfig()
+    
     // Khi cần khôi phục cấu hình
     function loadConfig() {
         var config = configManager.loadConfig("config.json")
         if (config.item_count !== undefined) {
             item_count = config.item_count
         }
+        return item_count
     }
-    function saveConfig() {
+    function saveConfig(value_) {
             var config = {
-                "item_count": item_count
+                "item_count": value_
             }
             configManager.saveConfig(config, "config.json")
         }
-    Component.onCompleted: loadConfig()
+    // Component.onCompleted: loadConfig()
 
     // onClosing: {
     //         saveConfig()
@@ -2229,7 +2228,7 @@ Page {
             onValueChanged: {
                 item_count = value
                 width_current = 140 - (value -8) * 7
-                saveConfig()
+                saveConfig(value)
 
             }
         }
@@ -2301,11 +2300,9 @@ Page {
             onClicked: {
                 popup_mode = 2
                 status_popup.text = state_system
-                if ( status_system === "ERROR") {
-                    popup_confirm_visible = true
-                } else {
-                    popup_confirm_visible = false
-                }
+                
+                popup_confirm_visible = true
+                
                 popup.open()
             }
             onPressedChanged: {
@@ -2328,16 +2325,16 @@ Page {
             font.pointSize: 45 * parent.height / 420
 
             background: Rectangle {
-                color: "#4CAF50"
+                color: "#FFFFFF"
                 radius: 30 * parent.height / 120
-                border.color: homming_button.background.color
-                border.width: 1
+                border.color: "#607D8B"
+                border.width: 2
             }
             onPressedChanged: {
                 if (pressed) {
                     background.color = "#A5D6A7";
                 } else {
-                    background.color = "#4CAF50";
+                    background.color = "#FFFFFF";
                 }
             }
             // onClicked: {
@@ -2524,69 +2521,22 @@ Page {
                 control_button.background.color = "#FFEB3B"
         }
         onSystemStatusChanged: {
-            state_system = backend.getStateSystem
+            state_system = "State AGF: " + backend.getStateSystem()
             
             status_system = backend.systemStatus
+            reset_mode = backend.systemStatus
+            if (backend.systemStatus === "ERROR") {
+                reset_button.background.color = "#F44336"
+                
+                
+                
+            }
+            else if (backend.systemStatus === "NORMAL") {
+                reset_button.background.color = "#4CAF50"
+            }
             
         }
     }
 
-    // Connections {
-    //     target: backend
-    //     onBatteryPercentageChanged: {
-    //         batteryPercentage = backend.batteryPercentage
-    //     }
-    //     onBatteryVoltageChanged: {
-    //         batteryVoltage = backend.batteryVoltage
-    //     }
-    //     onBatteryCurrentChanged: {
-    //         batteryCurrent = backend.batteryCurrent
-    //     }
-    //     onRobotDetailChanged: {
-    //         if (status_mode === "ERROR") {
-    //             status_header.text = backend.robotError
-    //         } else {
-    //             status_header.text = backend.robotDetail
-    //         }
-    //     }
-    //     onRobotModeChanged: {
-    //         mode_mode = backend.robotMode
-    //         if (mode_mode === "MANUAL") {
-    //             mode_button.background.color = "#03A9F4"
-    //         } else if (mode_mode === "AUTO") {
-    //             mode_button.background.color = "#4CAF50"
-    //         } else
-    //             mode_button.background.color = "#FF9800"
-    //     }
-    //     onRobotStatusChanged: {
-    //         status_mode = backend.robotStatus
-
-    //         if ((status_mode === "ERROR") || (status_mode === "EMG")) {
-    //             status_button.background.color = "#F44336"
-    //         } else if (status_mode === "WAITING_INIT_POSE") {
-    //             status_button.background.color = "#FFFFFF"
-    //         } else if (status_mode === "NORMAL") {
-    //             status_button.background.color = "#4CAF50"
-    //         } else if (status_mode === "WAITING") {
-    //             status_button.background.color = "#FFEB3B"
-    //         } else
-    //             status_button.background.color = "#FF9800"
-    //     }
-    //     onGetControlChanged: {
-    //         control_mode = backend.getControl
-    //         if (mode_mode === "AUTO" && control_mode === "RUNNING") {
-    //             if (status_mode === "WAITING") {
-    //                 control_button.background.color = "#2196F3"
-    //             } else {
-    //                 control_button.background.color = "#4CAF50"
-    //             }
-    //         } else if (mode_mode === "MANUAL" && control_mode === "RUNNING") {
-    //             control_button.background.color = "#2196F3"
-    //         } else if (control_mode === "PAUSE") {
-    //             control_button.background.color = "#FFEB3B"
-    //         } else
-    //             control_button.background.color = "#FFEB3B"
-    //     }
-        
-    // }
+   
 }
