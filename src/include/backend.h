@@ -42,6 +42,7 @@
 #include <mongocxx/stdx.hpp>
 #include <mongocxx/result/update.hpp>
 #include <QQuickItem>
+#include <QStringList>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QVariant>
@@ -156,6 +157,9 @@ private:
     int index;
     int max_index;
 
+    QStringList models = {};
+    QStringList counts = {};
+
     double start_time = ros::Time::now().toSec();
     double vel_linear;
     double vel_angular;
@@ -168,7 +172,7 @@ private:
     }
     void switchColorBuffer(mongocxx::collection coll,std::string old_id);
     void switchColorQueue(mongocxx::collection coll,std::string old_id, std::string update_id);
-    
+    json lookupPalletModel(std::string model, std::string count);
 
     std::string exec(const char* cmd) {
         std::array<char, 128> buffer;
@@ -234,6 +238,7 @@ public:
     QString systemStatus() const;
     double getLinear() const;
     double getAngular() const;
+    void getDataComboBox() ;
     
     // int getFastechRear(int index) const;
 
@@ -267,6 +272,13 @@ public:
     Q_INVOKABLE void deleteDataBuffer(QString jsonstring) ;
     Q_INVOKABLE void deleteDataQueue(QString jsonstring) ;
     Q_INVOKABLE QString getStateSystem() ;
+
+    Q_INVOKABLE QStringList getListModel() {
+        return models;
+    }
+    Q_INVOKABLE QStringList getListCount() {
+        return counts;
+    }
 
 
 signals:

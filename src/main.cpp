@@ -13,7 +13,9 @@ class hmiApp : public QObject {
     Q_OBJECT
 private:
     ros::NodeHandle nh;
+    
     QGuiApplication app;
+    
 
     QQmlApplicationEngine engine;
     Backend backend;
@@ -22,7 +24,6 @@ private:
     std_stamped_msgs::StringStamped hmi_msg;
 
     void set_qt_environment() {
-        // qputenv( "QT_IM_MODULE", QByteArray( "qtvirtualkeyboard" ) );
         engine.rootContext()->setContextProperty("backend", &backend);
         
         engine.rootContext()->setContextProperty("configManager", &configManager);
@@ -76,6 +77,8 @@ hmiApp::hmiApp(int argc, char** argv)
     engine.addImportPath(QCoreApplication::applicationDirPath() + "/qml");
     engine.addImportPath(":/");
     engine.load(url);
+    QInputMethod *inputMethod = QGuiApplication::inputMethod();
+    inputMethod->show();
     backend.setEngine(&engine);
     backend.initColor();
     
@@ -92,6 +95,7 @@ int hmiApp::_exit() {
 
 int main(int argc, char** argv) {
     ros::init(argc, argv, "hmi_agf_node");
+    qputenv("QML2_IMPORT_PATH", QString("/home/dinhson/Qt/6.7.2/gcc_64/qml").toLatin1());
     qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
     hmiApp hmi(argc, argv);
     // hmi.init_ros_timer();

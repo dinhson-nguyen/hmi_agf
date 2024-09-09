@@ -212,6 +212,16 @@
                     "access": "public",
                     "name": "getStateSystem",
                     "returnType": "QString"
+                },
+                {
+                    "access": "public",
+                    "name": "getListModel",
+                    "returnType": "QStringList"
+                },
+                {
+                    "access": "public",
+                    "name": "getListCount",
+                    "returnType": "QStringList"
                 }
             ],
             "object": true,

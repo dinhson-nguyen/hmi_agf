@@ -158,6 +158,10 @@ hmi_agf_qds_components_autogen/timestamp: \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Gui/Qt6QTuioTouchPluginConfig.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Gui/Qt6QTuioTouchPluginTargets-relwithdebinfo.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Gui/Qt6QTuioTouchPluginTargets.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Gui/Qt6QVirtualKeyboardPluginAdditionalTargetInfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Gui/Qt6QVirtualKeyboardPluginConfig.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Gui/Qt6QVirtualKeyboardPluginTargets-relwithdebinfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Gui/Qt6QVirtualKeyboardPluginTargets.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Gui/Qt6QVkKhrDisplayIntegrationPluginAdditionalTargetInfo.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Gui/Qt6QVkKhrDisplayIntegrationPluginConfig.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Gui/Qt6QVkKhrDisplayIntegrationPluginTargets-relwithdebinfo.cmake \
@@ -435,6 +439,54 @@ hmi_agf_qds_components_autogen/timestamp: \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquicktimelinepluginConfig.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquicktimelinepluginTargets-relwithdebinfo.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtquicktimelinepluginTargets.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbbuiltinstylespluginAdditionalTargetInfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbbuiltinstylespluginConfig.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbbuiltinstylespluginTargets-relwithdebinfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbbuiltinstylespluginTargets.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbcomponentspluginAdditionalTargetInfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbcomponentspluginConfig.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbcomponentspluginTargets-relwithdebinfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbcomponentspluginTargets.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbhangulpluginAdditionalTargetInfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbhangulpluginConfig.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbhangulpluginTargets-relwithdebinfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbhangulpluginTargets.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkblayoutspluginAdditionalTargetInfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkblayoutspluginConfig.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkblayoutspluginTargets-relwithdebinfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkblayoutspluginTargets.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbopenwnnpluginAdditionalTargetInfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbopenwnnpluginConfig.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbopenwnnpluginTargets-relwithdebinfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbopenwnnpluginTargets.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpinyinpluginAdditionalTargetInfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpinyinpluginConfig.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpinyinpluginTargets-relwithdebinfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpinyinpluginTargets.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpluginAdditionalTargetInfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpluginConfig.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpluginTargets-relwithdebinfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpluginTargets.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpluginspluginAdditionalTargetInfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpluginspluginConfig.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpluginspluginTargets-relwithdebinfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbpluginspluginTargets.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbsettingspluginAdditionalTargetInfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbsettingspluginConfig.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbsettingspluginTargets-relwithdebinfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbsettingspluginTargets.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbstylespluginAdditionalTargetInfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbstylespluginConfig.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbstylespluginTargets-relwithdebinfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbstylespluginTargets.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbtcimepluginAdditionalTargetInfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbtcimepluginConfig.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbtcimepluginTargets-relwithdebinfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbtcimepluginTargets.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbthaipluginAdditionalTargetInfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbthaipluginConfig.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbthaipluginTargets-relwithdebinfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qtvkbthaipluginTargets.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dspatialaudioAdditionalTargetInfo.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dspatialaudioConfig.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6quick3dspatialaudioTargets-relwithdebinfo.cmake \
@@ -559,22 +611,6 @@ hmi_agf_qds_components_autogen/timestamp: \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Quick/Qt6QuickTargets-relwithdebinfo.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Quick/Qt6QuickTargets.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6Quick/Qt6QuickVersionlessTargets.cmake \
-	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickControls2/Qt6QuickControls2AdditionalTargetInfo.cmake \
-	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickControls2/Qt6QuickControls2Config.cmake \
-	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickControls2/Qt6QuickControls2ConfigVersion.cmake \
-	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickControls2/Qt6QuickControls2ConfigVersionImpl.cmake \
-	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickControls2/Qt6QuickControls2Dependencies.cmake \
-	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickControls2/Qt6QuickControls2Targets-relwithdebinfo.cmake \
-	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickControls2/Qt6QuickControls2Targets.cmake \
-	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickControls2/Qt6QuickControls2VersionlessTargets.cmake \
-	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTemplates2/Qt6QuickTemplates2AdditionalTargetInfo.cmake \
-	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTemplates2/Qt6QuickTemplates2Config.cmake \
-	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTemplates2/Qt6QuickTemplates2ConfigVersion.cmake \
-	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTemplates2/Qt6QuickTemplates2ConfigVersionImpl.cmake \
-	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTemplates2/Qt6QuickTemplates2Dependencies.cmake \
-	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTemplates2/Qt6QuickTemplates2Targets-relwithdebinfo.cmake \
-	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTemplates2/Qt6QuickTemplates2Targets.cmake \
-	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTemplates2/Qt6QuickTemplates2VersionlessTargets.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTools/Qt6QuickToolsAdditionalTargetInfo.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTools/Qt6QuickToolsConfig.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTools/Qt6QuickToolsConfigVersion.cmake \
@@ -583,6 +619,14 @@ hmi_agf_qds_components_autogen/timestamp: \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTools/Qt6QuickToolsTargets-relwithdebinfo.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTools/Qt6QuickToolsTargets.cmake \
 	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6QuickTools/Qt6QuickToolsVersionlessTargets.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6VirtualKeyboard/Qt6VirtualKeyboardAdditionalTargetInfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6VirtualKeyboard/Qt6VirtualKeyboardConfig.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6VirtualKeyboard/Qt6VirtualKeyboardConfigVersion.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6VirtualKeyboard/Qt6VirtualKeyboardConfigVersionImpl.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6VirtualKeyboard/Qt6VirtualKeyboardDependencies.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6VirtualKeyboard/Qt6VirtualKeyboardTargets-relwithdebinfo.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6VirtualKeyboard/Qt6VirtualKeyboardTargets.cmake \
+	/home/dinhson/Qt/6.7.2/gcc_64/lib/cmake/Qt6VirtualKeyboard/Qt6VirtualKeyboardVersionlessTargets.cmake \
 	/home/dinhson/Qt/Tools/CMake/share/cmake-3.29/Modules/CMakeCXXInformation.cmake \
 	/home/dinhson/Qt/Tools/CMake/share/cmake-3.29/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake \
 	/home/dinhson/Qt/Tools/CMake/share/cmake-3.29/Modules/CMakeCommonLanguageInclude.cmake \

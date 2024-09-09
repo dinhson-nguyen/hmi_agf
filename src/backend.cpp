@@ -80,6 +80,7 @@ Backend::Backend(QObject* parent)
     catch (const YAML::ParserException& e) {
         ROS_WARN("Cannot get AGV name");
     }
+    getDataComboBox();
     
     
 
@@ -421,7 +422,33 @@ void Backend::palletStatusCallback(const std_msgs::Empty& msg){
 //     out << std::fixed << std::setprecision(precision) << value;
 //     return out.str();
 // }
+json Backend::lookupPalletModel(std::string model, std::string count) {
+    json object_pallet;
+    bsoncxx::builder::stream::document filter_model_pallet;
+    filter_model_pallet << "$and" << bsoncxx::builder::stream::open_array
+                << bsoncxx::builder::stream::open_document
+                << "model" << model        // Điều kiện 1
+                << bsoncxx::builder::stream::close_document
+                << bsoncxx::builder::stream::open_document
+                << "count" << count        // Điều kiện 2
+                << bsoncxx::builder::stream::close_document
+                << bsoncxx::builder::stream::close_array;
 
+    // Thực hiện tìm kiếm một tài liệu
+    auto result_pallet = collection_model.find_one(filter_model_pallet.view());
+    if(result_pallet) {
+            bsoncxx::document::view view_pallet = result_pallet->view();
+            std::string obj_pallet = bsoncxx::to_json(view_pallet);
+            object_pallet = json::parse(obj_pallet);
+            // object_ = object_ + object_pallet;
+            return object_pallet;
+        }
+        else {
+            ROS_ERROR("Can't find Model");
+            return object_pallet;
+        }
+
+}
 bool Backend::servicePopPalletCallback(std_stamped_msgs::StringService::Request& req, std_stamped_msgs::StringService::Response& res) {
     arrangeQueue();
     json delete_result = deleteObjQueue(1);
@@ -445,6 +472,19 @@ bool Backend::serviceLookupPalletCallback(std_stamped_msgs::StringService::Reque
         json object_ = json::parse(obj_filter);
         object_.erase("_id");
         object_.erase("queue");
+
+        //Update collection_model
+        std::string model_pallet = object_["Model"];
+        std::string count_pallet = object_["Count"];
+        
+        
+        json result_pallet = lookupPalletModel(model_pallet, count_pallet) ;
+        // Kiểm tra và in ra kết quả
+        if(!result_pallet.empty()) {
+            
+            object_.merge_patch(result_pallet);
+        }
+        else ROS_ERROR("Can't find Model");
         
         res.respond = object_.dump();
     } else  res.respond = empty.dump();;
@@ -456,7 +496,6 @@ bool Backend::serviceLookupPalletCallback(std_stamped_msgs::StringService::Reque
 bool Backend::serviceAppendPalletCallback(std_stamped_msgs::StringService::Request& req, std_stamped_msgs::StringService::Response& res ) {
     arrangeQueue();
     json data_obj = json::parse(req.request);
-    int height_ = 10  ;
     ROS_INFO_STREAM("call service append success");
     ModelQueue model(data_obj);
     // Chèn vào MongoDB
@@ -482,6 +521,19 @@ json Backend::deleteObjQueue(int queue) {
         json object_ = json::parse(obj_filter);
         object_.erase("_id");
         object_.erase("queue");
+        
+
+        //Update collection_model
+        std::string model_pallet = object_["Model"];
+        std::string count_pallet = object_["Count"];
+        json result_pallet = lookupPalletModel(model_pallet, count_pallet);
+
+        // Kiểm tra và in ra kết quả
+        if(!result_pallet.empty()) {
+            
+            object_.merge_patch(result_pallet);
+        }
+        else ROS_ERROR("Can't find Model");
         
         // Perform the deletion operation
         auto delete_result = collection_queue.delete_one(view);
@@ -538,10 +590,12 @@ void Backend::colorPalletQueue(mongocxx::collection coll,
         json object_ = json::parse(data_);
         
         // Determine color based on type
-        std::string high = object_["pallet_type"].get<std::string>();
+        std::string model_pallet = object_["Model"];
+        std::string count_pallet = object_["Count"];
+        json result_pallet = lookupPalletModel(model_pallet, count_pallet);
+        std::string high = result_pallet["pallet_type"].get<std::string>();
         float hig = stringToFloat(high);
 
-        std::cout << hig << std::endl;
         if (hig == 0) {
             
             color = "#FFEB3B";
@@ -769,6 +823,13 @@ void Backend::setDataQueue(int id) {
         bsoncxx::document::view view = result->view();
         std::string obj_filter = bsoncxx::to_json(view);
         json jsonObject = json::parse(obj_filter);
+        std::string model_pallet = jsonObject["Model"];
+        std::string count_pallet = jsonObject["Count"];
+        json result_pallet = lookupPalletModel(model_pallet, count_pallet);
+        if(!result_pallet.empty()) {
+            
+            jsonObject.merge_patch(result_pallet);
+        }
         rootObject = engine->rootObjects().first();
         // jsonObject.erase("_id");
         for (auto it = jsonObject.begin(); it != jsonObject.end(); ++it) {
@@ -827,7 +888,7 @@ void Backend::setDataQueue(int id) {
         for (QQuickItem *item : allObjects) {
             if (!item->objectName().isEmpty()) {
                 if (item->inherits("QQuickTextField")) {
-                    item->setProperty("text", QString::fromStdString("Empty"));
+                    item->setProperty("text", QString::fromStdString("-----"));
                 }
             }
         }
@@ -988,3 +1049,21 @@ void Backend::requestReset(const QString &str) {
         ROS_ERROR("Failed to call service string_service");
     }
 }
+
+void Backend::getDataComboBox()  {
+    models = {};
+    counts = {};
+    mongocxx::cursor cursor = collection_model.find({});
+    for (auto&& doc : cursor) {
+    
+        // Create a function to process documents
+        std::string data_ = bsoncxx::to_json(doc);
+        json object_ = json::parse(data_);
+        std::string model_pallet = object_["Model"];
+        std::string count_pallet = object_["Count"];
+        models.append(QString::fromStdString(model_pallet));
+        counts.append(QString::fromStdString(count_pallet));
+    }
+}
+
+    

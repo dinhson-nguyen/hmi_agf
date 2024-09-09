@@ -9,39 +9,33 @@
 class ModelQueue {
 public:
     // Constructor để khởi tạo từ nlohmann::json
-    Model(const nlohmann::json& json, int queue_size = 8) {
-        id = json.at("Id").get<std::string>();
-        Time = json.at("PalletInfo").get<std::string>();
+    ModelQueue(const nlohmann::json& json, int queue_size = 15) {
+        Id = json.at("Id").get<std::string>();
+        PalletInfo = json.at("PalletInfo").get<std::string>();
         Model = json.at("Model").get<std::string>();
-        length = json.at("Merchandise").get<std::string>();
-        location_id = json.at("NameModel").get<std::string>();
-        mechandise = json.at("Destination").get<std::string>();
-        height = json.at("height").get<std::string>();
-        model = json.at("model").get<std::string>();
-        name_model = json.at("name_model").get<std::string>();
-        type = json.at("type").get<std::string>();
-        width = json.at("width").get<std::string>();
-        zone_id = json.at("zone_id").get<std::string>();
-        pallet_type = json.at("pallet_type").get<std::string>();
+        Merchandise = json.at("Merchandise").get<std::string>();
+        NameModel = json.at("NameModel").get<std::string>();
+        Destination = json.at("Destination").get<std::string>();
+        Count = json.at("Count").get<std::string>();
+        ZoneId = json.at("ZoneId").get<std::string>();
+        ColumnId = json.at("ColumnId").get<std::string>();
+        LocationId = json.at("LocationId").get<std::string>();
         queue = queue_size;
     }
 
     // Phương thức để chuyển đối tượng thành BSON
     bsoncxx::document::value to_bson() const {
         return bsoncxx::builder::stream::document{} 
-            << "Id" << id
-            << "destination" << destination
-            << "id" << id
-            << "length" << length
-            << "location_id" << location_id
-            << "mechandise" << mechandise
-            << "height" << height
-            << "model" << model
-            << "name_model" << name_model
-            << "type" << type
-            << "width" << width
-            << "zone_id" << zone_id
-            << "pallet_type" << pallet_type
+            << "Id" << Id
+            << "PalletInfo" << PalletInfo
+            << "Model" << Model
+            << "Merchandise" << Merchandise
+            << "NameModel" << NameModel
+            << "Destination" << Destination
+            << "Count" << Count
+            << "ZoneId" << ZoneId
+            << "ColumnId" << ColumnId
+            << "LocationId" << LocationId
             << "queue" << queue
             << bsoncxx::builder::stream::finalize;
     }
@@ -76,18 +70,15 @@ public:
     }
 
 private:
-    std::string column_id;
-    std::string destination;
-    std::string id;
-    std::string length;
-    std::string location_id;
-    std::string mechandise;
-    std::string height;
-    std::string model;
-    std::string name_model;
-    std::string type;
-    std::string width;
-    std::string zone_id;
-    std::string pallet_type;
+    std::string Id;
+    std::string PalletInfo;
+    std::string Model;
+    std::string Merchandise;
+    std::string NameModel;
+    std::string Destination;
+    std::string Count;
+    std::string ZoneId;
+    std::string ColumnId;
+    std::string LocationId;
     int queue;
 };

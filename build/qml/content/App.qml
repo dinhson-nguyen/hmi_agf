@@ -5,11 +5,11 @@ import QtQuick 6.2
 // import hmi_agf
 import QtQuick.Controls 6.2
 import QtQuick.Layouts 6.2
-
+import QtQuick.VirtualKeyboard 6.7
 // import backendqt 1.0
 
 
-Window {
+ApplicationWindow {
     //width: 1920
     //height: 1080
     id: window
@@ -386,6 +386,7 @@ Window {
         initialItem: loader.setSource("qrc:/content/Screen01.qml")
 
     }
+
 
 
     Component {

@@ -9,7 +9,8 @@ Check out https://doc.qt.io/qtcreator/creator-quick-ui-forms.html for details on
 import QtQuick 6.2
 import QtQuick.Controls 6.2
 import QtQuick.Layouts 6.2
-
+import QtQuick.VirtualKeyboard 6.7
+// import QtQuick.VirtualKeyboard.Components 6.7
 // import backendqt 1.0
 Page {
     id: page1
@@ -41,6 +42,7 @@ Page {
     property bool popup_confirm_visible: true
     property int state_edit: 0 // 0 -> buffer | 1 -> queue 
     property int  width_current: 100
+    property string header_layout_text: ""
     property int  item_count: loadConfig()
     
     // Khi cần khôi phục cấu hình
@@ -211,11 +213,13 @@ Page {
     Popup {
         id: pop_up_2
         x: 0
-        y: page1.height * 0.05
+        y: - page1.height * 0.08
         width: page1.width * 0.9
-        height: page1.height * 0.55
+        height: page1.height * 0.65
         opacity: 1
         visible: false
+        closePolicy: Popup.NoAutoClose
+        // closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
         background: Rectangle {
             color: "#ddffffff"
             border.color: "#db000000"
@@ -228,12 +232,12 @@ Page {
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
-            height: parent.height * 0.12
+            height: parent.height * 0.1
             Text {
 
-                text: qsTr("text")
+                text: header_layout_text
                 anchors.fill: parent
-                font.pointSize: 40
+                font.pointSize: 30 * parent.height / 50
             }
         }
         RowLayout {
@@ -241,8 +245,8 @@ Page {
             anchors.top: stackLayout.bottom
             anchors.bottom: parent.bottom
             layoutDirection: Qt.RightToLeft
-            spacing: 50 * parent.width / 640
-            width: parent.width * 0.6
+            spacing: 10
+            width: parent.width * 0.4
             anchors.right: parent.right
             anchors.topMargin: 10
 
@@ -250,7 +254,7 @@ Page {
                 id: view_button
                 // height: parent.height * 0.12
                 text: "Trở về"
-                Layout.preferredWidth: parent.width * 0.15
+                Layout.fillWidth: true
                 Layout.fillHeight: true
 
 
@@ -282,7 +286,7 @@ Page {
                 id: del_button
                 // height: parent.height * 0.12
                 text: "Xóa"
-                Layout.preferredWidth: parent.width * 0.15
+                Layout.fillWidth: true
                 Layout.fillHeight: true
 
                 font.pointSize: 25 * del_button.height / 118
@@ -336,7 +340,7 @@ Page {
                 // height: parent.height * 0.12
                 text: "Lưu"
                 Layout.fillHeight: true
-                Layout.preferredWidth: parent.width * 0.15
+                Layout.fillWidth: true
 
                 font.pointSize: 25 * save_button.height / 118
                 font.family: "ubuntu"
@@ -376,23 +380,20 @@ Page {
                         
                         };
                       backend.saveDataBuffer(JSON.stringify(jsonObject, null, 2))
-                    } else {
+                    } else if (state_edit === 1) {
                         var jsonObject = {
                             "_id": uuid_queue.text,
-                            "id": _id_.text,
-                            "column_id": _column_id_.text,
-                            "zone_id": _zone_id_.text,
-                            "location_id": _location_id_.text,
-                            "height": _height_.text,
-                            "length": _length_.text,
-                            "width": _width_.text,
-                            "destination": _destination_.text,
-                            "mechandise": _mechandise_.text,
-                            "model": _model_.text,
-                            "name_model": _name_model_.text,
+                            "Id": _Id_.text,
+                            "PalletInfo": _PalletInfo_.text,
+                            "Model": _Model_.text,
+                            "Merchandise": _Merchandise_.text,
+                            "NameModel": _NameModel_.text,
+                            "Destination": _Destination_.text,
+                            "Count": _Count_.text,
+                            "ZoneId": _ZoneId_.text,
+                            "ColumnId": _ColumnId_.text,
+                            "LocationId": _LocationId_.text,
 
-                            "type": _type_.text,
-                            "pallet_type": _pallet_type_.text,
                             "queue": _queue_.text,
                         
                         };
@@ -410,7 +411,7 @@ Page {
                 text: "Thêm"
 
                 Layout.fillHeight: true
-                Layout.preferredWidth: parent.width * 0.15
+                Layout.fillWidth: true
 
                 font.pointSize: 25 * add_button.height / 118
                 font.family: "ubuntu"
@@ -445,6 +446,7 @@ Page {
             anchors.right: parent.right
             height: parent.height * 0.73
             anchors.verticalCenter: parent.verticalCenter
+            anchors.topMargin: 10
             currentIndex: state_edit
             Item {
                 id: buffer_item
@@ -821,6 +823,13 @@ Page {
                         font.pixelSize: 25 * _location_id.height / 45
                         Layout.fillWidth: true
                         text: "---"
+                        
+                        onActiveFocusChanged: {
+                            if(activeFocus) {
+                                console.log("jomphere");
+                                Qt.inputMethod.update(Qt.ImQueryInput)
+                            }
+                        }
                         Layout.preferredWidth: parent.width * 0.2
                         Layout.fillHeight: true
                         property bool isBold: false
@@ -856,7 +865,7 @@ Page {
                         font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         font.bold: true
-                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.preferredWidth: parent.width * 0.1
                         Layout.fillHeight: true
                         Layout.row: 0
                         Layout.column: 0
@@ -866,159 +875,173 @@ Page {
                         font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         font.bold: true
-                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.preferredWidth: parent.width * 0.1
                         Layout.fillHeight: true
-                        Layout.row: 0
-                        Layout.column: 2
-                    }
-                    Text {
-                        text: qsTr("ID Cột")
-                        font.family: "Ubuntu"
-                        font.bold: true
-                        Layout.preferredWidth: parent.width * 0.15
-                        Layout.fillHeight: true
-                        font.pointSize: 20 * main_layout.height / 364
-                        Layout.row: 0
-                        Layout.column: 4
-                    }
-                    Text {
-                        text: qsTr("Zone ID")
-                        font.pointSize: 20 * main_layout.height / 364
-                        font.bold: true
-                        Layout.preferredWidth: parent.width * 0.15
-                        Layout.fillHeight: true
-                        font.family: "Ubuntu"
                         Layout.row: 1
                         Layout.column: 0
                     }
                     Text {
-                        text: qsTr("ID vị trí")
-                        font.pointSize: 20 * main_layout.height / 364
+                        text: qsTr("PalletInfo")
                         font.family: "Ubuntu"
-                        Layout.preferredWidth: parent.width * 0.15
-                        Layout.fillHeight: true
                         font.bold: true
-                        Layout.row: 1
-                        Layout.column: 2
-                    }
-
-                    Text {
-                        text: qsTr("Chiều cao")
+                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.fillHeight: true
                         font.pointSize: 20 * main_layout.height / 364
-                        font.family: "Ubuntu"
-                        Layout.preferredWidth: parent.width * 0.15
-                        Layout.fillHeight: true
-                        font.bold: true
-                        Layout.row: 1
-                        Layout.column: 4
-                    }
-
-                    Text {
-                        text: qsTr("Chiều dài")
-                        font.pointSize: 20 * main_layout.height / 364
-                        font.family: "Ubuntu"
-                        Layout.preferredWidth: parent.width * 0.15
-                        Layout.fillHeight: true
-                        font.bold: true
                         Layout.row: 2
                         Layout.column: 0
                     }
+                    
                     Text {
-                        text: qsTr("Chiều rộng")
+                        text: qsTr("Merchandise")
                         font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
-                        Layout.preferredWidth: parent.width * 0.15
-                        Layout.fillHeight: true
-                        font.bold: true
-                        Layout.row: 2
-                        Layout.column: 2
-                    }
-                    Text {
-                        text: qsTr("Điểm đến")
-                        font.pointSize: 20 * main_layout.height / 364
-                        font.family: "Ubuntu"
-                        Layout.preferredWidth: parent.width * 0.15
-                        Layout.fillHeight: true
-                        font.bold: true
-                        Layout.row: 2
-                        Layout.column: 4
-                    }
-                    Text {
-                        text: qsTr("Mechandise")
-                        font.pointSize: 20 * main_layout.height / 364
-                        font.family: "Ubuntu"
-                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.preferredWidth: parent.width * 0.1
                         Layout.fillHeight: true
                         font.bold: true
                         Layout.row: 3
                         Layout.column: 0
+                    }
+
+                    Text {
+                        text: qsTr("NameModel")
+                        font.pointSize: 20 * main_layout.height / 364
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 4
+                        Layout.column: 0
+                    }
+
+                    Text {
+                        text: qsTr("Destination")
+                        font.pointSize: 20 * main_layout.height / 364
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 0
+                        Layout.column: 2
+                    }
+                    
+                    Text {
+                        text: qsTr("ZoneId")
+                        font.pointSize: 20 * main_layout.height / 364
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 1
+                        Layout.column: 2
+                    }
+                    Text {
+                        text: qsTr("ColumnId")
+                        font.pointSize: 20 * main_layout.height / 364
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 2
+                        Layout.column: 2
+                    }
+                    Text {
+                        text: qsTr("LocationId")
+                        font.pointSize: 20 * main_layout.height / 364
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 3
+                        Layout.column: 2
+                    }
+
+                    
+                    Text {
+                        text: qsTr("queue")
+                        font.pointSize: 20 * main_layout.height / 364
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 4
+                        Layout.column: 2
                     }
                     Text {
                         text: qsTr("Model")
                         font.pointSize: 20 * main_layout.height / 364
-                        font.family: "Ubuntu"
-                        Layout.preferredWidth: parent.width * 0.15
-                        Layout.fillHeight: true
                         font.bold: true
-                        Layout.row: 3
-                        Layout.column: 2
+                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.fillHeight: true
+                        font.family: "Ubuntu"
+                        Layout.row: 0
+                        Layout.column: 4
                     }
-
                     Text {
-                        text: qsTr("Tên model")
+                        text: qsTr("Count")
                         font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
-                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 1
+                        Layout.column: 4
+                    }
+                    Text {
+                        text: qsTr("height")
+                        font.pointSize: 20 * main_layout.height / 364
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 2
+                        Layout.column: 4
+                    }
+                    Text {
+                        text: qsTr("width")
+                        font.pointSize: 20 * main_layout.height / 364
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.1
                         Layout.fillHeight: true
                         font.bold: true
                         Layout.row: 3
                         Layout.column: 4
                     }
                     Text {
-                        text: qsTr("Type")
+                        text: qsTr("length")
                         font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
-                        Layout.preferredWidth: parent.width * 0.15
-                        Layout.fillHeight: true
-                        font.bold: true
-                        Layout.row: 4
-                        Layout.column: 0
-                    }
-                    Text {
-                        text: qsTr("Pallet type")
-                        font.pointSize: 20 * main_layout.height / 364
-                        font.family: "Ubuntu"
-                        Layout.preferredWidth: parent.width * 0.15
-                        Layout.fillHeight: true
-                        font.bold: true
-                        Layout.row: 4
-                        Layout.column: 2
-                    }
-                    Text {
-                        text: qsTr("Vị trí")
-                        font.pointSize: 20 * main_layout.height / 364
-                        font.family: "Ubuntu"
-                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.preferredWidth: parent.width * 0.1
                         Layout.fillHeight: true
                         font.bold: true
                         Layout.row: 4
                         Layout.column: 4
                     }
+                    Text {
+                        text: qsTr("pallet_type")
+                        font.pointSize: 20 * main_layout.height / 364
+                        font.family: "Ubuntu"
+                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.fillHeight: true
+                        font.bold: true
+                        Layout.row: 5
+                        Layout.column: 4
+                    }
+                    
 
                     TextField {
                         id: uuid_queue
                         objectName: "uuid_queue"
-                        font.pixelSize: 25 * _id.height / 45
+                        font.pixelSize: 25 * uuid_queue.height / 45
                         Layout.fillWidth: true
                         text: "---"
-
+                        readOnly: true
                         property bool isBold: false
                         property real radius: 5
                         width: 150
                         Layout.preferredWidth: parent.width * 0.2
                         Layout.fillHeight: true
+                        Layout.row: 0
                         Layout.column: 1
-                        Layout.row: 0
                         placeholderTextColor: "#F44336" //AppStyle.placeholderColor
 
                         background: Rectangle {
@@ -1028,9 +1051,55 @@ Page {
                         }
                     }
                     TextField {
-                        id: _id_
-                        objectName: "_id"
-                        font.pixelSize: 25 * _id_.height / 45
+                        id: _Id_
+                        objectName: "_Id"
+                        font.pixelSize: 25 * _Id_.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+                        focus: true
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.row: 1
+                        Layout.column: 1
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+                    TextField {
+                        id: _PalletInfo_
+                        objectName: "_PalletInfo"
+                        font.pixelSize: 25 * _PalletInfo_.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+                        focus: true
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.row: 2
+                        Layout.column: 1
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+                    
+
+                    TextField {
+                        id: _Merchandise_
+                        objectName: "__Merchandise"
+                        font.pixelSize: 25 * _Merchandise_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1039,8 +1108,152 @@ Page {
                         width: 150
                         Layout.preferredWidth: parent.width * 0.2
                         Layout.fillHeight: true
+                        Layout.row: 3
+                        Layout.column: 1
+                        
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    TextField {
+                        id: _NameModel_
+                        objectName: "_NameModel"
+                        font.pixelSize: 25 * _NameModel_.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.row: 4
+                        Layout.column: 1
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    TextField {
+                        id: _Destination_
+                        objectName: "_Destination"
+                        font.pixelSize: 25 * _Destination_.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.row: 0
                         Layout.column: 3
-                        Layout.row: 0
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    
+
+                    TextField {
+                        id: _ZoneId_
+                        objectName: "_ZoneId"
+                        font.pixelSize: 25 * _ZoneId_.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.row: 1
+                        Layout.column: 3
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    TextField {
+                        id: _ColumnId_
+                        objectName: "_ColumnId"
+                        font.pixelSize: 25 * _ColumnId_.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.row: 2
+                        Layout.column: 3
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    TextField {
+                        id: _LocationId_
+                        objectName: "_LocationId"
+                        font.pixelSize: 25 * _LocationId_.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.row: 3
+                        Layout.column: 3
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+
+                    
+
+
+                    TextField {
+                        id: _queue_
+                        objectName: "_queue"
+                        font.pixelSize: 25 * _queue_.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.row: 4
+                        Layout.column: 3
                         placeholderTextColor: "#F44336" //AppStyle.placeholderColor
 
                         background: Rectangle {
@@ -1050,9 +1263,9 @@ Page {
                         }
                     }
                     TextField {
-                        id: _column_id_
-                        objectName: "_column_id"
-                        font.pixelSize: 25 * _column_id_.height / 45
+                        id: _Model_
+                        objectName: "_Model"
+                        font.pixelSize: 25 * _Model_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1061,8 +1274,8 @@ Page {
                         width: 150
                         Layout.preferredWidth: parent.width * 0.2
                         Layout.fillHeight: true
+                        Layout.row: 0
                         Layout.column: 5
-                        Layout.row: 0
                         placeholderTextColor: "#F44336" //AppStyle.placeholderColor
 
                         background: Rectangle {
@@ -1072,9 +1285,9 @@ Page {
                         }
                     }
                     TextField {
-                        id: _zone_id_
-                        objectName: "_zone_id"
-                        font.pixelSize: 25 * _zone_id_.height / 45
+                        id: _Count_
+                        objectName: "_Count"
+                        font.pixelSize: 25 * _Count_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1083,8 +1296,8 @@ Page {
                         width: 150
                         Layout.preferredWidth: parent.width * 0.2
                         Layout.fillHeight: true
-                        Layout.column: 1
                         Layout.row: 1
+                        Layout.column: 5
                         placeholderTextColor: "#F44336" //AppStyle.placeholderColor
 
                         background: Rectangle {
@@ -1093,30 +1306,6 @@ Page {
                             border.color: "#3850ff"
                         }
                     }
-
-                    TextField {
-                        id: _location_id_
-                        objectName: "_location_id"
-                        font.pixelSize: 25 * _location_id_.height / 45
-                        Layout.fillWidth: true
-                        text: "---"
-
-                        property bool isBold: false
-                        property real radius: 5
-                        width: 150
-                        Layout.preferredWidth: parent.width * 0.2
-                        Layout.fillHeight: true
-                        Layout.column: 3
-                        Layout.row: 1
-                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-                        background: Rectangle {
-                            anchors.fill: parent
-                            radius: 5
-                            border.color: "#3850ff"
-                        }
-                    }
-
                     TextField {
                         id: _height_
                         objectName: "_height"
@@ -1129,8 +1318,8 @@ Page {
                         width: 150
                         Layout.preferredWidth: parent.width * 0.2
                         Layout.fillHeight: true
+                        Layout.row: 2
                         Layout.column: 5
-                        Layout.row: 1
                         placeholderTextColor: "#F44336" //AppStyle.placeholderColor
 
                         background: Rectangle {
@@ -1139,7 +1328,28 @@ Page {
                             border.color: "#3850ff"
                         }
                     }
+                    TextField {
+                        id: __width_
+                        objectName: "_width"
+                        font.pixelSize: 25 * __width_.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
 
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.2
+                        Layout.fillHeight: true
+                        Layout.row: 3
+                        Layout.column: 5
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
                     TextField {
                         id: _length_
                         objectName: "_length"
@@ -1152,146 +1362,8 @@ Page {
                         width: 150
                         Layout.preferredWidth: parent.width * 0.2
                         Layout.fillHeight: true
-                        Layout.column: 1
-                        Layout.row: 2
-                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-                        background: Rectangle {
-                            anchors.fill: parent
-                            radius: 5
-                            border.color: "#3850ff"
-                        }
-                    }
-
-                    TextField {
-                        id: _width_
-                        objectName: "_width"
-                        font.pixelSize: 25 * _width_.height / 45
-                        Layout.fillWidth: true
-                        text: "---"
-
-                        property bool isBold: false
-                        property real radius: 5
-                        width: 150
-                        Layout.preferredWidth: parent.width * 0.2
-                        Layout.fillHeight: true
-                        Layout.column: 3
-                        Layout.row: 2
-                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-                        background: Rectangle {
-                            anchors.fill: parent
-                            radius: 5
-                            border.color: "#3850ff"
-                        }
-                    }
-
-                    TextField {
-                        id: _destination_
-                        objectName: "_destination"
-                        font.pixelSize: 25 * _destination_.height / 45
-                        Layout.fillWidth: true
-                        text: "---"
-
-                        property bool isBold: false
-                        property real radius: 5
-                        width: 150
-                        Layout.preferredWidth: parent.width * 0.2
-                        Layout.fillHeight: true
-                        Layout.column: 5
-                        Layout.row: 2
-                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-                        background: Rectangle {
-                            anchors.fill: parent
-                            radius: 5
-                            border.color: "#3850ff"
-                        }
-                    }
-
-                    TextField {
-                        id: _mechandise_
-                        objectName: "_mechandise"
-                        font.pixelSize: 25 * _mechandise_.height / 45
-                        Layout.fillWidth: true
-                        text: "---"
-
-                        property bool isBold: false
-                        property real radius: 5
-                        width: 150
-                        Layout.preferredWidth: parent.width * 0.2
-                        Layout.fillHeight: true
-                        Layout.column: 1
-                        Layout.row: 3
-                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-                        background: Rectangle {
-                            anchors.fill: parent
-                            radius: 5
-                            border.color: "#3850ff"
-                        }
-                    }
-
-                    TextField {
-                        id: _model_
-                        objectName: "_model"
-                        font.pixelSize: 25 * _model_.height / 45
-                        Layout.fillWidth: true
-                        text: "---"
-
-                        property bool isBold: false
-                        property real radius: 5
-                        width: 150
-                        Layout.preferredWidth: parent.width * 0.2
-                        Layout.fillHeight: true
-                        Layout.column: 3
-                        Layout.row: 3
-                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-                        background: Rectangle {
-                            anchors.fill: parent
-                            radius: 5
-                            border.color: "#3850ff"
-                        }
-                    }
-
-                    TextField {
-                        id: _name_model_
-                        objectName: "_name_model"
-                        font.pixelSize: 25 * _name_model_.height / 45
-                        Layout.fillWidth: true
-                        text: "---"
-
-                        property bool isBold: false
-                        property real radius: 5
-                        width: 150
-                        Layout.preferredWidth: parent.width * 0.2
-                        Layout.fillHeight: true
-                        Layout.column: 5
-                        Layout.row: 3
-                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-                        background: Rectangle {
-                            anchors.fill: parent
-                            radius: 5
-                            border.color: "#3850ff"
-                        }
-                    }
-
-                    TextField {
-                        id: _type_
-                        objectName: "_type"
-                        font.pixelSize: 25 * _type_.height / 45
-                        Layout.fillWidth: true
-                        text: "---"
-
-                        property bool isBold: false
-                        property real radius: 5
-                        width: 150
-                        Layout.preferredWidth: parent.width * 0.2
-                        Layout.fillHeight: true
-                        Layout.column: 1
                         Layout.row: 4
+                        Layout.column: 5
                         placeholderTextColor: "#F44336" //AppStyle.placeholderColor
 
                         background: Rectangle {
@@ -1312,32 +1384,8 @@ Page {
                         width: 150
                         Layout.preferredWidth: parent.width * 0.2
                         Layout.fillHeight: true
-                        Layout.column: 3
-                        Layout.row: 4
-                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
-
-                        background: Rectangle {
-                            anchors.fill: parent
-                            radius: 5
-                            border.color: "#3850ff"
-                        }
-                    }
-
-
-                    TextField {
-                        id: _queue_
-                        objectName: "_queue"
-                        font.pixelSize: 25 * _queue_.height / 45
-                        Layout.fillWidth: true
-                        text: "---"
-
-                        property bool isBold: false
-                        property real radius: 5
-                        width: 150
-                        Layout.preferredWidth: parent.width * 0.2
-                        Layout.fillHeight: true
+                        Layout.row: 5
                         Layout.column: 5
-                        Layout.row: 4
                         placeholderTextColor: "#F44336" //AppStyle.placeholderColor
 
                         background: Rectangle {
@@ -1349,134 +1397,148 @@ Page {
                 }
             }
 
+            Item {
+                id: model_pallet
+                GridLayout {
+                    anchors.top: parent.top
+                    rowSpacing: 15
+                    columnSpacing: 20
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    height: parent.height
+                    anchors.verticalCenter: parent.verticalCenter
+                    rows: 5
+                    columns: 6
+
+                    Text {
+                        text: qsTr("Unique ID")
+                        font.pointSize: 20 * main_layout.height / 364
+                        font.family: "Ubuntu"
+                        font.bold: true
+                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.fillHeight: true
+                        Layout.row: 0
+                        Layout.column: 0
+                    }
+                    Text {
+                        text: qsTr("Model")
+                        font.pointSize: 20 * main_layout.height / 364
+                        font.family: "Ubuntu"
+                        font.bold: true
+                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.fillHeight: true
+                        Layout.row: 1
+                        Layout.column: 0
+                    }
+                    
+                    Text {
+                        text: qsTr("Count")
+                        font.pointSize: 20 * main_layout.height / 364
+                        font.family: "Ubuntu"
+                        font.bold: true
+                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.fillHeight: true
+                        Layout.row: 2
+                        Layout.column: 0
+                    }
+                    Text {
+                        text: qsTr("height")
+                        font.pointSize: 20 * main_layout.height / 364
+                        font.family: "Ubuntu"
+                        font.bold: true
+                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.fillHeight: true
+                        Layout.row: 0
+                        Layout.column: 2
+                    }
+                    Text {
+                        text: qsTr("width")
+                        font.pointSize: 20 * main_layout.height / 364
+                        font.family: "Ubuntu"
+                        font.bold: true
+                        
+                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.fillHeight: true
+                        Layout.row: 1
+                        Layout.column: 2
+                    }
+                    Text {
+                        text: qsTr("length")
+                        font.pointSize: 20 * main_layout.height / 364
+                        font.family: "Ubuntu"
+                        font.bold: true
+                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.fillHeight: true
+                        Layout.row: 2
+                        Layout.column: 2
+                    }
+                    ComboBox {
+                        id: list_model
+                        editable: true
+                        Layout.preferredWidth: parent.width * 0.3
+                        Layout.fillHeight: true
+                        Layout.row: 1
+                        Layout.column: 1
+                        currentIndex: 0
+                        property var fullModel: backend.getListModel()
+
+                        model: ListModel {
+                            id: list_model_pallet
+                        }
+
+                        delegate: ItemDelegate {
+                            text: model.text
+                        }
+
+                        Component.onCompleted: {
+                            // Khởi tạo danh sách ban đầu
+                            for (var i = 0; i < fullModel.length; i++) {
+                                list_model_pallet.append({
+                                                            "text": fullModel[i]
+                                                        })
+                            }
+                        }
+                        onCurrentTextChanged: {
+                            console.log("Selected fruit: " + editText)
+                        }
+                    }
+                    ComboBox {
+                        id: list_count
+                        editable: true
+                        Layout.preferredWidth: parent.width * 0.3
+                        Layout.fillHeight: true
+                        Layout.row: 2
+                        Layout.column: 1
+                        currentIndex: 1
+                        property var fullModel: backend.getListCount()
+
+                        model: ListModel {
+                            id: list_count_pallet
+                        }
+
+                        delegate: ItemDelegate {
+                            text: model.text
+                        }
+
+                        Component.onCompleted: {
+                            // Khởi tạo danh sách ban đầu
+                            for (var i = 0; i < fullModel.length; i++) {
+                                list_count_pallet.append({
+                                                            "text": fullModel[i]
+                                                        })
+                            }
+                        }
+                        onCurrentTextChanged: {
+                            console.log("Selected fruit: " + editText)
+                        }
+                    }
+                }
+            }
+
         }
 
     }
 
-
-    // Page {
-    //     id: left_down_panel
-    //     width: parent.width * 0.22
-    //     height: parent.height * 0.12
-    //     visible: false
-    //     anchors.right: parent.right
-    //     // anchors.top: parent.top
-    //     anchors.bottom: parent.bottom
-    //     anchors.rightMargin: 0
-    //     anchors.topMargin: 0
-    //     anchors.bottomMargin: 0
-    //     Button {
-    //         id: view_button_1
-    //         // height: parent.height * 0.12
-    //         text: "Xem"
-    //         width: parent.width / 3
-    //         anchors.right: parent.right
-    //         anchors.top: parent.top
-    //         anchors.bottom: parent.bottom
-    //         anchors.rightMargin: 10
-    //         anchors.bottomMargin: 0
-    //         font.pointSize: 25 * view_button_1.height / 118
-    //         font.family: "ubuntu"
-    //         font.bold: true
-    //         display: AbstractButton.TextOnly
-    //         background: Rectangle {
-    //             color: "#FFFFFF"
-    //             radius: 10
-    //             border.color: "#607D8B"
-    //             border.width: 5
-    //         }
-    //         onClicked: {
-
-    //             state_panel_edit = false
-    //             state_panel_queue = false
-    //         }
-    //         //     animation_goout.start();
-    //         //     animation_forward.start();
-    //         onPressedChanged: {
-    //             if (pressed) {
-    //                 background.color = "#607D8B"
-    //             } else {
-    //                 background.color = "#FFFFFF"
-    //             }
-    //         }
-    //     }
-    //     Button {
-    //         id: del_button_1
-    //         // height: parent.height * 0.12
-    //         text: "Xóa"
-    //         width: parent.width / 3
-    //         anchors.right: view_button.left
-    //         anchors.top: parent.top
-    //         anchors.bottom: parent.bottom
-    //         anchors.rightMargin: 10
-    //         anchors.bottomMargin: 0
-    //         font.pointSize: 25 * del_button_1.height / 118
-    //         font.family: "ubuntu"
-    //         font.bold: true
-    //         display: AbstractButton.TextOnly
-    //         background: Rectangle {
-    //             color: "#FFFFFF"
-    //             radius: 10
-    //             border.color: "#F44336"
-    //             border.width: 5
-    //         }
-    //         onPressedChanged: {
-    //             if (pressed) {
-    //                 background.color = "#F44336";
-
-    //             } else {
-    //                 background.color = "#FFFFFF";
-
-    //             }
-    //         }
-    //         onClicked: {
-
-    //             state_panel_edit = false
-    //             state_panel_queue = false
-    //         }
-    //         //     animation_goout.start();
-    //         //     animation_forward.start();
-
-    //     }
-    //     Button {
-    //         id: save_button_1
-    //         // height: parent.height * 0.12
-    //         text: "Lưu"
-    //         width: parent.width / 3
-    //         anchors.right: del_button.left
-    //         anchors.top: parent.top
-    //         anchors.bottom: parent.bottom
-    //         anchors.rightMargin: 10
-    //         anchors.bottomMargin: 0
-    //         font.pointSize: 25 * save_button_1.height / 118
-    //         font.family: "ubuntu"
-    //         font.bold: true
-    //         display: AbstractButton.TextOnly
-    //         background: Rectangle {
-    //             color: "#FFFFFF"
-    //             radius: 10
-    //             border.color: "#4CAF50"
-    //             border.width: 5
-    //         }
-    //         onPressedChanged: {
-    //             if (pressed) {
-    //                 background.color = "#4CAF50";
-
-    //             } else {
-    //                 background.color = "#FFFFFF";
-
-    //             }
-    //         }
-    //         onClicked: {
-
-    //             state_panel_edit = false
-    //             state_panel_queue = false
-    //         }
-    //         //     animation_goout.start();
-    //         //     animation_forward.start();
-
-    //     }
-    // }
     Page {
         id: down_panel
         anchors.left: parent.left
@@ -2338,9 +2400,8 @@ Page {
                 }
             }
             // onClicked: {
-            //     Qt.callLater(function() {
-            //     Qt.openUrlExternally("onboard")
-            // })
+            //     state_edit = 2
+            //     pop_up_2.open()
             // }
 
         }
@@ -2462,7 +2523,26 @@ Page {
             }
         }
     }
+ 
+    // Thêm bàn phím ảo
+    Keyboard {
+        id: inputPanel
+        height: parent.height * 0.25
+        anchors.bottom: parent.bottom
+        anchors.leftMargin: parent.width * 0.15
+        anchors.rightMargin: parent.width * 0.15
+        visible: Qt.inputMethod.visible
+        anchors.left: parent.left
+        anchors.right: parent.right
+        parent: Overlay.overlay
 
+        
+    }
+
+    // Hiển thị bàn phím khi TextField nhận focus
+    Component.onCompleted: {
+        inputPanel.active = inputField.hasActiveFocus
+    }
     Connections {
         target: backend
         onBatteryPercentageChanged: {

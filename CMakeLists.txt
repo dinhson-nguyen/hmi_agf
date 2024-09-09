@@ -11,6 +11,7 @@ set(CMAKE_AUTORCC ON)
 
 include_directories(/home/dinhson/yaml-cpp/include/yaml-cpp)
 include_directories(/home/dinhson/Qt/6.7.2/gcc_64/qml)
+include_directories(/home/dinhson/Qt/6.7.2/gcc_64/qml/QtQuick)
 link_directories(/home/dinhson/yaml-cpp/build)
 link_directories(/home/dinhson/Qt/6.7.2/gcc_64/lib)
 link_directories(/home/dinhson/Qt/6.7.2/gcc_64/qml)
@@ -29,8 +30,8 @@ find_package(bsoncxx CONFIG REQUIRED)
 find_package(mongocxx CONFIG REQUIRED)
 find_package(yaml-cpp REQUIRED)
 message(STATUS "yaml-cpp found at: ${yaml-cpp_DIR}")
-find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Qml Quick Linguist QuickControls2)
-# find_package(Qt6 REQUIRED COMPONENTS VirtualKeyboard)
+find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Qml Quick Linguist  )
+find_package(Qt6 REQUIRED COMPONENTS VirtualKeyboard)
 # qt6_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} simplequick.ts)
 # configure_file(${QM_FILES} ${CMAKE_SOURCE_DIR} COPYONLY)
 
@@ -82,7 +83,7 @@ target_link_libraries(hmi_agf PRIVATE
     Qt6::Qml
     Qt6::Quick
     Qt6::Linguist
-    Qt6::QuickControls2
+    Qt6::VirtualKeyboard
     yaml-cpp
     mongocxx
     bsoncxx
@@ -97,7 +98,7 @@ qt6_add_resources(hmi_agf "configuration"
 )
 
 set(QT_QML_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/qml)
-set(QML_IMPORT_PATH ${QT_QML_OUTPUT_DIRECTORY}
+set(QML_IMPORT_PATH "/home/dinhson/Qt/6.7.2/gcc_64/qml"
     CACHE STRING "Import paths for Qt Creator's code model"
     FORCE
 )

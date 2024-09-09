@@ -10,17 +10,23 @@ class ModelPallet {
 public:
     // Constructor để khởi tạo từ nlohmann::json
     ModelPallet(const nlohmann::json& json) {
+        Model = json.at("Model").get<std::string>();
+        Count = json.at("Count").get<std::string>();
         length = json.at("length").get<std::string>();
         height = json.at("height").get<std::string>();
         width = json.at("width").get<std::string>();
+        pallet_type = json.at("pallet_type").get<std::string>();
     }
 
     // Phương thức để chuyển đối tượng thành BSON
     bsoncxx::document::value to_bson() const {
         return bsoncxx::builder::stream::document{} 
+            << "Model" << Model
+            << "Count" << Count
             << "length" << length
             << "height" << height
             << "width" << width
+            << "pallet_type" << pallet_type
             << bsoncxx::builder::stream::finalize;
     }
 
@@ -54,7 +60,10 @@ public:
     }
 
 private:
+    std::string Model;
+    std::string Count;
     std::string length;
     std::string height;
     std::string width;
+    std::string pallet_type;
 };

@@ -12,6 +12,7 @@
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QSize \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QSizeF \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QString \
+  /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QStringList \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QTimer \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QTranslator \
   /home/dinhson/Qt/6.7.2/gcc_64/include/QtCore/QVariant \
@@ -236,8 +237,9 @@
   /home/dinhson/amr_ws/src/hmi_agf/src/include/backend.h \
   /home/dinhson/amr_ws/src/hmi_agf/src/include/config_manager.h \
   /home/dinhson/amr_ws/src/hmi_agf/src/include/json.hpp \
-  /home/dinhson/amr_ws/src/hmi_agf/src/include/model.h \
   /home/dinhson/amr_ws/src/hmi_agf/src/include/model_buffer.h \
+  /home/dinhson/amr_ws/src/hmi_agf/src/include/model_pallet.h \
+  /home/dinhson/amr_ws/src/hmi_agf/src/include/model_queue.h \
   /opt/ros/noetic/include/geometry_msgs/Twist.h \
   /opt/ros/noetic/include/geometry_msgs/Vector3.h \
   /opt/ros/noetic/include/ros/advertise_options.h \

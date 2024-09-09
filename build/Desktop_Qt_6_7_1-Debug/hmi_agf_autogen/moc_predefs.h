@@ -69,6 +69,7 @@
 #define __unix 1
 #define __UINT32_MAX__ 0xffffffffU
 #define __GXX_EXPERIMENTAL_CXX0X__ 1
+#define QT_VIRTUALKEYBOARD_LIB 1
 #define __LDBL_MAX_EXP__ 16384
 #define __FLT128_MIN_EXP__ (-16381)
 #define __WINT_MIN__ 0U
@@ -287,7 +288,6 @@
 #define __UINT16_TYPE__ short unsigned int
 #define __WCHAR_TYPE__ int
 #define __SIZEOF_FLOAT__ 4
-#define QT_QUICKCONTROLS2_LIB 1
 #define __pic__ 2
 #define __UINTPTR_MAX__ 0xffffffffffffffffUL
 #define __INT_FAST64_WIDTH__ 64

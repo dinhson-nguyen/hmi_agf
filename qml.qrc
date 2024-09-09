@@ -6,6 +6,7 @@
         <file>content/Screen03.qml</file>
         <file>content/component_test.ui.qml</file>
         <file>content/component_test_2.ui.qml</file>
+        <file>content/KeyboardStyle.qml</file>
         <file>main.qml</file>
         <file>cfg/config.json</file>
         <file>content/App.qml</file>
