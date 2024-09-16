@@ -80,11 +80,22 @@ constexpr auto qt_meta_stringdata_CLASSBackendENDCLASS = QtMocHelpers::stringDat
     "saveDataBuffer",
     "jsonstring",
     "saveDataQueue",
+    "saveDataModel",
     "deleteDataBuffer",
     "deleteDataQueue",
+    "deleteDataModel",
+    "addDataBuffer",
+    "addDataQueue",
+    "addDataModel",
     "getStateSystem",
+    "getDataComboBox",
+    "getDataComboBox2",
+    "updateComboBox",
+    "model",
+    "count",
     "getListModel",
     "getListCount",
+    "set_color",
     "batteryPercentage",
     "batteryVoltage",
     "batteryCurrent",
@@ -108,57 +119,66 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSBackendENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-      41,   14, // methods
-      11,  331, // properties
+      50,   14, // methods
+      11,  408, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
       15,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,  260,    2, 0x06,   12 /* Public */,
-       3,    0,  261,    2, 0x06,   13 /* Public */,
-       4,    0,  262,    2, 0x06,   14 /* Public */,
-       5,    0,  263,    2, 0x06,   15 /* Public */,
-       6,    0,  264,    2, 0x06,   16 /* Public */,
-       7,    0,  265,    2, 0x06,   17 /* Public */,
-       8,    0,  266,    2, 0x06,   18 /* Public */,
-       9,    0,  267,    2, 0x06,   19 /* Public */,
-      10,    0,  268,    2, 0x06,   20 /* Public */,
-      11,    0,  269,    2, 0x06,   21 /* Public */,
-      12,    0,  270,    2, 0x06,   22 /* Public */,
-      13,    0,  271,    2, 0x06,   23 /* Public */,
-      14,    0,  272,    2, 0x06,   24 /* Public */,
-      15,    0,  273,    2, 0x06,   25 /* Public */,
-      16,    0,  274,    2, 0x06,   26 /* Public */,
+       1,    0,  314,    2, 0x06,   12 /* Public */,
+       3,    0,  315,    2, 0x06,   13 /* Public */,
+       4,    0,  316,    2, 0x06,   14 /* Public */,
+       5,    0,  317,    2, 0x06,   15 /* Public */,
+       6,    0,  318,    2, 0x06,   16 /* Public */,
+       7,    0,  319,    2, 0x06,   17 /* Public */,
+       8,    0,  320,    2, 0x06,   18 /* Public */,
+       9,    0,  321,    2, 0x06,   19 /* Public */,
+      10,    0,  322,    2, 0x06,   20 /* Public */,
+      11,    0,  323,    2, 0x06,   21 /* Public */,
+      12,    0,  324,    2, 0x06,   22 /* Public */,
+      13,    0,  325,    2, 0x06,   23 /* Public */,
+      14,    0,  326,    2, 0x06,   24 /* Public */,
+      15,    0,  327,    2, 0x06,   25 /* Public */,
+      16,    0,  328,    2, 0x06,   26 /* Public */,
 
  // methods: name, argc, parameters, tag, flags, initial metatype offsets
-      17,    1,  275,    2, 0x02,   27 /* Public */,
-      19,    1,  278,    2, 0x02,   29 /* Public */,
-      20,    0,  281,    2, 0x02,   31 /* Public */,
-      21,    1,  282,    2, 0x02,   32 /* Public */,
-      23,    1,  285,    2, 0x02,   34 /* Public */,
-      24,    1,  288,    2, 0x02,   36 /* Public */,
-      26,    0,  291,    2, 0x02,   38 /* Public */,
-      27,    1,  292,    2, 0x02,   39 /* Public */,
-      29,    1,  295,    2, 0x02,   41 /* Public */,
-      31,    1,  298,    2, 0x02,   43 /* Public */,
-      32,    1,  301,    2, 0x02,   45 /* Public */,
-      33,    0,  304,    2, 0x02,   47 /* Public */,
-      34,    0,  305,    2, 0x02,   48 /* Public */,
-      35,    0,  306,    2, 0x02,   49 /* Public */,
-      36,    0,  307,    2, 0x02,   50 /* Public */,
-      37,    0,  308,    2, 0x02,   51 /* Public */,
-      38,    0,  309,    2, 0x02,   52 /* Public */,
-      39,    1,  310,    2, 0x02,   53 /* Public */,
-      41,    1,  313,    2, 0x02,   55 /* Public */,
-      42,    1,  316,    2, 0x02,   57 /* Public */,
-      44,    1,  319,    2, 0x02,   59 /* Public */,
-      45,    1,  322,    2, 0x02,   61 /* Public */,
-      46,    1,  325,    2, 0x02,   63 /* Public */,
-      47,    0,  328,    2, 0x02,   65 /* Public */,
-      48,    0,  329,    2, 0x02,   66 /* Public */,
-      49,    0,  330,    2, 0x02,   67 /* Public */,
+      17,    1,  329,    2, 0x02,   27 /* Public */,
+      19,    1,  332,    2, 0x02,   29 /* Public */,
+      20,    0,  335,    2, 0x02,   31 /* Public */,
+      21,    1,  336,    2, 0x02,   32 /* Public */,
+      23,    1,  339,    2, 0x02,   34 /* Public */,
+      24,    1,  342,    2, 0x02,   36 /* Public */,
+      26,    0,  345,    2, 0x02,   38 /* Public */,
+      27,    1,  346,    2, 0x02,   39 /* Public */,
+      29,    1,  349,    2, 0x02,   41 /* Public */,
+      31,    1,  352,    2, 0x02,   43 /* Public */,
+      32,    1,  355,    2, 0x02,   45 /* Public */,
+      33,    0,  358,    2, 0x02,   47 /* Public */,
+      34,    0,  359,    2, 0x02,   48 /* Public */,
+      35,    0,  360,    2, 0x02,   49 /* Public */,
+      36,    0,  361,    2, 0x02,   50 /* Public */,
+      37,    0,  362,    2, 0x02,   51 /* Public */,
+      38,    0,  363,    2, 0x02,   52 /* Public */,
+      39,    1,  364,    2, 0x02,   53 /* Public */,
+      41,    1,  367,    2, 0x02,   55 /* Public */,
+      42,    1,  370,    2, 0x02,   57 /* Public */,
+      44,    1,  373,    2, 0x02,   59 /* Public */,
+      45,    1,  376,    2, 0x02,   61 /* Public */,
+      46,    1,  379,    2, 0x02,   63 /* Public */,
+      47,    1,  382,    2, 0x02,   65 /* Public */,
+      48,    1,  385,    2, 0x02,   67 /* Public */,
+      49,    1,  388,    2, 0x02,   69 /* Public */,
+      50,    1,  391,    2, 0x02,   71 /* Public */,
+      51,    1,  394,    2, 0x02,   73 /* Public */,
+      52,    0,  397,    2, 0x02,   75 /* Public */,
+      53,    0,  398,    2, 0x02,   76 /* Public */,
+      54,    0,  399,    2, 0x02,   77 /* Public */,
+      55,    2,  400,    2, 0x02,   78 /* Public */,
+      58,    0,  405,    2, 0x02,   81 /* Public */,
+      59,    0,  406,    2, 0x02,   82 /* Public */,
+      60,    0,  407,    2, 0x02,   83 /* Public */,
 
  // signals: parameters
     QMetaType::Void,
@@ -201,22 +221,31 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSBackendENDCLASS[] = {
     QMetaType::Void, QMetaType::QString,   43,
     QMetaType::Void, QMetaType::QString,   43,
     QMetaType::Void, QMetaType::QString,   43,
+    QMetaType::Void, QMetaType::QString,   43,
+    QMetaType::Void, QMetaType::QString,   43,
+    QMetaType::Void, QMetaType::QString,   43,
+    QMetaType::Void, QMetaType::QString,   43,
+    QMetaType::Void, QMetaType::QString,   43,
     QMetaType::QString,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString,   56,   57,
     QMetaType::QStringList,
     QMetaType::QStringList,
+    QMetaType::Void,
 
  // properties: name, type, flags
-      50, QMetaType::Double, 0x00015001, uint(0), 0,
-      51, QMetaType::Double, 0x00015001, uint(1), 0,
-      52, QMetaType::Double, 0x00015001, uint(2), 0,
-      53, QMetaType::QString, 0x00015001, uint(4), 0,
-      54, QMetaType::QString, 0x00015001, uint(5), 0,
-      55, QMetaType::QString, 0x00015001, uint(6), 0,
-      56, QMetaType::QString, 0x00015001, uint(9), 0,
-      57, QMetaType::QString, 0x00015001, uint(3), 0,
-      58, QMetaType::Double, 0x00015001, uint(12), 0,
-      59, QMetaType::Double, 0x00015001, uint(12), 0,
-      60, QMetaType::QString, 0x00015001, uint(14), 0,
+      61, QMetaType::Double, 0x00015001, uint(0), 0,
+      62, QMetaType::Double, 0x00015001, uint(1), 0,
+      63, QMetaType::Double, 0x00015001, uint(2), 0,
+      64, QMetaType::QString, 0x00015001, uint(4), 0,
+      65, QMetaType::QString, 0x00015001, uint(5), 0,
+      66, QMetaType::QString, 0x00015001, uint(6), 0,
+      67, QMetaType::QString, 0x00015001, uint(9), 0,
+      68, QMetaType::QString, 0x00015001, uint(3), 0,
+      69, QMetaType::Double, 0x00015001, uint(12), 0,
+      70, QMetaType::Double, 0x00015001, uint(12), 0,
+      71, QMetaType::QString, 0x00015001, uint(14), 0,
 
        0        // eod
 };
@@ -337,18 +366,43 @@ Q_CONSTINIT const QMetaObject Backend::staticMetaObject = { {
         // method 'saveDataQueue'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        // method 'saveDataModel'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         // method 'deleteDataBuffer'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         // method 'deleteDataQueue'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        // method 'deleteDataModel'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        // method 'addDataBuffer'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        // method 'addDataQueue'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        // method 'addDataModel'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         // method 'getStateSystem'
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        // method 'getDataComboBox'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'getDataComboBox2'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'updateComboBox'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         // method 'getListModel'
         QtPrivate::TypeAndForceComplete<QStringList, std::false_type>,
         // method 'getListCount'
-        QtPrivate::TypeAndForceComplete<QStringList, std::false_type>
+        QtPrivate::TypeAndForceComplete<QStringList, std::false_type>,
+        // method 'set_color'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
 } };
@@ -402,14 +456,23 @@ void Backend::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 33: _t->setDataQueue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
         case 34: _t->saveDataBuffer((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 35: _t->saveDataQueue((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 36: _t->deleteDataBuffer((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 37: _t->deleteDataQueue((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 38: { QString _r = _t->getStateSystem();
+        case 36: _t->saveDataModel((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 37: _t->deleteDataBuffer((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 38: _t->deleteDataQueue((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 39: _t->deleteDataModel((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 40: _t->addDataBuffer((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 41: _t->addDataQueue((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 42: _t->addDataModel((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 43: { QString _r = _t->getStateSystem();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
-        case 39: { QStringList _r = _t->getListModel();
+        case 44: _t->getDataComboBox(); break;
+        case 45: _t->getDataComboBox2(); break;
+        case 46: _t->updateComboBox((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
+        case 47: { QStringList _r = _t->getListModel();
             if (_a[0]) *reinterpret_cast< QStringList*>(_a[0]) = std::move(_r); }  break;
-        case 40: { QStringList _r = _t->getListCount();
+        case 48: { QStringList _r = _t->getListCount();
             if (_a[0]) *reinterpret_cast< QStringList*>(_a[0]) = std::move(_r); }  break;
+        case 49: _t->set_color(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -562,13 +625,13 @@ int Backend::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 41)
+        if (_id < 50)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 41;
+        _id -= 50;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 41)
+        if (_id < 50)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 41;
+        _id -= 50;
     }else if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
             || _c == QMetaObject::ResetProperty || _c == QMetaObject::BindableProperty
             || _c == QMetaObject::RegisterPropertyMetaType) {

@@ -195,6 +195,17 @@
                                 "type": "QString"
                             }
                         ],
+                        "name": "saveDataModel",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "jsonstring",
+                                "type": "QString"
+                            }
+                        ],
                         "name": "deleteDataBuffer",
                         "returnType": "void"
                     },
@@ -211,8 +222,77 @@
                     },
                     {
                         "access": "public",
+                        "arguments": [
+                            {
+                                "name": "jsonstring",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "deleteDataModel",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "jsonstring",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "addDataBuffer",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "jsonstring",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "addDataQueue",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "jsonstring",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "addDataModel",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
                         "name": "getStateSystem",
                         "returnType": "QString"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getDataComboBox",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "getDataComboBox2",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "model",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "count",
+                                "type": "QString"
+                            }
+                        ],
+                        "name": "updateComboBox",
+                        "returnType": "void"
                     },
                     {
                         "access": "public",
@@ -223,6 +303,11 @@
                         "access": "public",
                         "name": "getListCount",
                         "returnType": "QStringList"
+                    },
+                    {
+                        "access": "public",
+                        "name": "set_color",
+                        "returnType": "void"
                     }
                 ],
                 "object": true,

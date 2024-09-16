@@ -80,7 +80,7 @@ Backend::Backend(QObject* parent)
     catch (const YAML::ParserException& e) {
         ROS_WARN("Cannot get AGV name");
     }
-    getDataComboBox();
+    // getDataComboBox();
     
     
 
@@ -427,10 +427,10 @@ json Backend::lookupPalletModel(std::string model, std::string count) {
     bsoncxx::builder::stream::document filter_model_pallet;
     filter_model_pallet << "$and" << bsoncxx::builder::stream::open_array
                 << bsoncxx::builder::stream::open_document
-                << "model" << model        // Điều kiện 1
+                << "Model" << model        // Điều kiện 1
                 << bsoncxx::builder::stream::close_document
                 << bsoncxx::builder::stream::open_document
-                << "count" << count        // Điều kiện 2
+                << "Count" << count        // Điều kiện 2
                 << bsoncxx::builder::stream::close_document
                 << bsoncxx::builder::stream::close_array;
 
@@ -441,6 +441,7 @@ json Backend::lookupPalletModel(std::string model, std::string count) {
             std::string obj_pallet = bsoncxx::to_json(view_pallet);
             object_pallet = json::parse(obj_pallet);
             // object_ = object_ + object_pallet;
+            std::cout << object_pallet << std::endl;
             return object_pallet;
         }
         else {
@@ -481,7 +482,7 @@ bool Backend::serviceLookupPalletCallback(std_stamped_msgs::StringService::Reque
         json result_pallet = lookupPalletModel(model_pallet, count_pallet) ;
         // Kiểm tra và in ra kết quả
         if(!result_pallet.empty()) {
-            
+            result_pallet.erase("_id");
             object_.merge_patch(result_pallet);
         }
         else ROS_ERROR("Can't find Model");
@@ -498,6 +499,18 @@ bool Backend::serviceAppendPalletCallback(std_stamped_msgs::StringService::Reque
     json data_obj = json::parse(req.request);
     ROS_INFO_STREAM("call service append success");
     ModelQueue model(data_obj);
+    std::string model_pallet = data_obj["Model"];
+    std::string count_pallet = data_obj["Count"];
+    
+    
+    json result_pallet = lookupPalletModel(model_pallet, count_pallet) ;
+    // Kiểm tra và in ra kết quả
+    if(result_pallet.empty()) {
+        res.respond = " CAN NOT FIND MODEL OR COUNT";
+        ROS_ERROR(" CAN NOT FIND MODEL OR COUNT");
+        return false;
+    }
+
     // Chèn vào MongoDB
     int result = model.insert(collection_queue);
 
@@ -592,9 +605,17 @@ void Backend::colorPalletQueue(mongocxx::collection coll,
         // Determine color based on type
         std::string model_pallet = object_["Model"];
         std::string count_pallet = object_["Count"];
+        std::cout << count_pallet << std::endl;
         json result_pallet = lookupPalletModel(model_pallet, count_pallet);
-        std::string high = result_pallet["pallet_type"].get<std::string>();
-        float hig = stringToFloat(high);
+        std::cout << result_pallet << std::endl;
+        std::cout << "11111111111" << std::endl;
+        float hig = 0;
+        if (!result_pallet.empty()) {
+            std::string high = result_pallet["pallet_type"].get<std::string>();
+            hig = stringToFloat(high);
+        } 
+        std::cout << "1111111232323231111" << std::endl;
+        std::cerr << result_pallet << std::endl;
 
         if (hig == 0) {
             
@@ -1018,52 +1039,185 @@ void Backend::requestStop(const QString &str) {
     std_stamped_msgs::StringService srv;
     req.request = "Hello, this is a request stop_trigger_manager ";
 
-    
-    if (stop_error_agf.call(req,res))
-    {
-        ROS_INFO("Response: %s", res.respond.c_str());
-    }
-    else
-    {
-        ROS_ERROR("Failed to call service string_service");
+    // Đợi tối đa 2 giây để service sẵn sàng
+    if (ros::service::waitForService("/stop_trigger_manager", ros::Duration(2))) {
+        if (stop_error_agf.call(req, res)) {
+            ROS_INFO("Response: %s", res.respond.c_str());
+        } else {
+            ROS_ERROR("Failed to call service string_service");
+        }
+    } else {
+        ROS_ERROR("Service /stop_trigger_manager not available after timeout.");
     }
 
 }
 
 void Backend::requestReset(const QString &str) {
-
-
-
     std_stamped_msgs::StringService::Request req;
     std_stamped_msgs::StringService::Response res;
-    std_stamped_msgs::StringService srv;
-    req.request = "Hello, this is a request reset_trigger_manager ";
-
     
-    if (reset_error_agf.call(req,res))
-    {
-        ROS_INFO("Response: %s", res.respond.c_str());
-    }
-    else
-    {
-        ROS_ERROR("Failed to call service string_service");
+    req.request = "Hello, this is a request reset_trigger_manager";
+
+    // Đợi tối đa 2 giây để service sẵn sàng
+    if (ros::service::waitForService("/reset_error_agf", ros::Duration(2))) {
+        if (reset_error_agf.call(req, res)) {
+            ROS_INFO("Response: %s", res.respond.c_str());
+        } else {
+            ROS_ERROR("Failed to call service string_service");
+        }
+    } else {
+        ROS_ERROR("Service /reset_error_agf not available after timeout.");
     }
 }
 
 void Backend::getDataComboBox()  {
-    models = {};
-    counts = {};
+    models->clear();
+
+    // Duyệt qua cursor MongoDB
     mongocxx::cursor cursor = collection_model.find({});
     for (auto&& doc : cursor) {
-    
-        // Create a function to process documents
+        // Chuyển BSON thành JSON
         std::string data_ = bsoncxx::to_json(doc);
         json object_ = json::parse(data_);
+
+        // Lấy dữ liệu từ các trường "Model" và "Count"
         std::string model_pallet = object_["Model"];
+
+        // Thêm vào models và counts thông qua con trỏ
+        models->append(QString::fromStdString(model_pallet)); 
+    }
+}
+void Backend::getDataComboBox2()  {
+    counts->clear();
+
+    // Duyệt qua cursor MongoDB
+    mongocxx::cursor cursor = collection_model.find({});
+    for (auto&& doc : cursor) {
+        // Chuyển BSON thành JSON
+        std::string data_ = bsoncxx::to_json(doc);
+        json object_ = json::parse(data_);
+
+        // Lấy dữ liệu từ các trường "Model" và "Count"
         std::string count_pallet = object_["Count"];
-        models.append(QString::fromStdString(model_pallet));
-        counts.append(QString::fromStdString(count_pallet));
+
+        counts->append(QString::fromStdString(count_pallet)); 
     }
 }
 
+void Backend::updateComboBox(QString model, QString count) {
+    std::string model_string = model.toStdString();
+    std::string count_string = count.toStdString();
+    json model_data = lookupPalletModel(model_string, count_string);
     
+    if (!model_data.empty()) {
+        // model_data.erase("_id");
+
+        model_data.erase("Model");
+        model_data.erase("Count");
+
+        for (auto it = model_data.begin(); it != model_data.end(); ++it) {
+            std::string key = "_" + it.key() + "__";  // Lấy tên key
+            auto value = it.value();     // Lấy giá trị
+            rootObject = engine->rootObjects().first();
+            if ( key == "__id__") {
+                bsoncxx::builder::stream::document filter_model_pallet;
+                filter_model_pallet << "$and" << bsoncxx::builder::stream::open_array
+                            << bsoncxx::builder::stream::open_document
+                            << "Model" << model_string        // Điều kiện 1
+                            << bsoncxx::builder::stream::close_document
+                            << bsoncxx::builder::stream::open_document
+                            << "Count" << count_string        // Điều kiện 2
+                            << bsoncxx::builder::stream::close_document
+                            << bsoncxx::builder::stream::close_array;
+
+                // Thực hiện tìm kiếm một tài liệu
+                auto result_pallet = collection_model.find_one(filter_model_pallet.view());
+                if(result_pallet) {
+                    bsoncxx::document::view view_pallet = result_pallet->view();
+                    QObject *itempp = rootObject->findChild<QObject*>(QString::fromStdString("__id__"));
+                    if (itempp) {
+                        itempp->setProperty("text", QString::fromStdString(view_pallet["_id"].get_oid().value.to_string()));
+                    }
+                }
+            }
+            else {
+                QObject *item = rootObject->findChild<QObject*>(QString::fromStdString(key));
+                if (item) {
+                    
+                    QString propertyValue = QString::fromStdString(value.get<std::string>());
+                    
+                    item->setProperty("text", propertyValue);
+                } 
+            
+            }
+        }
+    } 
+}
+
+void Backend::saveDataModel(QString jsonstring) {
+    nlohmann::json jsonObj = nlohmann::json::parse(jsonstring.toStdString());
+    mongocxx::cursor cursor = collection_model.find({});
+    std::string id_ = jsonObj["_id"];
+    std::string model_pallet = jsonObj["Model"];
+    std::string count_pallet = jsonObj["Count"];
+    std::cout << jsonObj.dump() << std::endl;
+    bsoncxx::oid id(id_); // Thay bằng _id thực tế của bạn
+    bsoncxx::builder::stream::document filter_builder;
+    filter_builder << "_id" << id;
+    auto result = collection_model.find_one(filter_builder.view());
+
+    if (result) {
+        bsoncxx::document::view view = result->view();
+        ModelPallet modelupdate(jsonObj);
+        modelupdate.update(collection_model, filter_builder.view());
+        ROS_WARN("success");
+    }
+}
+
+void Backend::deleteDataModel(QString jsonstring) {
+    nlohmann::json jsonObj = nlohmann::json::parse(jsonstring.toStdString());
+    mongocxx::cursor cursor = collection_model.find({});
+    std::string id_ = jsonObj["_id"];
+    std::string model_pallet = jsonObj["Model"];
+    std::string count_pallet = jsonObj["Count"];
+    bsoncxx::oid id(id_); // Thay bằng _id thực tế của bạn
+    bsoncxx::builder::stream::document filter_model_pallet;
+    filter_model_pallet << "$and" << bsoncxx::builder::stream::open_array
+                << bsoncxx::builder::stream::open_document
+                << "_id" << id        // Điều kiện 1
+                << bsoncxx::builder::stream::close_document
+                << bsoncxx::builder::stream::open_document
+                << "Model" << model_pallet        // Điều kiện 1
+                << bsoncxx::builder::stream::close_document
+                << bsoncxx::builder::stream::open_document
+                << "Count" << count_pallet        // Điều kiện 2
+                << bsoncxx::builder::stream::close_document
+                << bsoncxx::builder::stream::close_array;
+
+    // Thực hiện tìm kiếm một tài liệu
+    auto result_pallet = collection_model.find_one(filter_model_pallet.view());
+    
+    if (result_pallet) {
+        bsoncxx::document::view view = result_pallet->view();
+        auto delete_result = collection_model.delete_one(view);
+    }
+}
+
+void Backend::addDataBuffer(QString jsonstring) {
+
+}
+
+void Backend::addDataQueue(QString jsonstring) {
+
+}
+
+void Backend::addDataModel(QString jsonstring) {
+    nlohmann::json jsonObj = nlohmann::json::parse(jsonstring.toStdString());
+    ModelPallet modelupdate(jsonObj);
+    int result = modelupdate.insert(collection_model);
+
+    if(result == 1) {
+        ROS_WARN("import success");
+    } else ROS_WARN("import false");
+
+}

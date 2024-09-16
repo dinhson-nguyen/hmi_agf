@@ -43,8 +43,11 @@ Page {
     property int state_edit: 0 // 0 -> buffer | 1 -> queue 
     property int  width_current: 100
     property string header_layout_text: ""
+    property string model_data: ""
+    property string count_data: ""
     property int  item_count: loadConfig()
-    
+    property var model_pallet_: getListModel()
+    property var count_pallet: []
     // Khi cần khôi phục cấu hình
     function loadConfig() {
         var config = configManager.loadConfig("config.json")
@@ -58,6 +61,21 @@ Page {
                 "item_count": value_
             }
             configManager.saveConfig(config, "config.json")
+        }
+    function getListCount() {
+        backend.getDataComboBox2()
+        var item = backend.getListCount()
+        return item
+    }
+    function getListModel() {
+        backend.getDataComboBox()
+        var item = backend.getListModel()
+        return item
+    }
+    function popup_close() {
+            
+            pop_up_2.close()
+            backend.set_color()
         }
     // Component.onCompleted: loadConfig()
 
@@ -246,15 +264,16 @@ Page {
             anchors.bottom: parent.bottom
             layoutDirection: Qt.RightToLeft
             spacing: 10
-            width: parent.width * 0.4
+            width: parent.width * 0.6
             anchors.right: parent.right
             anchors.topMargin: 10
 
+            
             Button {
                 id: view_button
                 // height: parent.height * 0.12
                 text: "Trở về"
-                Layout.fillWidth: true
+                Layout.preferredWidth: parent.width * 0.2
                 Layout.fillHeight: true
 
 
@@ -270,7 +289,7 @@ Page {
                 }
                 onClicked: {
 
-                    pop_up_2.close()
+                    popup_close()
                 }
                 //     animation_goout.start();
                 //     animation_forward.start();
@@ -286,7 +305,7 @@ Page {
                 id: del_button
                 // height: parent.height * 0.12
                 text: "Xóa"
-                Layout.fillWidth: true
+                Layout.preferredWidth: parent.width * 0.2
                 Layout.fillHeight: true
 
                 font.pointSize: 25 * del_button.height / 118
@@ -328,9 +347,25 @@ Page {
                         };
                         backend.deleteDataBuffer(JSON.stringify(jsonObject, null, 2))
                     }
-                    else {
+                    else if (state_edit === 1) {
                         backend.deleteDataQueue(uuid_queue.text)
+                    } else if (state_edit === 2) {
+                        
+                        var jsonObject = {
+                            "_id": __id__.text,
+                            "Model": list_model.editText,
+                            "Count": list_count.editText,
+                            "height": _height__.text,
+                            "width": _width__.text,
+                            "length": _length__.text,
+                            "pallet_type": _pallet_type__.text,
+                            
+                        
+                        };
+                        
+                        backend.deleteDataModel(JSON.stringify(jsonObject, null, 2))
                     }
+                    
                 }
                 //     animation_goout.start();
                 //     animation_forward.start();
@@ -339,8 +374,9 @@ Page {
                 id: save_button
                 // height: parent.height * 0.12
                 text: "Lưu"
+                Layout.preferredWidth: parent.width * 0.2
                 Layout.fillHeight: true
-                Layout.fillWidth: true
+                
 
                 font.pointSize: 25 * save_button.height / 118
                 font.family: "ubuntu"
@@ -400,6 +436,20 @@ Page {
                         // console.log(JSON.stringify(jsonObject, null, 2))
                         
                         backend.saveDataQueue(JSON.stringify(jsonObject, null, 2))
+                    } else if (state_edit === 2) {
+                        var jsonObject = {
+                            "_id": __id__.text,
+                            "Model": list_model.editText,
+                            "Count": list_count.editText,
+                            "height": _height__.text,
+                            "width": _width__.text,
+                            "length": _length__.text,
+                            "pallet_type": _pallet_type__.text,
+                            
+                        
+                        };
+                        
+                        backend.saveDataModel(JSON.stringify(jsonObject, null, 2))
                     }
                 }
                 //     animation_goout.start();
@@ -410,8 +460,8 @@ Page {
                 // height: parent.height * 0.12
                 text: "Thêm"
 
+                Layout.preferredWidth: parent.width * 0.2
                 Layout.fillHeight: true
-                Layout.fillWidth: true
 
                 font.pointSize: 25 * add_button.height / 118
                 font.family: "ubuntu"
@@ -432,13 +482,100 @@ Page {
                 }
                 onClicked: {
 
-                    state_panel_edit = false
-                    state_panel_queue = false
+                    if ( state_edit === 2) {
+                        var jsonObject = {
+                            "_id": __id__.text,
+                            "Model": list_model.editText,
+                            "Count": list_count.editText,
+                            "height": _height__.text,
+                            "width": _width__.text,
+                            "length": _length__.text,
+                            "pallet_type": _pallet_type__.text,
+                            
+                        
+                        };
+                        
+                        backend.addDataModel(JSON.stringify(jsonObject, null, 2))
+                    } else if ( state_edit === 1) {
+                        var jsonObject = {
+                            "_id": uuid_queue.text,
+                            "Id": _Id_.text,
+                            "PalletInfo": _PalletInfo_.text,
+                            "Model": _Model_.text,
+                            "Merchandise": _Merchandise_.text,
+                            "NameModel": _NameModel_.text,
+                            "Destination": _Destination_.text,
+                            "Count": _Count_.text,
+                            "ZoneId": _ZoneId_.text,
+                            "ColumnId": _ColumnId_.text,
+                            "LocationId": _LocationId_.text,
+
+                            "queue": _queue_.text,
+                        
+                        };
+                        // console.log(JSON.stringify(jsonObject, null, 2))
+                        
+                        backend.addDataQueue(JSON.stringify(jsonObject, null, 2))
+                    } else if (state_edit === 0) {
+                        var jsonObject = {
+                            "_id": ___id.text,
+                            "id": _id.text,
+                            "id_hang": _id_hang.text,
+                            "status": _status.text,
+                            "stt": _stt.text,
+                            "type": _type.text,
+
+                            "height": _height.text,
+                            "width": _width.text,
+                            "length": _length.text,
+                            "zone_id": _zone_id.text,
+                            "column_id": _column_id.text,
+                            "location_id": _location_id.text,
+                            
+                        
+                        };
+                      backend.addDataBuffer(JSON.stringify(jsonObject, null, 2))
+                    }
                 }
                 //     animation_goout.start();
                 //     animation_forward.start();
             }
+
+            Button {
+                id: model_button
+                // height: parent.height * 0.12
+                text: "Model"
+                Layout.preferredWidth: parent.width * 0.2
+                Layout.fillHeight: true
+
+
+                font.pointSize: 25 * view_button.height / 118
+                font.family: "ubuntu"
+                font.bold: true
+                display: AbstractButton.TextOnly
+                background: Rectangle {
+                    color: "#FFFFFF"
+                    radius: 10
+                    border.color: "#607D8B"
+                    border.width: 5
+                }
+                onClicked: {
+                    backend.getDataComboBox()
+                    backend.getDataComboBox2()
+                    state_edit = 2
+                    // pop_up_2.close()
+                }
+                onPressedChanged: {
+                    if (pressed) {
+                        background.color = "#607D8B"
+                    } else {
+                        background.color = "#FFFFFF"
+                    }
+                }
+            }
         }
+    
+        
         StackLayout {
             id: stackLayout
             anchors.top: header_layout.bottom
@@ -1098,7 +1235,7 @@ Page {
 
                     TextField {
                         id: _Merchandise_
-                        objectName: "__Merchandise"
+                        objectName: "_Merchandise"
                         font.pixelSize: 25 * _Merchandise_.height / 45
                         Layout.fillWidth: true
                         text: "---"
@@ -1329,9 +1466,9 @@ Page {
                         }
                     }
                     TextField {
-                        id: __width_
+                        id: _width_
                         objectName: "_width"
-                        font.pixelSize: 25 * __width_.height / 45
+                        font.pixelSize: 25 * _width_.height / 45
                         Layout.fillWidth: true
                         text: "---"
 
@@ -1407,15 +1544,15 @@ Page {
                     anchors.right: parent.right
                     height: parent.height
                     anchors.verticalCenter: parent.verticalCenter
-                    rows: 5
-                    columns: 6
+                    rows: 4
+                    columns: 4
 
                     Text {
                         text: qsTr("Unique ID")
                         font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         font.bold: true
-                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.row: 0
                         Layout.column: 0
@@ -1425,18 +1562,18 @@ Page {
                         font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         font.bold: true
-                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.row: 1
                         Layout.column: 0
                     }
-                    
+
                     Text {
                         text: qsTr("Count")
                         font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         font.bold: true
-                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.row: 2
                         Layout.column: 0
@@ -1446,7 +1583,7 @@ Page {
                         font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         font.bold: true
-                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.row: 0
                         Layout.column: 2
@@ -1456,8 +1593,8 @@ Page {
                         font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         font.bold: true
-                        
-                        Layout.preferredWidth: parent.width * 0.1
+
+                        Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.row: 1
                         Layout.column: 2
@@ -1467,21 +1604,54 @@ Page {
                         font.pointSize: 20 * main_layout.height / 364
                         font.family: "Ubuntu"
                         font.bold: true
-                        Layout.preferredWidth: parent.width * 0.1
+                        Layout.preferredWidth: parent.width * 0.15
                         Layout.fillHeight: true
                         Layout.row: 2
                         Layout.column: 2
+                    }
+                    Text {
+                        text: qsTr("pallet_type")
+                        font.pointSize: 20 * main_layout.height / 364
+                        font.family: "Ubuntu"
+                        font.bold: true
+                        Layout.preferredWidth: parent.width * 0.15
+                        Layout.fillHeight: true
+                        Layout.row: 3
+                        Layout.column: 2
+                    }
+                    TextField {
+                        id: __id__
+                        objectName: "__id__"
+                        font.pixelSize: 25 * _Id_.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+                        
+                        readOnly: true
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.3
+                        Layout.preferredHeight: parent * 0.25
+                        Layout.row: 0
+                        Layout.column: 1
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
                     }
                     ComboBox {
                         id: list_model
                         editable: true
                         Layout.preferredWidth: parent.width * 0.3
-                        Layout.fillHeight: true
+                        Layout.preferredHeight: parent * 0.25
                         Layout.row: 1
                         Layout.column: 1
                         currentIndex: 0
-                        property var fullModel: backend.getListModel()
 
+                        // property var model_pallet_: backend.getListModel()
                         model: ListModel {
                             id: list_model_pallet
                         }
@@ -1492,13 +1662,15 @@ Page {
 
                         Component.onCompleted: {
                             // Khởi tạo danh sách ban đầu
-                            for (var i = 0; i < fullModel.length; i++) {
+                            for (var i = 0; i < model_pallet_.length; i++) {
                                 list_model_pallet.append({
-                                                            "text": fullModel[i]
+                                                            "text": model_pallet_[i]
                                                         })
                             }
                         }
-                        onCurrentTextChanged: {
+                        onEditTextChanged: {
+                            model_data = editText
+                            backend.updateComboBox(model_data,count_data)
                             console.log("Selected fruit: " + editText)
                         }
                     }
@@ -1506,12 +1678,12 @@ Page {
                         id: list_count
                         editable: true
                         Layout.preferredWidth: parent.width * 0.3
-                        Layout.fillHeight: true
+                        Layout.preferredHeight: parent * 0.25
                         Layout.row: 2
                         Layout.column: 1
-                        currentIndex: 1
-                        property var fullModel: backend.getListCount()
+                        currentIndex: 0
 
+                        // property var count_pallet: backend.getListCount()
                         model: ListModel {
                             id: list_count_pallet
                         }
@@ -1522,14 +1694,107 @@ Page {
 
                         Component.onCompleted: {
                             // Khởi tạo danh sách ban đầu
-                            for (var i = 0; i < fullModel.length; i++) {
+                            for (var i = 0; i < count_pallet.length; i++) {
                                 list_count_pallet.append({
-                                                            "text": fullModel[i]
+                                                            "text": count_pallet[i]
                                                         })
                             }
                         }
-                        onCurrentTextChanged: {
+                        onEditTextChanged: {
+                            count_data = editText
                             console.log("Selected fruit: " + editText)
+                            backend.updateComboBox(model_data,count_data)
+                            
+                        }
+                    }
+                    TextField {
+                        id: _height__
+                        objectName: "_height__"
+                        font.pixelSize: 25 * _height__.height / 45
+                        
+                        Layout.fillWidth: true
+                        text: "---"
+                        focus: true
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.3
+                        Layout.preferredHeight: parent * 0.25
+                        Layout.row: 0
+                        Layout.column: 3
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        } 
+                        
+                    }
+                    TextField {
+                        id: _width__
+                        objectName: "_width__"
+                        font.pixelSize: 25 * _width__.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+                        focus: true
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.3
+                        Layout.preferredHeight: parent * 0.25
+                        Layout.row: 1
+                        Layout.column: 3
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+                    TextField {
+                        id: _length__
+                        objectName: "_length__"
+                        font.pixelSize: 25 * _length__.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+                        focus: true
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.3
+                        Layout.preferredHeight: parent * 0.25
+                        Layout.row: 2
+                        Layout.column: 3
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
+                        }
+                    }
+                    TextField {
+                        id: _pallet_type__
+                        objectName: "_pallet_type__"
+                        font.pixelSize: 25 * _pallet_type_.height / 45
+                        Layout.fillWidth: true
+                        text: "---"
+                        focus: true
+                        property bool isBold: false
+                        property real radius: 5
+                        width: 150
+                        Layout.preferredWidth: parent.width * 0.3
+                        Layout.preferredHeight: parent * 0.25
+                        Layout.row: 3
+                        Layout.column: 3
+                        placeholderTextColor: "#F44336" //AppStyle.placeholderColor
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            radius: 5
+                            border.color: "#3850ff"
                         }
                     }
                 }
@@ -1537,7 +1802,7 @@ Page {
 
         }
 
-    }
+}
 
     Page {
         id: down_panel
@@ -1617,7 +1882,7 @@ Page {
 
             Rectangle {
                 Layout.preferredWidth: parent.width * 0.4
-                Layout.preferredHeight:  parent.height
+                Layout.preferredHeight:  parent.height 
                 color: "#64B5F6"
                 border.color: "#607D8B"
                 border.width: 2
@@ -2540,9 +2805,9 @@ Page {
     }
 
     // Hiển thị bàn phím khi TextField nhận focus
-    Component.onCompleted: {
-        inputPanel.active = inputField.hasActiveFocus
-    }
+    // Component.onCompleted: {
+    //     inputPanel.active = inputField.hasActiveFocus
+    // }
     Connections {
         target: backend
         onBatteryPercentageChanged: {

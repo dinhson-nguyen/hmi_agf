@@ -157,8 +157,8 @@ private:
     int index;
     int max_index;
 
-    QStringList models = {};
-    QStringList counts = {};
+    QStringList* models = new QStringList();
+    QStringList* counts = new QStringList();
 
     double start_time = ros::Time::now().toSec();
     double vel_linear;
@@ -238,7 +238,7 @@ public:
     QString systemStatus() const;
     double getLinear() const;
     double getAngular() const;
-    void getDataComboBox() ;
+    
     
     // int getFastechRear(int index) const;
 
@@ -269,15 +269,27 @@ public:
     Q_INVOKABLE void setDataQueue(int id) ;
     Q_INVOKABLE void saveDataBuffer(QString jsonstring) ;
     Q_INVOKABLE void saveDataQueue(QString jsonstring) ;
+    Q_INVOKABLE void saveDataModel(QString jsonstring) ;
     Q_INVOKABLE void deleteDataBuffer(QString jsonstring) ;
     Q_INVOKABLE void deleteDataQueue(QString jsonstring) ;
-    Q_INVOKABLE QString getStateSystem() ;
+    Q_INVOKABLE void deleteDataModel(QString jsonstring) ;
 
+    Q_INVOKABLE void addDataBuffer(QString jsonstring) ;
+    Q_INVOKABLE void addDataQueue(QString jsonstring) ;
+    Q_INVOKABLE void addDataModel(QString jsonstring) ;
+
+    Q_INVOKABLE QString getStateSystem() ;
+    Q_INVOKABLE void getDataComboBox() ;
+    Q_INVOKABLE void getDataComboBox2() ;
+    Q_INVOKABLE void updateComboBox(QString model, QString count) ;
     Q_INVOKABLE QStringList getListModel() {
-        return models;
+        return *models;
     }
     Q_INVOKABLE QStringList getListCount() {
-        return counts;
+        return *counts;
+    }
+    Q_INVOKABLE void set_color() {
+        initColor();
     }
 
 
